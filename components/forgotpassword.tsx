@@ -27,7 +27,7 @@ const ForgotPassword = () => {
     <div className="flex flex-col items-center min-h-screen bg-[#FCFCFC] pt-0">
       {/* Custom Heading Container */}
       <div
-        className="w-full max-w-[500px] h-[120px] rounded-bl-lg rounded-br-lg bg-[#004BAD] flex items-center justify-center mb-8 absolute "
+        className="w-full max-w-[500px] h-[120px] rounded-bl-lg rounded-br-lg bg-[#004BAD] flex items-center justify-center mb-8 absolute  "
       >
         <div className="flex items-center w-full px-4 pt-16">
         <span className="text-white text-xl mr-3"><IoIosArrowBack size={24}/></span>
@@ -37,7 +37,7 @@ const ForgotPassword = () => {
       
       {/* Card Component */}
       <div className="flex-grow flex items-center justify-center">
-        <Card className="max-w-sm w-full p-4  rounded-lg bg-[#FCFCFC]">
+        <Card className="max-w-sm w-full p-4 mt-11  rounded-lg bg-[#FCFCFC]">
           <Image
             src="/check-mail.png" // Ensure this image is in your public folder
             alt="Check your mail"

@@ -10,7 +10,7 @@ const config = {
   theme: {
     extend: {
       colors: {
-        first: { 
+        primary: { 
           50: '#fafcff', 
           100: '#eaf3ff', 
           200: '#d0e4ff', 
@@ -23,7 +23,7 @@ const config = {
           900: '#001c41', 
           950: '#001633', 
         },
-        second: { 
+        secondary: { 
           50: '#fdfffd', 
           100: '#f6fdf6', 
           200: '#eafbea', 
@@ -36,7 +36,7 @@ const config = {
           900: '#0e450e', 
           950: '#092b08', 
         },
-        third: { 
+        error: { 
           50: '#fffcfc', 
           100: '#fef4f4', 
           200: '#fde6e6', 

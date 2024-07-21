@@ -15,11 +15,8 @@ export const NEXT_AUTH_CONFIG = {
           async authorize(credentials: any) {
             const { username, password } = credentials;
             if (username.endsWith('@thapar.edu')){
-              return {
-                  id: "user1",
-                  email: "ramdomEmail",
-                  password:"password"
-              }
+              //backend Logic
+              return  null
             }
             else{
               return null;
@@ -32,7 +29,7 @@ export const NEXT_AUTH_CONFIG = {
         })
     ],
     pages: {
-      signIn: '/auth/signin',  // Custom sign-in page URL
+      signIn: '/auth/signin',
     },
     secret: process.env.NEXTAUTH_SECRET,
     callbacks: {
