@@ -4,10 +4,10 @@
 import React, { useEffect, useState } from 'react';
 import { Card, Button, Image } from '@nextui-org/react';
 import { IoIosArrowBack } from 'react-icons/io';
-
+import { useSession } from 'next-auth/react';
 const ForgotPassword = () => {
   const [timer, setTimer] = useState<number>(120);
-
+    
   useEffect(() => {
     if (timer > 0) {
       const intervalId = setInterval(() => {

@@ -5,6 +5,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Image } from '@nextui-org/react';
 import { signIn } from 'next-auth/react';
 import { Button } from '@nextui-org/button';
+import { useRouter } from 'next/router';
+
 
 const SignIn = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -71,6 +73,14 @@ const LoginForm = ({ toggleForm }: { toggleForm: () => void }) => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
+  const handleForgotPassword = () => {
+    
+    if (email.endsWith('@thapar.edu')) {
+      window.location.href='/forgotpassword';
+    } else {
+      setError('Please enter an  valid email  to reset password.');
+    }
+  };
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
@@ -92,7 +102,6 @@ const LoginForm = ({ toggleForm }: { toggleForm: () => void }) => {
       window.location.href = '/';
     }
   };
-
   const handleGoogleSignIn = () => {
     signIn('google', { callbackUrl: '/' });
   };
@@ -133,7 +142,8 @@ const LoginForm = ({ toggleForm }: { toggleForm: () => void }) => {
         <div className="text-red-500 text-sm mt-2">{error}</div>
       )}
       <div className="text-right">
-        <a href="#" className="text-sm text-blue-600">Forgot Password?</a>
+        
+        <a href="#" onClick={handleForgotPassword} className="text-sm text-blue-600">Forgot Password?</a>
       </div>
       <button type="submit" className="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 transition-colors">Login</button>
       <div className="relative text-center">
@@ -165,12 +175,11 @@ const SignupForm = ({ toggleForm }: { toggleForm: () => void }) => {
       return;
     }
 
-    // Here you would typically call an API to register the user
-    // For now, we'll just simulate a successful registration
+    // call an API to register the user
     console.log('Registration submitted:', { email, password });
-    // After successful registration, you might want to automatically sign in the user
-    // or redirect them to the login page
-    toggleForm();
+    // After successful registration
+    // or redirect them to the home page
+    window.location.href = '/';
   };
 
   const handleGoogleSignIn = () => {
@@ -214,7 +223,7 @@ const SignupForm = ({ toggleForm }: { toggleForm: () => void }) => {
       {error && (
         <div className="text-red-500 text-sm mt-2">{error}</div>
       )}
-      <button type="submit" className="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 transition-colors">Sign Up</button>
+      <button type="submit"  className="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 transition-colors">Sign Up</button>
       <div className="relative text-center">
         <hr className="my-4" />
         <span className="bg-white px-2 text-sm text-gray-500 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">OR</span>
