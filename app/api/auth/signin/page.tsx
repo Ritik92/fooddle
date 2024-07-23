@@ -5,6 +5,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Image } from '@nextui-org/react';
 import { signIn } from 'next-auth/react';
 import { Button } from '@nextui-org/button';
+import { useRouter } from 'next/router';
+
 
 const SignIn = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -12,11 +14,14 @@ const SignIn = () => {
   const toggleForm = () => setIsLogin(!isLogin);
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#EAF3FF]">
+    <div className="flex flex-col min-h-screen bg-white md:bg-[#EAF3FF]">
       <div className="flex-grow flex flex-col">
-        <div className="p-3 md:p-6">
+        <div className="hidden md:block p-3  md:ml-3 mt-1 ">
           <Image src="/logo.png" alt="Foodle logo" width={128} height={55} className="w-24 md:w-32" />
         </div>
+          <div className="block bg-[#004BAD] md:hidden h-[14.75rem] flex items-center justify-center md:ml-3">
+             <Image src="/logo2.png" alt="Foodle logo" width={150} height={63} className=" md:w-32" />
+          </div>
         <div className="flex flex-col md:flex-row flex-grow">
           <div className="hidden md:block md:basis-1/2 relative">
             <div className="absolute top-[30px] left-[10%] lg:left-[20%]">
@@ -27,16 +32,16 @@ const SignIn = () => {
             </div>
           </div>
           <div className="md:basis-1/2 flex items-center justify-center p-4 md:p-0">
-            <div className="bg-white rounded-lg shadow-md w-full max-w-md overflow-hidden">
-              <div className="flex">
+            <div className="bg-blue md:bg-white  absolute top-[11rem]  md:static  lg:mt-10 rounded-xl  w-full md:max-w-md overflow-hidden">
+              <div className="flex ">
                 <button
-                  className={`flex-1 py-4 text-lg font-semibold ${isLogin ? 'text-blue-600' : 'text-gray-400'}`}
+                  className={`flex-1 py-4 text-lg font-semibold  ${isLogin ? 'text-[#004BAD] bg-white rounded-t-xl ' : 'text-white bg-[#004BAD] md:text-[#4D4D4D] md:bg-white font-urbanist'}`}
                   onClick={() => setIsLogin(true)}
                 >
                   Login
                 </button>
                 <button
-                  className={`flex-1 py-4 text-lg font-semibold ${!isLogin ? 'text-blue-600' : 'text-gray-400'}`}
+                  className={`flex-1 py-4 text-lg font-semibold ${!isLogin ? 'text-[#004BAD]  bg-white rounded-t-xl' : 'text-white md:text-[#4D4D4D] bg-[#004BAD] md:bg-white font-urbanist'}`}
                   onClick={() => setIsLogin(false)}
                 >
                   Sign up
@@ -58,7 +63,7 @@ const SignIn = () => {
           </div>
         </div>
       </div>
-      <div className="text-center text-sm text-gray-600 mt-4 mb-4">
+      <div className="hidden md:block text-center text-sm text-gray-600 mt-4 mb-4 ">
         Need help? <a href="#" className="text-blue-600">Contact Us</a> for support.
       </div>
     </div>
@@ -71,6 +76,14 @@ const LoginForm = ({ toggleForm }: { toggleForm: () => void }) => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
+  const handleForgotPassword = () => {
+    
+    if (email.endsWith('@thapar.edu')) {
+      window.location.href='/forgotpassword';
+    } else {
+      setError('Please enter an  valid email  to reset password.');
+    }
+  };
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
@@ -92,7 +105,6 @@ const LoginForm = ({ toggleForm }: { toggleForm: () => void }) => {
       window.location.href = '/';
     }
   };
-
   const handleGoogleSignIn = () => {
     signIn('google', { callbackUrl: '/' });
   };
@@ -101,11 +113,11 @@ const LoginForm = ({ toggleForm }: { toggleForm: () => void }) => {
     setShowPassword(!showPassword);
   };
   return (
-    <form className="space-y-4" onSubmit={handleSubmit}>
+    <form className="space-y-4 " onSubmit={handleSubmit}>
       <input 
         type="email" 
         placeholder="Email" 
-        className="w-full p-3 border rounded-md" 
+        className="w-full p-3 border rounded-md " 
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         required
@@ -133,9 +145,10 @@ const LoginForm = ({ toggleForm }: { toggleForm: () => void }) => {
         <div className="text-red-500 text-sm mt-2">{error}</div>
       )}
       <div className="text-right">
-        <a href="#" className="text-sm text-blue-600">Forgot Password?</a>
+        
+        <a href="#" onClick={handleForgotPassword} className="text-sm text-blue-600">Forgot Password?</a>
       </div>
-      <button type="submit" className="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 transition-colors">Login</button>
+      <button type="submit" className="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700  transition-colors">Login</button>
       <div className="relative text-center">
         <hr className="my-4" />
         <span className="bg-white px-2 text-sm text-gray-500 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">OR</span>
@@ -144,7 +157,7 @@ const LoginForm = ({ toggleForm }: { toggleForm: () => void }) => {
         <Image src="/google logo.png" alt="Google logo" width={20} height={20} className="mr-2" />
         Log in with Google
       </button>
-      <p className="text-center text-sm">
+      <p className="text-center text-sm ">
         Don't have an account yet? <button type="button" onClick={toggleForm} className="text-blue-600 hover:underline">Sign up</button>
       </p>
     </form>
@@ -165,12 +178,11 @@ const SignupForm = ({ toggleForm }: { toggleForm: () => void }) => {
       return;
     }
 
-    // Here you would typically call an API to register the user
-    // For now, we'll just simulate a successful registration
+    // call an API to register the user
     console.log('Registration submitted:', { email, password });
-    // After successful registration, you might want to automatically sign in the user
-    // or redirect them to the login page
-    toggleForm();
+    // After successful registration
+    // or redirect them to the home page
+    window.location.href = '/';
   };
 
   const handleGoogleSignIn = () => {
@@ -214,7 +226,7 @@ const SignupForm = ({ toggleForm }: { toggleForm: () => void }) => {
       {error && (
         <div className="text-red-500 text-sm mt-2">{error}</div>
       )}
-      <button type="submit" className="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 transition-colors">Sign Up</button>
+      <button type="submit"  className="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 transition-colors font-urbanist">Sign Up</button>
       <div className="relative text-center">
         <hr className="my-4" />
         <span className="bg-white px-2 text-sm text-gray-500 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">OR</span>

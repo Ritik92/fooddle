@@ -16,7 +16,7 @@ export const NEXT_AUTH_CONFIG = {
             const { username, password } = credentials;
             if (username.endsWith('@thapar.edu')){
               //backend Logic
-              return  null
+              return username;
             }
             else{
               return null;

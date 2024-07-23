@@ -9,6 +9,9 @@ const config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        urbanist: ['Urbanist', 'sans-serif'],
+      },
       colors: {
         primary: { 
           50: '#fafcff', 
