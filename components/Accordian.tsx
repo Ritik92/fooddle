@@ -25,7 +25,7 @@ const Accordian = () => {
         </div>
       </div>
      <div className='pt-44 w-full max-w-sm'> 
-     <Card className="w-full max-w-sm px-4 py-6">
+     <Card className="w-full max-w-sm px-4 py-6 ">
         
         <h2>FAQs</h2>
 
