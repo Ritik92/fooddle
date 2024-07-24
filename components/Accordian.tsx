@@ -13,10 +13,10 @@ const Accordian = () => {
   "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
 
   return (
-    <div className="flex flex-col items-center min-h-screen bg-[#FCFCFC] pt-0">
+    <div className="flex flex-col items-center min-h-screen bg-[#FCFCFC] pt-0 font-urbanist">
       
       <div
-        className="w-full max-w-[500px] h-[120px] rounded-bl-lg rounded-br-lg bg-[#004BAD] flex items-center justify-center mb-8 absolute pb-6"
+        className="w-full  h-[120px] rounded-bl-lg rounded-br-lg bg-[#004BAD] flex items-center justify-center mb-8 absolute pb-6"
       >
         <div className="flex items-center w-full px-4 pt-16">
           <span className="text-white text-xl mr-3"><IoIosArrowBack size={24}/></span>
@@ -24,16 +24,16 @@ const Accordian = () => {
           <h2 className="text-white text-xl ">Help & Support</h2>
         </div>
       </div>
-     <div className='pt-44 w-full max-w-sm'> 
-     <Card className="w-full max-w-sm px-4 py-6 ">
+     <div className='pt-44 w-full text-[#4D4D4D] '> 
+     <div className="w-full px-4 py-6 bg-white ">
         
         <h2>FAQs</h2>
 
         {/* Input Fields */}
-        <div className="flex flex-col items-center justify-center w-full space-y-4">
+        <div className="flex flex-col items-center justify-center w-full space-y-4 bg-white">
           <div className="w-full relative">
           <Accordion selectionMode="multiple">
-                <AccordionItem key="1" aria-label="Kitna kama lete ho?" title="Kitna kama lete ho?">
+                <AccordionItem key="1" aria-label="Kitna kama lete ho?" title="Kitna kama lete ho? ">
                      {"Bas unicorn banne wale hai thode dino mein"}
                  </AccordionItem>
                  <AccordionItem key="2" aria-label="What are the delivery hours?" title="What are the delivery hours?">
@@ -49,7 +49,7 @@ const Accordian = () => {
           </div>
 
         </div>
-      </Card>
+      </div>
       </div>
     </div>
   );
