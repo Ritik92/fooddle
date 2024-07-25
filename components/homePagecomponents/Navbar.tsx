@@ -20,8 +20,8 @@ const Navbar=()=>{
             </div>
 
             <div className='options'>
-                <button  className={pathname === '/api/home' ? 'active' : ''} 
-          onClick={() => handleNavigation('/api/home')}
+                <button  className={pathname === '/' ? 'active' : ''} 
+          onClick={() => handleNavigation('/')}
         ><Image src="/home1.png"/></button>
 
 
