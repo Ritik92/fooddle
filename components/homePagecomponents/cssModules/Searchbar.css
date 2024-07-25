@@ -1,0 +1,52 @@
+.out
+{
+    display: inline-flex;
+    width: 342px;
+    height:49px;
+    top: 48px;
+    /* left: 469px; */
+    padding: 15px 18px 15px 18px;
+    gap: 0px;
+    border-radius: 30px ;
+    justify-content: space-between;
+    align-items: center;
+    opacity: 0px;
+    background: #EDEDED;
+    
+
+}
+.inn{
+    display:flex;
+    align-items: center;
+    gap:3px;
+}
+.inn image{
+    height:19px;
+    width:15px;
+}
+.holder
+{
+  width:239px;
+  height:19px;
+  font-family: Urbanist,sans-serif;
+  font-size:16px;
+  font-weight: 400;
+  text-align: left;
+  opacity: 100%;
+  background: none;
+  border:none;
+  outline: none;
+  caret-color: #A6A6A6;
+  color: #323030;
+ 
+}
+.out button{
+    height:23px;
+    width:23px;
+    padding: 4px;
+    gap: 10px;
+}
+.out button :active{
+    background-color: #7cadbc;
+    transition: 1s;
+}

@@ -1,0 +1,127 @@
+ .screen
+{
+    height:100vh;
+    width:100vw;
+    position: relative;
+    
+
+    overflow: hidden;
+    display:grid;
+     grid-template-columns: 110.75px 1fr  ;
+    
+}  
+/* #nav
+{
+    position:absolute;
+    width:100.75px;
+    height:100vh;
+   
+    
+
+} */
+#rest
+{
+   
+    grid-column: 1 /span 2;
+    display: flex;
+    background: #F5F5F5;
+    padding: 32px;
+      /* position:absolute; */
+    /*top:58px;
+    left:440px; */
+    display:flex;
+    flex-direction: column;
+    position:relative;
+  
+
+}
+
+#sbar{
+    position:fixed;
+    display: flex;
+    justify-content: center;
+    position:absolute;
+    top:48px;
+    left:469px;
+    z-index:1000;
+}
+#fibar
+{
+    display:flex;
+    justify-content: center;
+   position:absolute;
+    top:118px;
+    left:212px;
+    z-index:1000;
+    
+}
+#restbar
+{
+    display:flex;
+    flex-wrap: wrap;
+    position:absolute;
+    top:208px;
+    left:289px;
+    width:726px;
+    height:630px;
+    gap:16px;
+    overflow:auto;
+    /* overflow-y: scroll;  */
+     /* scrollbar-width: 11px; */
+    padding-bottom: 200px;
+   
+    
+}
+
+ #restbar::-webkit-scrollbar{
+width:11px;
+}
+
+#restbar ::-webkit-scrollbar-track{
+    width: 11px;
+    height: 261px;
+    top: 20px;
+    left: 20px;
+    padding: 2px 2px 88px 2px;
+    gap: 0px;
+    background: black;
+    
+
+} 
+#restbar::-webkit-scrollbar-thumb {
+    background: #E0E0E0;
+    border-radius: 3.5px; /* Rounded corners for the thumb */
+    border: 1px solid #FFFFFF26;
+    width: 7px;
+    height: 171px;
+    top: 2px;
+    left: 2px;
+
+
+
+}
+
+#restbar::-webkit-scrollbar-thumb:hover {
+    background: #C0C0C0;
+    transition: background-color 150ms ease-out;
+
+}
+
+#restbar::-webkit-scrollbar-thumb:active {
+    background: #A0A0A0;
+    border: 1px solid #FFFFFF26;
+ 
+    transition: background-color 150ms ease-out;
+}
+/* #restbar ::-webkit-scrollbar-thumb{
+    width: 7px;
+height: 171px;
+top: 2px;
+left: 2px;
+gap: 0px;
+border-radius: 3.5px;
+background: #E0E0E0;
+border: 1px solid #FFFFFF26;
+opacity: 0px;
+
+} */
