@@ -1,8 +1,12 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { Card, Button, Image } from "@nextui-org/react";
-import { IoIosArrowBack } from "react-icons/io";
+
+
+
+import React, { useEffect, useState } from 'react';
+import { Card, Button, Image } from '@nextui-org/react';
+import { IoIosArrowBack } from 'react-icons/io';
+import { useSession } from 'next-auth/react';
 import { useRouter } from "next/navigation";
 
 const ForgotPassword = () => {
@@ -13,7 +17,7 @@ const ForgotPassword = () => {
   };
 
   const [timer, setTimer] = useState<number>(120);
-
+    
   useEffect(() => {
     if (timer > 0) {
       const intervalId = setInterval(() => {
@@ -49,6 +53,7 @@ const ForgotPassword = () => {
         />
       </div>
       <div className="w-full h-[120px] rounded-bl-lg rounded-br-lg bg-[#004BAD] flex items-center justify-center mb-8 absolute md:hidden">
+
         <div className="flex items-center w-full px-4 pt-16">
           <button
             className="text-white mr-4 hover:bg-[#1a1c1e] rounded-full p-2"
