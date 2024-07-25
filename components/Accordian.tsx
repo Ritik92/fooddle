@@ -27,11 +27,11 @@ const Accordian = () => {
      <div className='pt-44 w-full text-[#4D4D4D] '> 
      <div className="w-full px-4 py-6 bg-white ">
         
-        <h2>FAQs</h2>
+        <h2 className="text-[#4D4D4D] font-bold px--6">FAQs</h2>
 
         {/* Input Fields */}
         <div className="flex flex-col items-center justify-center w-full space-y-4 bg-white">
-          <div className="w-full relative">
+          <div className="w-full relative p-3">
           <Accordion selectionMode="multiple">
                 <AccordionItem key="1" aria-label="Kitna kama lete ho?" title="Kitna kama lete ho? ">
                      {"Bas unicorn banne wale hai thode dino mein"}
@@ -48,6 +48,11 @@ const Accordian = () => {
              </Accordion>
           </div>
 
+        </div>
+
+        <div className="flex flex-col items-center justify-center mt-20">
+          <div className=""><p>For more queries email us at:</p></div>
+          <div><p className="text-[#004BAD]">contact@fooddle.in</p></div>
         </div>
       </div>
       </div>

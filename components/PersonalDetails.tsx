@@ -29,7 +29,7 @@ const PersonalDetails = () =>{
       <div className="flex flex-col items-center min-h-screen bg-[#FCFCFC] pt-0">
       {/* Custom Heading Container */}
       <div
-        className="w-full max-w-[500px] h-[120px] rounded-bl-lg rounded-br-lg bg-[#004BAD] flex items-center justify-center mb-8 absolute pb-6"
+        className="w-full w-[100vw] h-[120px] rounded-bl-lg rounded-br-lg bg-[#004BAD] flex items-center justify-center mb-8 absolute pb-6"
       >
         <div className="flex items-center w-full px-4 pt-16">
           <span className="text-white text-xl mr-3"><IoIosArrowBack size={24}/></span>
@@ -38,7 +38,7 @@ const PersonalDetails = () =>{
         </div>
       </div>
      <div className='pt-44 w-full max-w-sm'> 
-     <Card className="w-full max-w-sm px-4 py-6">
+     <div className="w-full max-w-sm px-4 py-6">
         
         
 
@@ -113,7 +113,7 @@ const PersonalDetails = () =>{
             Save Changes
           </Button>
         </div>
-      </Card>
+      </div>
       </div>
     </div>
         
