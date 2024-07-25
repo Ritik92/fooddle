@@ -1,0 +1,76 @@
+.outer {
+    /* position: absolute;
+    top: 0;
+    left: 0; */
+    width: 110.75px;
+    height: 100vh;
+    padding: 24px;
+    background: #004BAD;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+     /* Ensure navigation bar stays on top of other content */
+    grid-column-start: 0;
+    grid-column-end:1;
+
+}
+
+.logo {
+    height: 47.25px;
+    width: 30.75px;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 32px;
+    margin-top: 32px; /* Adjust top margin as needed */
+    margin-bottom: 32px; /* Adjust bottom margin as needed */
+}
+
+.icon {
+    height: 111.25px;
+    width: 116px;
+    padding: 32px 32px 32px 32px; /* Adjust padding as needed */
+}
+
+.profile-pic {
+    height: 32px;
+    width: 32px;
+}
+
+.options button {
+    display:flex;
+    
+    width:56px;
+    height:32px;
+    padding : 4px 16px 4px 16px ;
+    border-radius: 16px;
+
+  
+    border: none;
+    cursor: pointer;
+    background: transparent; /* Default background */
+    transition:  0.5s ease; /* Smooth transition effect */
+    
+}
+
+.options button:focus {
+    outline: none;
+}
+
+.options button img {
+    width: 24px; /* Adjust icon size as needed */
+    height: 24px; /* Adjust icon size as needed */
+    cursor:pointer;
+}
+.options button.active
+{
+    background: white;
+    /* transition:0.5s ease; */
+}
+
+

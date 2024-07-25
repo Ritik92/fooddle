@@ -1,0 +1,55 @@
+.button-container{
+   
+    
+    padding:4.67px 14.02px 4.67px 14.02px;
+    background: #F5F5F5;
+    border: 1.17px solid #E6E6E6;
+    width: 86.03px;
+    height: 29.34px;
+    top: 20px;
+    left: 20px;
+    padding: 4.67px 14.02px 4.67px 14.02px;
+    gap: 11.68px;
+    border-radius: 18.69px ;
+    display:flex;
+    align-items:center;
+    justify-content: center;
+    
+    
+    opacity: 0px;
+    
+
+    
+}
+
+.button-container button{
+    width:58px;
+    height:20px;
+    font-family: Urbanist;
+    font-weight: 400;
+    line-height: 19.62px;
+    font-size: 16.35px;
+    text-align: center;
+    
+
+}
+.button-container:hover{
+    background: #EAF3FF; 
+   
+
+    transform: scale(1.02); 
+    transition:300ms ease-out;
+    
+}
+
+.button-container:hover button{
+    color:#004BAD;
+    
+}
+
+.button-container.active  {
+    /* styles for the active filter button */
+    background: #FFFFFF;
+
+
+}

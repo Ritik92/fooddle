@@ -1,0 +1,106 @@
+#outer-box{
+    width:344px;
+    height:180px;
+    border-radius:20px;
+    
+    position: relative;
+    display: block;
+    overflow: hidden;
+    
+    
+
+}
+#outer-box:hover {
+    transform: scale(.95); 
+    transition: 150ms ease-out;
+    
+    
+}
+#image-container{
+    
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+#panel
+{
+    display: flex;
+    justify-content: space-evenly;
+    
+    height:51px;
+    width: 344px;
+    position: absolute;
+    background: #FFFFFF;
+
+    align-items:center;
+    z-index:2;
+    bottom:0;
+    font-family: Urbanist;
+}
+#info
+{
+    height:19px;
+    display:flex;
+    width: 312px;
+    justify-content: center;
+}
+#rname{
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    height:19px;
+    width:218px;
+    font-size: 16px;
+
+}
+
+#time-block
+{
+    width:94px;
+    height:19px;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+}
+
+#time-block div {
+    padding: 1.8px;
+    
+    
+}
+#like
+{
+    position:absolute;
+    top:11px;
+    left:312px;
+    height:20px;
+    width:20px;
+    border-color: aliceblue;
+    z-index:3;
+}
+
+/* #like img {
+    height: 100%; 
+    width: 100%; 
+    transition: filter 150ms ease-out;
+} */
+
+/* Style for click effect */
+/* #like:active img {
+    animation: like-click 150ms ease-out;
+}
+
+@keyframes like-click {
+    0% {
+        filter: none;
+    }
+    50% {
+        filter: invert(36%) sepia(76%) saturate(5738%) hue-rotate(355deg) brightness(104%) contrast(102%);
+    }
+    100% {
+        filter: none;
+    }
+} */

@@ -1,0 +1,63 @@
+#bar{
+    position: relative;
+    width: 856px;
+    height: 44px;
+    /* top:70px;
+    left:212px; */
+     
+ 
+    gap: 0px;
+    opacity: 0px;
+    background: #F5F5F5;
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+   
+
+
+
+}
+
+#mainbar
+{
+     width: 768.54px;
+    height: 29.2px; 
+    
+    opacity: 0px;
+
+    display:flex;
+    justify-content: space-between;
+    gap:14.02px;
+    overflow-x: auto;
+    white-space: nowrap;
+     overflow: hidden; 
+    scroll-behavior: smooth;
+
+}
+
+#larrow{
+    width: Hug (26.81px)px;
+    height: Fixed (29.2px)px;
+    padding: 9.34px 0px 0px 0px;
+    gap: 8.76px;
+    border-radius: 9.34px 0px 0px 0px;
+    opacity: 0px;
+    cursor:pointer;
+
+}
+
+
+#rarrow
+{
+    width: Hug (26.81px)px;
+    height: Fixed (29.2px)px;
+    padding: 9.34px 0px 0px 0px;
+    gap: 8.76px;
+    border-radius: 9.34px 0px 0px 0px;
+    opacity: 0px;
+    cursor:pointer;
+
+
+}

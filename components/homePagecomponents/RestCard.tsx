@@ -1,0 +1,47 @@
+'use client'
+
+import React from 'react';
+import {Image} from '@nextui-org/react';
+import './cssModules/RestCard.css'
+
+// Define the type for the props
+type RestCardProps = {
+    img: string;
+    name: string;
+    time: string;
+    location:string;
+};
+
+const RestCard: React.FC<RestCardProps> = ({ img, name, time ,location}) => {
+    return (
+        <div id="outer-box">
+            <button id="like">
+                <Image src="/favourite.png" />
+            </button>
+            <Image id="image-container"src={img} width={344} height={178} alt="Restaurant Image" />
+            <div id="panel">
+                <div id="info">
+                <div id="rname">
+                    <p>{name}</p>
+                    
+                </div>
+                
+                <div>
+                <div id="time-block">
+                   <div><Image height={15} width={15}  src= "/door.png"/></div> 
+                    <p>{time}</p>
+                </div>
+                    
+                </div>
+
+                </div>
+                
+            </div>
+            <style>
+            @import url('https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
+            </style> 
+        </div>
+    );
+}
+
+export default RestCard
