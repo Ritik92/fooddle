@@ -9,9 +9,9 @@ export default function Home() {
 
   return (
  <div>
+   
     <Login/>
-    <ForgotPassword/>
-    <ResetPassword/>
+    
  </div>
     
   );
