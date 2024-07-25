@@ -1,3 +1,4 @@
+"use client"
 import Navbar from './Navbar'
 import'./cssModules/homeP.css'
 import React from'react'
