@@ -38,7 +38,7 @@ const RestCard: React.FC<RestCardProps> = ({ img, name, time ,location}) => {
                 
             </div>
             <style>
-            @import url('https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
+           
             </style> 
         </div>
     );

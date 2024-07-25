@@ -34,7 +34,7 @@ const Navbar=()=>{
 
             </div>
             
-               <button id="profile">
+               <button id="profile" onClick={() => handleNavigation('/api/profilepage')}>
                 <Image className="profile-pic" src="/UserIcon.png"/>
                </button>
             

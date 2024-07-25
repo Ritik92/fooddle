@@ -6,7 +6,20 @@ import { IoMdContact } from "react-icons/io";
 import { FaSignOutAlt } from 'react-icons/fa';
 import { MdOutlineQuestionMark } from "react-icons/md";
 import { Card, Button, Image, Avatar } from '@nextui-org/react';
+import { signOut, useSession } from 'next-auth/react';
+import { redirect } from 'next/dist/server/api-utils';
+import { useRouter } from 'next/navigation';
 
+const handleSignOut = async() => {
+  
+    try {
+        await  signOut(); 
+         window.location.href = '/';
+        
+    } catch (error) {
+        console.error('Sign out failed', error);
+    }
+};
 const Profile = () => {
 
     const defaultContent =
@@ -43,8 +56,8 @@ const Profile = () => {
                                 </div>
                                 <div>
                                     <div className={`flex gap-4 py-2 rounded-lg black`}>
-                                    <Image src='/logout-square-01.png' alt='dp' width={24} height={24} className='m-1'/>
-                                        <div className='text-[#EF4D4D]'>Log Out</div>
+                                    <Image src='/logout-square-01.png' alt='dp' width={24} height={24} className='m-1' onClick={handleSignOut}/>
+                                        <div className='text-[#EF4D4D] cursor-pointer ' onClick={handleSignOut}>Log Out</div>
                                     </div>
                                 </div>
                             </div>

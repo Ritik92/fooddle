@@ -13,7 +13,7 @@ const Accordian = () => {
   "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
 
   return (
-    <div className="flex flex-col items-center min-h-screen bg-[#FCFCFC] pt-0 font-urbanist">
+    <div className="flex flex-col items-center min-h-screen bg-[#FCFCFC]  pt-0 font-urbanist">
       
       <div
         className="w-full  h-[120px] rounded-bl-lg rounded-br-lg bg-[#004BAD] flex items-center justify-center mb-8 absolute pb-6"
