@@ -13,13 +13,14 @@ const HomeP=()=>{
     const [searchtext,setsearchtext]=useState('')
     const selectedFilter= useSelector((state:RootState)=>state.filter.selectedFilter)
     const restaurantData = [
-        { img: '/pizzaNation.png', name: 'Pizza Nation', time: '12:00 pm', location: 'cos' },
-        { img: '/restpic.png', name: 'Desert Club', time: '12:00 pm', location: 'cos' },
-        { img: '/restpic2.png', name: 'Sips N Bites', time: '12:00 pm', location: 'G-block' },
-        { img: '/pizzaNation.png', name: 'Desert Club', time: '12:00 pm', location: 'cos' },
-        { img: '/restpic.png', name: 'Pizza Nation', time: '12:00 pm', location: 'cos' },
-        { img: '/restpic2.png', name: 'Desert Club', time: '12:00 pm', location: 'cos' },
-        { img: '/pizzaNation.png', name: 'Sips N Bites', time: '12:00 pm', location: 'cos' },
+        { id:'1', img: '/pizzaNation.png', name: 'Pizza Nation', time: '12:00 pm', location: 'cos' },
+        { id:'2',img: '/restpic.png', name: 'Desert Club', time: '12:00 pm', location: 'cos' },
+        { id:'3',img: '/restpic2.png', name: 'Sips N Bites', time: '12:00 pm', location: 'G-block' },
+        { id:'4',img: '/restpic2.png', name: 'Sips N Bites', time: '12:00 pm', location: 'G-block' },
+        { id:'5',img: '/pizzaNation.png', name: 'Desert Club', time: '12:00 pm', location: 'cos' },
+        { id:'6',img: '/restpic.png', name: 'Pizza Nation', time: '12:00 pm', location: 'cos' },
+        { id:'7',img: '/restpic2.png', name: 'Desert Club', time: '12:00 pm', location: 'cos' },
+        { id:'8',img: '/pizzaNation.png', name: 'Sips N Bites', time: '12:00 pm', location: 'cos' },
         // Add more restaurant data here...
       ];    
      
@@ -40,7 +41,7 @@ const HomeP=()=>{
                 <div id="restbar">
 
                 {filter2.map((restaurant, index) => (
-            <RestCard key={index} {...restaurant} />
+            <RestCard key={index} {...restaurant}  />
           ))}
                    
                 </div>

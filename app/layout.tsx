@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Urbanist } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./provider";
 
-const inter = Inter({ subsets: ["latin"] });
+const urbanist = Urbanist({ 
+  subsets: ["latin"],
+  variable: '--font-urbanist',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: "Home | Fooddle",
@@ -16,12 +20,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
+    <html lang="en" className={urbanist.variable}>
+      <body className="font-sans">
          <Providers>
           {children}
         </Providers>
-        </body>
+      </body>
     </html>
   );
 }

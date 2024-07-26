@@ -1,8 +1,8 @@
 "use client";
 
 import React from 'react';
-import ProfileHeader from './profileHeader';
-import ProfileButtons from './profileButtons';
+import ProfileHeader from './ProfileHeader';
+import ProfileButtons from './ProfileButtons';
 
 const Profile = () => {
 

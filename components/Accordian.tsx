@@ -17,9 +17,7 @@ const Accordian = () => {
 
   return (
     <div className="flex">
-      <div className="hidden md:flex md:items-center md:[15vw]">
-        Fooddle
-      </div>
+    
       <div className="flex flex-col">
         <div className="hidden md:block">
           <ProfileHeader />
