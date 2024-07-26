@@ -1,7 +1,7 @@
 "use client"
 import Navbar from './Navbar'
 import'./cssModules/homeP.css'
-import React from'react'
+import React, { useState } from'react'
 import Searchbar from './Searchbar'
 import {RootState} from '@/redux/store'
 import './cssModules/navbar.css'
@@ -10,7 +10,7 @@ import RestCard from './RestCard'
 import { useSelector } from 'react-redux'
 
 const HomeP=()=>{
-
+    const [searchtext,setsearchtext]=useState('')
     const selectedFilter= useSelector((state:RootState)=>state.filter.selectedFilter)
     const restaurantData = [
         { img: '/pizzaNation.png', name: 'Pizza Nation', time: '12:00 pm', location: 'cos' },
@@ -21,24 +21,25 @@ const HomeP=()=>{
         { img: '/restpic2.png', name: 'Desert Club', time: '12:00 pm', location: 'cos' },
         { img: '/pizzaNation.png', name: 'Sips N Bites', time: '12:00 pm', location: 'cos' },
         // Add more restaurant data here...
-      ];
-
-      const filteredRestaurants = selectedFilter === 'All' ? restaurantData : restaurantData.filter(restaurant => restaurant.location === selectedFilter);
+      ];    
+     
+      const filteredRestaurants = ( !searchtext) ? restaurantData : restaurantData.filter(restaurant => (restaurant.name.toLowerCase().includes(searchtext)));
+      const filter2=(selectedFilter==='All')? filteredRestaurants:filteredRestaurants.filter(restaurant=>(restaurant.location===selectedFilter))
     return(
-       
+        
         <div className='screen'>
              <Navbar />
             
             <div id="rest">
                 <div id="sbar">
-                <Searchbar />
+                <Searchbar searchtext={searchtext} setsearchtext={setsearchtext} />
                 </div>
                 <div id="fibar">
                 <Filterbar/>
                 </div>
                 <div id="restbar">
 
-                {filteredRestaurants.map((restaurant, index) => (
+                {filter2.map((restaurant, index) => (
             <RestCard key={index} {...restaurant} />
           ))}
                    
