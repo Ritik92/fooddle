@@ -1,5 +1,13 @@
 import { Image } from "@nextui-org/react"
-export default function Menuitems(){
+type MenuItemProps = {
+    data: {
+        id: string;
+        name: string;
+        price: string;
+    };
+};
+const Menuitems: React.FC<MenuItemProps> = ({ data }) => {
+    const { name, price } = data;
     return(
         
         <div className='flex mt-[24px]  justify-between'>
@@ -8,10 +16,10 @@ export default function Menuitems(){
     <div className='ml-[9.34px]'>
     <Image src="/vegicon.png" alt="Food Image" width={15.18} height={15.71} />
     <div className='mt-[4.27px]'>
-        Margerita pizza
+       {name}
     </div>
     <div className='text-[#004BAD] text-left'>
-        $129.00
+        {price}
     </div>
     </div> 
         </div>
@@ -26,3 +34,4 @@ export default function Menuitems(){
         
     )
 }
+export default Menuitems;
