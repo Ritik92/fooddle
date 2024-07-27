@@ -3,22 +3,26 @@
 import React from 'react';
 import {Image} from '@nextui-org/react';
 import './cssModules/RestCard.css'
+import { useRouter } from 'next/navigation';
 
 // Define the type for the props
 type RestCardProps = {
+    id: string;
     img: string;
     name: string;
     time: string;
     location:string;
 };
 
-const RestCard: React.FC<RestCardProps> = ({ img, name, time ,location}) => {
+const RestCard: React.FC<RestCardProps> = ({ id,img, name, time ,location}) => {
+    const router=useRouter()
     return (
+       
         <div id="outer-box">
             <button id="like">
-                <Image src="/favourite.png" />
+                <Image src="/favourite.png"  />
             </button>
-            <Image id="image-container"src={img} width={344} height={178} alt="Restaurant Image" />
+            <Image id="image-container"src={img} width={344} height={178} alt="Restaurant Image" onClick={() => { router.push(`/restaurants/${id}`) }}/>
             <div id="panel">
                 <div id="info">
                 <div id="rname">
@@ -38,7 +42,7 @@ const RestCard: React.FC<RestCardProps> = ({ img, name, time ,location}) => {
                 
             </div>
             <style>
-            @import url('https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
+           
             </style> 
         </div>
     );

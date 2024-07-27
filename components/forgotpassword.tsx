@@ -13,7 +13,7 @@ const ForgotPassword = () => {
   const router = useRouter();
 
   const handleBackClick = () => {
-    router.push("/login");
+    router.push("/");
   };
 
   const [timer, setTimer] = useState<number>(120);
@@ -41,15 +41,15 @@ const ForgotPassword = () => {
       <Image
         src="/Foodle-logo.png"
         alt="logo"
-        className="w-full h-20 position-fixed object-cover hidden md:block"
+        className="w-[128px] h-[55px] top-[2.03rem] left-[3.5rem] object-cover hidden md:block"
       />
-      <div className="flex flex-col md:mt-40 md:flex-row md:justify-between md:px-16 lg:pt-12">
+      <div className="flex flex-col md:mt-20 md:flex-row md:justify-between md:px-10">
       {/* Heading Container for larger screens */}
-      <div className="flex justify-center md:w-1/2">
+      <div className="flex justify-center  md:w-1/2">
         <Image
           src="/check-mail.png"
           alt="Check your mail"
-          className="w-full h-72 object-cover mt-14 px-6 hidden md:block"
+          className="w-[357.17px] h-[259.68px]   object-cover mt-14 px-6 hidden md:block"
         />
       </div>
       <div className="w-full h-[120px] rounded-bl-lg rounded-br-lg bg-[#004BAD] flex items-center justify-center mb-8 absolute md:hidden">
@@ -66,8 +66,8 @@ const ForgotPassword = () => {
       </div>
 
       <div className="flex-grow flex items-center justify-center mt-52 md:mt-0">
-        <div className="max-w-sm  w-full rounded-lg bg-[#FCFCFC] md:w-50 md:max-w-xl md:h-[28rem]">
-          <div className="hidden md:flex w-full max-w-[500px] md:max-w-none md:w-[100%] lg:w-[100%] h-[120px] bg-[#004BAD] items-center justify-center mb-8 md:h-24 md:mb-14 ">
+        <div className="max-w-sm  w-full rounded-2xl bg-[#FCFCFC] md:w-50 md:max-w-xl md:h-[28rem]">
+          <div className="hidden md:flex w-full max-w-[500px] md:max-w-none md:w-[100%] lg:w-[100%] h-[120px] bg-[#004BAD] rounded-t-2xl items-center justify-center mb-8 md:h-24 md:mb-14 ">
             <div className="flex items-center w-full px-4 pt-16 md:pt-0">
               <button
                 className="text-white mr-4 hover:bg-[#003b8c] rounded-full p-2"

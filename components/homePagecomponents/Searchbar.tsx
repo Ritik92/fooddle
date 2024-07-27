@@ -1,18 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Image } from '@nextui-org/react';
 import './cssModules/Searchbar.css'
-const Searchbar=()=>{
+const Searchbar=({ searchtext, setsearchtext }:any)=>{
+    
     return(
+        
         <div className='out'>
             <div className='inn'>
                 <Image src="/searchb.png"/>
-                <input className='holder' type="text" placeholder="What would you like to eat today?"/>
+                <input className='holder' type="text" placeholder="What would you like to eat today?" onChange={(e)=>{setsearchtext(e.target.value)}}/>
             </div>
             
             <button><Image src="/filter-horizontal.png"/></button>
-               
             <style>
-            @import url('https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
+            
             </style> 
         </div>
     )

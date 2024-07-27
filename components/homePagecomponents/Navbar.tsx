@@ -21,6 +21,7 @@ const Navbar=()=>{
             </div>
 
             <div className='options'>
+
                 <button  className={pathname === '/api/home' ? 'active' : ''} 
           onClick={() => handleNavigation('/api/home')}
         ><Image src="/home.png"  className='defaultim'/>
@@ -40,7 +41,7 @@ const Navbar=()=>{
 
             </div>
             
-               <button id="profile">
+               <button id="profile" onClick={() => handleNavigation('/profilepage')}>
                 <Image className="profile-pic" src="/UserIcon.png"/>
                 <p>Profile</p>
                </button>
