@@ -3,6 +3,8 @@
     top: 0;
     left: 0; */
     width: 110.75px;
+    /* width:220px; */
+
     height: 100vh;
     padding: 24px;
     background: #004BAD;
@@ -13,13 +15,23 @@
      /* Ensure navigation bar stays on top of other content */
     grid-column-start: 0;
     grid-column-end:1;
+    transition: all 0.5s ease;
+    
 
 }
-
-.logo {
+.fulllogo
+{
+   height:60px;
+   width:116px;
+    display: none;
+   
+}
+/* .logo {
+    display: block;
     height: 47.25px;
     width: 30.75px;
-}
+    
+} */
 
 .options {
     display: flex;
@@ -30,18 +42,34 @@
     margin-top: 32px; /* Adjust top margin as needed */
     margin-bottom: 32px; /* Adjust bottom margin as needed */
 }
+.defaultim{
+    display:block;
+}
+.activeim{
+display: none;
+}
+
+.option button{
+    display: flex;
+}
 
 .icon {
     height: 111.25px;
     width: 116px;
     padding: 32px 32px 32px 32px; /* Adjust padding as needed */
+    transition: all 0.5s ease;
 }
 
 .profile-pic {
     height: 32px;
     width: 32px;
+    margin-right:10px;
 }
-
+#profile{
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
 .options button {
     display:flex;
     
@@ -54,23 +82,93 @@
     border: none;
     cursor: pointer;
     background: transparent; /* Default background */
-    transition:  0.5s ease; /* Smooth transition effect */
+    /* transition:  0.5s ease; Smooth transition effect */
     
+}
+
+.options button p,#profile p{
+    display: none;
+    margin:0;
+    padding-left: 0px;
+    transition: opacity 0.5s ease;
+    color: white;
 }
 
 .options button:focus {
     outline: none;
 }
 
-.options button img {
-    width: 24px; /* Adjust icon size as needed */
+.options button img, #profile img {
+    width: 24px; 
     height: 24px; /* Adjust icon size as needed */
     cursor:pointer;
+    margin-right: 10px;
+    transition: filter 0.5s ease;
 }
 .options button.active
 {
     background: white;
+    transition:none;
     /* transition:0.5s ease; */
 }
+.options button.active .defaultim{
+    display: none;
+}
+.options button.active .activeim{
+    display:block;
+}
 
+.outer:hover{
+    padding: 20px;
+    width:150px;
+}
+.outer:hover .icon{
+    width:116px;
+    height: 111.25px;
+    padding-left: 20px;
+    
+}
+.outer:hover .fulllogo{
+    display:block;
+    margin-left:0px;
+}
+.outer:hover .deflogo
+{
+    display: none;
+}
+.outer:hover .options button{
+    width: 120px;
+}
 
+.outer:hover .options button p, .outer:hover #profile p {
+    display: block;
+    opacity:1;
+
+  }
+
+  .options button.active p {
+    color: #004BAD; /* Text color when active */
+  }
+  .options button.active img {
+    mask-image: var(--mask-image);
+    mask-size: cover;
+    mask-repeat: no-repeat;
+    /* Apply the background color inside the mask */
+  
+}
+
+.options button.home {
+    --mask-image: url('/homeYes.png');
+}
+
+.options button.search {
+    --mask-image: url('/homeYes.png');
+}
+
+.options button.cart {
+    --mask-image: url('/cart.png');
+}
+
+.options button.orders {
+    --mask-image: url('/orderhistory.png');
+}

@@ -15,27 +15,34 @@ const Navbar=()=>{
     return(
         <div className='outer'>
             <div className='icon'>
-            <Image className='logo' src = "/logos.png" />
+            <Image className='deflogo' src = "/logos.png" />
+            <Image className='fulllogo' src = "/logocom.png" />
             
             </div>
 
             <div className='options'>
                 <button  className={pathname === '/api/home' ? 'active' : ''} 
           onClick={() => handleNavigation('/api/home')}
-        ><Image src="/home1.png"/></button>
+        ><Image src="/home.png"  className='defaultim'/>
+        <Image src="/homeYes.png" className='activeim'/>
+        <p>home</p></button>
 
 
                 <button className={pathname === '/api/search' ? 'active' : ''} 
-          onClick={() => handleNavigation('/api/search')}><Image src="/search.png"/></button>
+          onClick={() => handleNavigation('/api/search')}><Image src="/searchNo.png"  className='defaultim'/>
+        <Image src="/SearchYes.png" className='activeim'/><p>search</p></button>
                 <button className={pathname === '/api/cart' ? 'active' : ''} 
-          onClick={() => handleNavigation('/api/cart')}><Image src="/cart.png"/></button>
+          onClick={() => handleNavigation('/api/cart')}><Image src="/cart.png"  className='defaultim'/>
+        <Image src="/cartYes.png" className='activeim'/><p>cart</p></button>
                 <button className={pathname === '/api/note' ? 'active' : ''} 
-          onClick={() => handleNavigation('/api/note')}><Image src="/orderhistory.png"/></button>
+          onClick={() => handleNavigation('/api/note')}><Image src="/ordersNo.png"  className='defaultim'/>
+        <Image src="/orderYes.png" className='activeim'/><p>orders</p></button>
 
             </div>
             
                <button id="profile">
                 <Image className="profile-pic" src="/UserIcon.png"/>
+                <p>Profile</p>
                </button>
             
 
