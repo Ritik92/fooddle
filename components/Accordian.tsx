@@ -6,8 +6,8 @@ import { Card, Button, Input } from '@nextui-org/react';
 import Profile from "./profile";
 import { IoIosArrowBack } from "react-icons/io";
 
-import ProfileButtons from "./profileButtons";
-import ProfileHeader from "./profileHeader";
+import ProfileButtons from "./ProfileButtons";
+import ProfileHeader from "./ProfileHeader";
 
 const Accordian = () => {
 
@@ -27,7 +27,7 @@ const Accordian = () => {
             <ProfileButtons />
           </div>
 
-          <div className="flex flex-col w-[100vw] items-center min-h-screen bg-[#FCFCFC] pt-0 font-urbanist md:w-[88vw]">
+          <div className="flex flex-col  w-[100vw] items-center min-h-screen bg-[#FCFCFC] pt-0 font-urbanist md:w-[100vw]">
 
             <div
               className="w-full  h-[120px] rounded-bl-lg rounded-br-lg bg-[#004BAD] flex items-center justify-center mb-8  pb-6 sm:w-[100vw] md:hidden"

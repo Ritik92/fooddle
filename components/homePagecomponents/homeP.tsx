@@ -41,7 +41,7 @@ const HomeP=()=>{
                 <div id="restbar">
 
                 {filter2.map((restaurant, index) => (
-            <RestCard key={index} {...restaurant}  />
+            <RestCard key={index} {...restaurant} />
           ))}
                    
                 </div>

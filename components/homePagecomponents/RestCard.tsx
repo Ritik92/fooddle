@@ -7,13 +7,14 @@ import { useRouter } from 'next/navigation';
 
 // Define the type for the props
 type RestCardProps = {
+    id: string;
     img: string;
     name: string;
     time: string;
     location:string;
 };
 
-const RestCard: React.FC<RestCardProps> = ({ img, name, time ,location}) => {
+const RestCard: React.FC<RestCardProps> = ({ id,img, name, time ,location}) => {
     const router=useRouter()
     return (
        
@@ -21,7 +22,7 @@ const RestCard: React.FC<RestCardProps> = ({ img, name, time ,location}) => {
             <button id="like">
                 <Image src="/favourite.png"  />
             </button>
-            <Image id="image-container"src={img} width={344} height={178} alt="Restaurant Image" onClick={()=>{router.push('/restaurants/pizzanation')}}/>
+            <Image id="image-container"src={img} width={344} height={178} alt="Restaurant Image" onClick={() => { router.push(`/restaurants/${id}`) }}/>
             <div id="panel">
                 <div id="info">
                 <div id="rname">
