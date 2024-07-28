@@ -22,7 +22,7 @@ const Accordian = () => {
       Fooddle
     </div>
       <div className="flex flex-col">
-        <div className="hidden md:block">
+        <div className="hidden md:block mb-5">
           <ProfileHeader />
         </div>
         <div className="flex flex-row w-full relative top-0 bg-[#FCFCFC] md:top-[13.5rem]">
