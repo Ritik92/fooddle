@@ -13,29 +13,37 @@ const Navbar=()=>{
     router.push(path);
   };
     return(
-        <div className='outer '>
+        <div className='outernav'>
             <div className='icon'>
-            <Image className='logo' src = "/logos.png" />
+            <Image className='deflogo' src = "/logos.png" />
+            <Image className='fulllogo' src = "/logocom.png" />
             
             </div>
 
             <div className='options'>
+
                 <button  className={pathname === '/home' ? 'active' : ''} 
           onClick={() => handleNavigation('/home')}
-        ><Image src="/home1.png"/></button>
+        ><Image src="/home.png"  className='defaultim'/>
+        <Image src="/homeYes.png" className='activeim'/>
+        <p>home</p></button>
 
 
                 <button className={pathname === '/search' ? 'active' : ''} 
-          onClick={() => handleNavigation('/search')}><Image src="/search.png"/></button>
+          onClick={() => handleNavigation('/search')}><Image src="/searchNo.png"  className='defaultim'/>
+        <Image src="/SearchYes.png" className='activeim'/><p>search</p></button>
                 <button className={pathname === '/cart' ? 'active' : ''} 
-          onClick={() => handleNavigation('/cart')}><Image src="/cart.png"/></button>
+          onClick={() => handleNavigation('/cart')}><Image src="/cart.png"  className='defaultim'/>
+        <Image src="/cartYes.png" className='activeim'/><p>cart</p></button>
                 <button className={pathname === '/note' ? 'active' : ''} 
-          onClick={() => handleNavigation('/note')}><Image src="/orderhistory.png"/></button>
+          onClick={() => handleNavigation('/note')}><Image src="/ordersNo.png"  className='defaultim'/>
+        <Image src="/orderYes.png" className='activeim'/><p>orders</p></button>
 
             </div>
             
                <button id="profile" onClick={() => handleNavigation('/profilepage')}>
                 <Image className="profile-pic" src="/UserIcon.png"/>
+                <p>Profile</p>
                </button>
             
 

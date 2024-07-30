@@ -38,18 +38,22 @@
    
 
     transform: scale(1.02); 
-    transition:300ms ease-out;
+
+    transition:0.3s ease-out;
     
 }
 
-.button-container:hover button{
+.button-container:hover :not(.active) button{
     color:#004BAD;
+
+
     
 }
 
 .button-container.active  {
     /* styles for the active filter button */
     background: #FFFFFF;
+    color:black;
 
 
 }

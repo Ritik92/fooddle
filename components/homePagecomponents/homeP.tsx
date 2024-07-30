@@ -7,9 +7,29 @@ import {RootState} from '@/redux/store'
 import './cssModules/navbar.css'
 import Filterbar from './Filterbar'
 import RestCard from './RestCard'
+import Support from './support'
 import { useSelector } from 'react-redux'
+import {Image} from '@nextui-org/react'
+import { useRouter,usePathname } from 'next/navigation'
+import Supportmsg from './supportmsg'
 
 const HomeP=()=>{
+    const router = useRouter();
+    const pathname = usePathname();
+    const [helpbox,setHelpbox]=useState(false);
+    
+
+    const toggleHelpBox=()=>{
+        setHelpbox(!helpbox);
+    }  
+
+    const closeHelpBox=()=>{
+        setHelpbox(false);
+    }  
+
+
+  const handleNavigation = (path: string) => {
+    router.push(path);};
     const [searchtext,setsearchtext]=useState('')
     const selectedFilter= useSelector((state:RootState)=>state.filter.selectedFilter)
     const restaurantData = [
@@ -29,8 +49,20 @@ const HomeP=()=>{
     return(
         
         <div className='screen'>
-             <Navbar />
+                 <div id="top">
+                
+                <Image src="/Foodle-logo.png"/>
+                <button id="user-icon" onClick={() => handleNavigation('/profilepage')}>
+                <Image className="prof-pic" src="/UserIcon.png"/>
+                
+               </button>
+
             
+        </div>
+             <div className='nav'>
+             <Navbar />
+             </div>
+           
             <div id="rest">
                 <div id="sbar">
                 <Searchbar searchtext={searchtext} setsearchtext={setsearchtext} />
@@ -43,12 +75,31 @@ const HomeP=()=>{
                 {filter2.map((restaurant, index) => (
             <RestCard key={index} {...restaurant} />
           ))}
+
+     
+
+
                    
                 </div>
+                { helpbox &&(<Supportmsg closeHelpbox={closeHelpBox}/>)}
                 
-            </div>
+                    <div id="s-icon">
+                  
+                    <Support toggleHelpbox={toggleHelpBox} isActive={helpbox}/>
+
+                    </div>
+                    
+                
+                </div>
+
+                
+
+                </div>
+
+                
             
-        </div>
+            
+        
     )
 }
 export default HomeP

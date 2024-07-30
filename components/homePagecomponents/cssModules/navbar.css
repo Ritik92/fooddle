@@ -1,8 +1,12 @@
-.outer {
-    /* position: absolute;
+
+
+.outernav {
+    position: absolute;
     top: 0;
-    left: 0; */
+    left: 0;
     width: 110.75px;
+    /* width:220px; */
+
     height: 100vh;
     padding: 24px;
     background: #004BAD;
@@ -11,21 +15,25 @@
     justify-content: space-between;
     align-items: center;
      /* Ensure navigation bar stays on top of other content */
-    grid-column-start: 0;
-    grid-column-end:1;
+   
+    transition: all 0.5s ease;
+    z-index:10;
+    
+
+}
+.fulllogo
+{
+   height:60px;
+   width:116px;
     display: none;
-
+   
 }
-@media screen and (min-width: 768px) {
-    .outer {
-        display: flex; /* Show on larger screens */
-    }
-}
-
-.logo {
+/* .logo {
+    display: block;
     height: 47.25px;
     width: 30.75px;
-}
+    
+} */
 
 .options {
     display: flex;
@@ -36,18 +44,34 @@
     margin-top: 32px; /* Adjust top margin as needed */
     margin-bottom: 32px; /* Adjust bottom margin as needed */
 }
+.defaultim{
+    display:block;
+}
+.activeim{
+display: none;
+}
+
+.option button{
+    display: flex;
+}
 
 .icon {
     height: 111.25px;
     width: 116px;
-    padding: 32px 32px 32px 32px; /* Adjust padding as needed */
+    padding: 32px; /* Adjust padding as needed */
+    transition: all 0.5s ease;
 }
 
 .profile-pic {
     height: 32px;
     width: 32px;
+    margin-right:10px;
 }
-
+#profile{
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
 .options button {
     display:flex;
     
@@ -60,23 +84,149 @@
     border: none;
     cursor: pointer;
     background: transparent; /* Default background */
-    transition:  0.5s ease; /* Smooth transition effect */
+    /* transition:  0.5s ease; Smooth transition effect */
     
+}
+
+.options button p,#profile p{
+    display: none;
+    margin:0;
+    padding-left: 0px;
+    transition: opacity 0.5s ease;
+    color: white;
 }
 
 .options button:focus {
     outline: none;
 }
 
-.options button img {
-    width: 24px; /* Adjust icon size as needed */
+.options button img, #profile img {
+    width: 24px; 
     height: 24px; /* Adjust icon size as needed */
     cursor:pointer;
+    margin-right: 10px;
+    transition: filter 0.5s ease;
 }
 .options button.active
 {
     background: white;
+    transition:none;
+    
     /* transition:0.5s ease; */
 }
 
+.outernav:hover .options button.active p{
+    color:#004BAD;
+    display: block;
+}
 
+ .options button.active .defaultim{
+    display: none;
+}
+.options button.active .activeim{
+    display:inline;
+}
+
+.outernav:hover{
+    padding: 20px;
+    width:150px;
+}
+.outernav:hover .icon{
+    width:116px;
+    height: 111.25px;
+    padding-left: 20px;
+    
+}
+.outernav:hover .fulllogo{
+    display:block;
+    margin-left:0px;
+}
+.outernav:hover .deflogo
+{
+    display: none;
+}
+.outernav:hover .options button{
+    width: 120px;
+}
+
+.outernav:hover .options button p, .outernav:hover #profile p {
+    display: block;
+    opacity:1;
+
+  }
+
+  
+@media (max-width:767px){
+    .outernav{
+        /* position:absolute; */
+        bottom:0px;
+        left:0px;
+        position:relative;
+        padding: 0px 24px 0px 24px;
+        border-radius: 24px;
+        height:72px;
+        width:100%;
+        display:flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0;
+        z-index:10;
+       
+        /* box-sizing: border-box; */
+        transition:none;
+    }
+
+    .icon{
+        display:none;
+    }
+
+    .options{
+        flex-direction: row;
+        gap:10px;
+        padding:0px;
+        width:100%;
+        height:40px;
+        padding: 0px 24px 0px 24px;
+        border-radius: 24px;
+        
+
+    }
+
+    .options button{
+        width: 48px;
+        height: 32px;
+        border-radius: 8px;
+        padding: 4px 12px 4px 12px;
+
+    }
+
+    .options button p, #profile p{
+        display: none;
+    }
+
+    .options button:active,
+    .options button.active {
+        background: white;
+    }
+
+    #profile{
+        display: none;
+    }
+
+   
+    .outernav:hover .fulllogo,
+    .outernav:hover .deflogo,
+    .outernav:hover .options button.active p,
+    .outernav:hover .options button p,
+    .outernav:hover #profile p {
+        display: none;
+        
+    }
+    .outernav:hover{
+        width:100%;
+    }
+    .outernav:hover .options button{
+        width:48px;
+    }
+}
