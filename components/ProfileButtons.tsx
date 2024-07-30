@@ -2,6 +2,7 @@
 
 import React from "react";
 import { Card, Button, Image, Avatar } from '@nextui-org/react';
+import { signOut } from "next-auth/react";
 
 const ProfileButtons = () => {
 
@@ -26,7 +27,7 @@ const ProfileButtons = () => {
                                 <div>
                                     <div className={`flex gap-4 py-2 rounded-lg black`}>
                                     <Image src='/logout-square-01.png' alt='dp' width={24} height={24} className='m-1'/>
-                                        <button className='text-[#EF4D4D]'>Log Out</button>
+                                        <button className='text-[#EF4D4D] ' onClick={()=>{signOut()}}>Log Out</button>
                                     </div>
                                 </div>
                             </div>

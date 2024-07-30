@@ -16,10 +16,13 @@ const Accordian = () => {
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
 
   return (
-    <div className="flex">
     
+    <div className="flex">
+    <div>
+      Fooddle
+    </div>
       <div className="flex flex-col">
-        <div className="hidden md:block">
+        <div className="hidden md:block mb-5">
           <ProfileHeader />
         </div>
         <div className="flex flex-row w-full relative top-0 bg-[#FCFCFC] md:top-[13.5rem]">

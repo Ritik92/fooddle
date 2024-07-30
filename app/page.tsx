@@ -6,13 +6,14 @@ import ForgotPassword from "@/components/forgotpassword";
 import ResetPassword from "@/components/ResetPassword";
 import Accordian from "@/components/Accordian";
 import Profile from "@/components/profile";
+import PersonalDetails from "@/components/PersonalDetails";
 
 
 export default function Home() {
 
   return (
    
-    <Accordian/>
+    <Login/>
     
   );
 }
