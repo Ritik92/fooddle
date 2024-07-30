@@ -2,14 +2,22 @@
 import React,{useRef, useState} from 'react'
 import {Image}from '@nextui-org/react';
 import "./cssModules/support.css"
-const support=()=>{
+
+
+
+interface SupportProps {
+    toggleHelpbox: () => void;
+    isActive: boolean;
+  }
+const support: React.FC<SupportProps> = ({ toggleHelpbox, isActive })=>{
 
     const dotRef = useRef<HTMLImageElement>(null);
    
     const lineRef = useRef<HTMLImageElement>(null);
     const sendRef = useRef<HTMLImageElement>(null);
     const [isBlinking, setIsBlinking] = useState(false);
-    const[isActive,setIsActive]=useState(false);
+    // const[isActive,setIsActive]=useState(false);
+    const[isHovered,setIsHovered]=useState(false);
    
     const triggerBlink = () => {
         if (dotRef.current) {
@@ -20,6 +28,7 @@ const support=()=>{
     };
 
     const handleMouseEnter = () => {
+        setIsHovered(true);
         if (!isBlinking) {
             setIsBlinking(true);
             triggerBlink();
@@ -27,6 +36,7 @@ const support=()=>{
     };
 
     const handleMouseLeave = () => {
+        setIsHovered(false);
         if (dotRef.current) {
             setIsBlinking(false);
             triggerBlink();
@@ -34,40 +44,43 @@ const support=()=>{
     };
 
     const handleClick = () => {
-        setIsActive(prevState => !prevState); 
+        // setIsActive(prevState => !prevState); 
+        toggleHelpbox
     };
 
-    const handleSendClick = (event: React.MouseEvent<HTMLImageElement>) => {
-        event.stopPropagation(); // Prevent click event from bubbling up
-        setIsActive(false);
-    };
+    // const handleSendClick = (event: React.MouseEvent<HTMLImageElement>) => {
+    //     event.stopPropagation(); // Prevent click event from bubbling up
+    //     setIsActive(false);
+    // };
     
   
 
 
     return(
-        <div className='screen'>
-        <div className='out'>
+        // <div className='screen'>
+        <div className='outsup' onClick={toggleHelpbox}>
            
+            <div className={`iconback${isHovered && !isActive ? ' hovered' : ''}`}>
+                 <div className={`main-icon${isActive ? ' clicked' : ''}`}
+           
+                 onMouseEnter={handleMouseEnter} 
+                 onMouseLeave={handleMouseLeave}
+                 onClick={handleClick}
+                 >
             
-            <div className={`main-icon${isActive ? ' clicked' : ''}`}
-           
-            onMouseEnter={handleMouseEnter} 
-            onMouseLeave={handleMouseLeave}
-            onClick={handleClick}
-            >
-            <Image id="line" src= "/line.png"
-            style={{ display: isActive ? 'none' : 'block' }} 
-            />
-            <Image id="dot"  src= "/dot.png" ref={dotRef} 
-            style={{ display: isActive ? 'none' : 'block' }} 
-            />
-            <Image id="send" src="/send.png" onClick={handleSendClick}
-             style={{ display: isActive ? 'block' : 'none'  }} 
-            />
+                 <Image id="line" src= "/line.png"
+                 style={{ display: isActive ? 'none' : 'block' }} 
+                 />
+                 <Image id="dot"  src= "/dot.png" ref={dotRef} 
+                 style={{ display: isActive ? 'none' : 'block' }} 
+                 />
+                 <Image id="send" src="/send.png" /*onClick={handleSendClick}*/
+                 style={{ display: isActive ? 'block' : 'none'  }} 
+                 />
 
+                </div>
             </div>
-            <div className="help">
+            <div className="help"  style={{ display: isHovered && !isActive ? 'block' : 'none' }}>
             <p >Need Help?</p>
             </div>
 
@@ -76,13 +89,7 @@ const support=()=>{
            
             
         </div>
-         <div className='msg'>
-         <textarea name="remarks" id="remarks"></textarea>
-         {/* <div id="limit"> */}
-            <p id="limit">bbsfbgj</p>
-         {/* </div> */}
-     </div>
-     </div>
+       
 
     )
 };

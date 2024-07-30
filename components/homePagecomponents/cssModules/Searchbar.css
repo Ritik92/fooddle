@@ -50,3 +50,26 @@
     background-color: #7cadbc;
     transition: 1s;
 }
+.out:hover{
+    background: #F7F7F7;
+
+}
+
+@media (max-width:768px){
+    .out{
+        /* display:inline-flex ; */
+        width:342px;
+        border-radius: 30px;
+        padding: 12px 18px;
+        /* position:fixed; */
+       
+        /* top:70px; */
+        
+        
+        
+        
+
+        
+
+    }
+}

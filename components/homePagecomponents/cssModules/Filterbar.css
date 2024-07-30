@@ -30,9 +30,9 @@
     display:flex;
     justify-content: space-between;
     gap:14.02px;
-    overflow-x: auto;
+    overflow:hidden;
     white-space: nowrap;
-     overflow: hidden; 
+     
     scroll-behavior: smooth;
 
 }
@@ -60,4 +60,21 @@
     cursor:pointer;
 
 
+}
+
+@media (max-width:768px)
+{
+    #rarrow,#larrow{
+        display:none;
+    }
+    #mainbar{
+        position: absolute;
+        left:0px;
+        overflow-x:scroll;
+        width:100%;
+
+    }
+    #mainbar::-webkit-scrollbar{
+        display: none;
+    }
 }

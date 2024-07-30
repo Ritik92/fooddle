@@ -13,7 +13,7 @@ const Navbar=()=>{
     router.push(path);
   };
     return(
-        <div className='outer'>
+        <div className='outernav'>
             <div className='icon'>
             <Image className='deflogo' src = "/logos.png" />
             <Image className='fulllogo' src = "/logocom.png" />
@@ -22,21 +22,21 @@ const Navbar=()=>{
 
             <div className='options'>
 
-                <button  className={pathname === '/api/home' ? 'active' : ''} 
-          onClick={() => handleNavigation('/api/home')}
+                <button  className={pathname === '/home' ? 'active' : ''} 
+          onClick={() => handleNavigation('/home')}
         ><Image src="/home.png"  className='defaultim'/>
         <Image src="/homeYes.png" className='activeim'/>
         <p>home</p></button>
 
 
-                <button className={pathname === '/api/search' ? 'active' : ''} 
-          onClick={() => handleNavigation('/api/search')}><Image src="/searchNo.png"  className='defaultim'/>
+                <button className={pathname === '/search' ? 'active' : ''} 
+          onClick={() => handleNavigation('/search')}><Image src="/searchNo.png"  className='defaultim'/>
         <Image src="/SearchYes.png" className='activeim'/><p>search</p></button>
-                <button className={pathname === '/api/cart' ? 'active' : ''} 
-          onClick={() => handleNavigation('/api/cart')}><Image src="/cart.png"  className='defaultim'/>
+                <button className={pathname === '/cart' ? 'active' : ''} 
+          onClick={() => handleNavigation('/cart')}><Image src="/cart.png"  className='defaultim'/>
         <Image src="/cartYes.png" className='activeim'/><p>cart</p></button>
-                <button className={pathname === '/api/note' ? 'active' : ''} 
-          onClick={() => handleNavigation('/api/note')}><Image src="/ordersNo.png"  className='defaultim'/>
+                <button className={pathname === '/note' ? 'active' : ''} 
+          onClick={() => handleNavigation('/note')}><Image src="/ordersNo.png"  className='defaultim'/>
         <Image src="/orderYes.png" className='activeim'/><p>orders</p></button>
 
             </div>
