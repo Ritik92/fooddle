@@ -38,12 +38,14 @@
    
 
     transform: scale(1.02); 
+
     transition:0.3s ease-out;
     
 }
 
 .button-container:hover :not(.active) button{
     color:#004BAD;
+
 
     
 }
