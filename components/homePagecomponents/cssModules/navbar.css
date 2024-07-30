@@ -13,7 +13,13 @@
      /* Ensure navigation bar stays on top of other content */
     grid-column-start: 0;
     grid-column-end:1;
+    display: none;
 
+}
+@media screen and (min-width: 768px) {
+    .outer {
+        display: flex; /* Show on larger screens */
+    }
 }
 
 .logo {

@@ -7,13 +7,14 @@ import ResetPassword from "@/components/ResetPassword";
 import Accordian from "@/components/Accordian";
 import Profile from "@/components/profile";
 import PersonalDetails from "@/components/PersonalDetails";
+import HomeP from "@/components/homePagecomponents/homeP";
 
 
 export default function Home() {
 
   return (
    
-    <Login/>
+    <HomeP/>
     
   );
 }

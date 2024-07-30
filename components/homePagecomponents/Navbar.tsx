@@ -13,7 +13,7 @@ const Navbar=()=>{
     router.push(path);
   };
     return(
-        <div className='outer'>
+        <div className='outer '>
             <div className='icon'>
             <Image className='logo' src = "/logos.png" />
             
