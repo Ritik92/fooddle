@@ -35,13 +35,13 @@ const SignIn = () => {
             <div className="bg-blue md:bg-white  absolute top-[11rem]  md:static  lg:mt-10 rounded-xl  w-full md:max-w-md overflow-hidden">
               <div className="flex ">
                 <button
-                  className={`flex-1 py-4 text-lg font-semibold  ${isLogin ? 'text-[#004BAD] bg-white rounded-t-xl ' : 'text-white bg-[#004BAD] md:text-[#4D4D4D] md:bg-white font-urbanist'}`}
+                  className={`flex-1 py-4  font-semibold text-[27px]  ${isLogin ? 'text-[#004BAD] bg-white rounded-t-xl ' : 'text-white bg-[#004BAD] md:text-[#4D4D4D] md:bg-white font-urbanist'}`}
                   onClick={() => setIsLogin(true)}
                 >
                   Login
                 </button>
                 <button
-                  className={`flex-1 py-4 text-lg font-semibold ${!isLogin ? 'text-[#004BAD]  bg-white rounded-t-xl' : 'text-white md:text-[#4D4D4D] bg-[#004BAD] md:bg-white font-urbanist'}`}
+                  className={`flex-1 py-4 text-[27px]  font-semibold ${!isLogin ? 'text-[#004BAD]  bg-white rounded-t-xl' : 'text-white md:text-[#4D4D4D] bg-[#004BAD] md:bg-white font-urbanist'}`}
                   onClick={() => setIsLogin(false)}
                 >
                   Sign up

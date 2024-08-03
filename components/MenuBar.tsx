@@ -12,7 +12,7 @@ export default function MenuBar(props:any){
     
     return(
      
-        <div className=' flex bg-[#F5F5F5]'>
+        <div className=' flex '>
             <div className='hidden md:block'>
             <Navbar/>
             </div>
@@ -38,8 +38,6 @@ export default function MenuBar(props:any){
                   {menudata.closingTime}
                 </div>
             </div>
-               
-                
             </div>
             <div className='flex md:justify-end'>
             <div className='text-[#FCFCFCB2] pl-14 absolute top-[5.5rem] md:pr-2 md:mt-8'>

@@ -72,15 +72,16 @@ const Accordian = () => {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-      <div className="hidden md:flex md:items-end md:w-[15vw]">
+            <div className="hidden md:flex md:items-end md:w-[15vw]">
         <p className="">
           <img src="/i.png" alt="i" />
           <span className="text-white">lorem</span>
         </p>
       </div>
+          </div>
+        </div>
+      </div>
+     
 
     </div>
   );
