@@ -5,22 +5,32 @@ import React from 'react';
 import { Card, Button, Input } from '@nextui-org/react';
 import Profile from "./profile";
 import { IoIosArrowBack } from "react-icons/io";
-
+import { useRouter } from "next/navigation";
 import ProfileButtons from "./ProfileButtons";
 import ProfileHeader from "./ProfileHeader";
 
 const Accordian = () => {
+
+  const router = useRouter();
+
+  function handleHomeClick() {
+    router.push('/home');
+  }
+
+  const handleBackClick = () => {
+    router.push("/profilepage");
+  };
 
 
   const defaultContent =
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
 
   return (
-    
+
     <div className="flex">
-    <div>
-      Fooddle
-    </div>
+      <div className="hidden md:flex md:items-center">
+        <button className="w-[2vw] h-[50px]" onClick={handleHomeClick}><img src="/F.png" alt="Fooddle" /></button>
+      </div>
       <div className="flex flex-col">
         <div className="hidden md:block mb-5">
           <ProfileHeader />
@@ -36,7 +46,12 @@ const Accordian = () => {
               className="w-full  h-[120px] rounded-bl-lg rounded-br-lg bg-[#004BAD] flex items-center justify-center mb-8  pb-6 sm:w-[100vw] md:hidden"
             >
               <div className="flex items-center w-full px-4 pt-16 ">
-                <span className="text-white text-xl mr-3"><IoIosArrowBack size={24} /></span>
+                <button
+                  className="text-white mr-4 hover:bg-[#1a1c1e] rounded-full p-2"
+                  onClick={handleBackClick}
+                >
+                  <IoIosArrowBack size={24} />
+                </button>
 
                 <h2 className="text-white text-xl">Help & Support</h2>
               </div>
@@ -72,15 +87,15 @@ const Accordian = () => {
                 </div>
               </div>
             </div>
+            <div className="hidden md:flex md:justify-end md:items-end md:w-[15vw]">
+              <p> 
+              <img src="/i.png" alt="i" className="h-[30px] w-[30px] "/>
+              </p>
+            </div>
           </div>
         </div>
       </div>
-      <div className="hidden md:flex md:items-end md:w-[15vw]">
-        <p className="">
-          <img src="/i.png" alt="i" />
-          <span className="text-white">lorem</span>
-        </p>
-      </div>
+
 
     </div>
   );

@@ -12,8 +12,11 @@ export default function MenuBar(props:any){
     
     return(
      
-        <div className='flex bg-[#F5F5F5]'>
-        <Navbar/>
+        <div className=' flex '>
+            <div className='hidden md:block'>
+            <Navbar/>
+            </div>
+        
         <div className='w-full'>
             <div className='max-w-[889px]  mx-auto '>
         <div className='bg-blue-800 h-[120px] w-full md:h-[168px] md:w-[889px] md:mt-[24px] rounded-b-[8px] md:rounded-[24px]  text-center text-blue'>
@@ -35,8 +38,6 @@ export default function MenuBar(props:any){
                   {menudata.closingTime}
                 </div>
             </div>
-               
-                
             </div>
             <div className='flex md:justify-end'>
             <div className='text-[#FCFCFCB2] pl-14 absolute top-[5.5rem] md:pr-2 md:mt-8'>
