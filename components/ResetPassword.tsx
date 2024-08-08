@@ -41,7 +41,7 @@ const ResetPassword: React.FC = () => {
       <Image
         src="/Foodle-logo.png"
         alt="logo"
-        className="w-full h-20 position-fixed object-cover hidden md:block"
+        className="w-[128px] h-[55px] top-[2.03rem] left-[3.5rem] object-cover hidden md:block"
       />
       <div className="hidden md:pt-20 md:block position-relative md:px-72">
         {error && (
@@ -70,7 +70,7 @@ const ResetPassword: React.FC = () => {
             <h2 className="text-white text-xl ">Forgot Password</h2>
           </div>
         </div>
-        <div className="flex-grow flex items-center justify-center mt-52 md:mt-0">
+        <div className="flex-grow flex items-center justify-center mt-32 md:mt-0">
           <div className="max-w-sm  w-full rounded-lg bg-[#FCFCFC] md:w-50 md:max-w-xl md:h-[26rem] ">
             <div className="hidden md:flex w-full max-w-[500px] md:max-w-none md:w-[100%] lg:w-[100%] h-[120px] bg-[#004BAD] items-center justify-center mb-8 md:h-24 md:mb-14 ">
               <div className="flex items-center w-full px-4 pt-16 md:pt-0">
@@ -117,7 +117,7 @@ const ResetPassword: React.FC = () => {
                   <label
                     className={`absolute left-1.5 top-1 transition-all transform ${
                       newPassword
-                        ? "text-xs -top-3.5 md:-top-5"
+                        ? "text-xs -top-4 md:-top-5"
                         : "text-sm top-3 pt-2"
                     } px-3`}
                   >
@@ -149,7 +149,7 @@ const ResetPassword: React.FC = () => {
                   <label
                     className={`absolute left-1.5 top-1 transition-all transform ${
                       confirmPassword
-                        ? "text-xs -top-3.5 md:-top-5"
+                        ? "text-xs -top-4 md:-top-5"
                         : "text-sm top-3 pt-2"
                     } px-3`}
                   >

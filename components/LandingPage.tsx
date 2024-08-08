@@ -8,7 +8,7 @@ const Login = () => {
   const { data: session, status } = useSession();
 
   return (
-  /*  <div className='flex flex-col'>
+    <div className='flex flex-col'>
       {status === 'loading' ? (
         <p>Loading...</p>
       ) : session ? (
@@ -19,7 +19,7 @@ const Login = () => {
       ) : (
        signIn()
       )}
-    </div>*/
+    </div>
   );
 };
 

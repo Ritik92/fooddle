@@ -43,7 +43,7 @@ const ForgotPassword = () => {
         alt="logo"
         className="w-[128px] h-[55px] top-[2.03rem] left-[3.5rem] object-cover hidden md:block"
       />
-      <div className="flex flex-col md:mt-20 md:flex-row md:justify-between md:px-10">
+      <div className="flex flex-col md:mt-56 md:flex-row md:justify-between md:px-10">
       {/* Heading Container for larger screens */}
       <div className="flex justify-center  md:w-1/2">
         <Image
