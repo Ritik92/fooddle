@@ -22,8 +22,8 @@ const Navbar=()=>{
 
             <div className='options'>
 
-                <button  className={pathname === '/home' ? 'active' : ''} 
-          onClick={() => handleNavigation('/home')}
+                <button  className={pathname === '/' ? 'active' : ''} 
+          onClick={() => handleNavigation('/')}
         ><Image src="/home.png"  className='defaultim'/>
         <Image src="/homeYes.png" className='activeim'/>
         <p>Home</p></button>

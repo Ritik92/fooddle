@@ -9,9 +9,7 @@ import Supportmsg from '@/components/homePagecomponents/supportmsg';
 const Home = ()=>{
     return(
        <div>
-        {/* <Navbar />   */}
-        {/* <Support />   */}
-        {/* <Supportmsg /> */}
+        <Navbar/>
        
         </div>
         

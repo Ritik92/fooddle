@@ -52,8 +52,11 @@
 
 .button-container.active  {
     /* styles for the active filter button */
-    background: #FFFFFF;
-    color:black;
+    background: #EAF3FF;
+    color:#004BAD;
+    font-weight: 500;
+    line-height: 16.8px;
+    font-size: 14px;
 
 
 }

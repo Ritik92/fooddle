@@ -65,7 +65,7 @@ const HomeP=()=>{
            
             <div id="rest">
                 <div id="sbar">
-                <Searchbar searchtext={searchtext} setsearchtext={setsearchtext} />
+                <Searchbar searchtext={searchtext} text={'What would you like to eat today?'} setsearchtext={setsearchtext} />
                 </div>
                 <div id="fibar">
                 <Filterbar/>

@@ -26,7 +26,7 @@ export default function MenuBar(props:any){
                 <div className='p-4 pt-16 '>
                 <Image src='/arrowWhite.png' width={24} height={24} alt="Eye hide icon" />
                 </div>
-                 <div className='font-urbanist font-semibold text-[#FCFCFC] leading-7 text-[25.7px] pt-16 text-left'>
+                 <div className=' font-semibold text-[#FCFCFC] leading-[26.4px] text-[25.7px] pt-16 text-left'>
                  {menudata.name}
                  </div>
             </div>
@@ -40,21 +40,21 @@ export default function MenuBar(props:any){
             </div>
             </div>
             <div className='flex md:justify-end'>
-            <div className='text-[#FCFCFCB2] pl-14 absolute top-[5.5rem] md:pr-2 md:mt-8'>
+            <div className='text-slate-400  pl-14 absolute top-[5.5rem] md:pr-2 md:mt-8'>
                 Delivering in {menudata.deliveryTime}
             </div>
             </div>
             
             
 
-            <div className=' mt-6 md:mt-24'>
+            <div className=' mt-6 '>
                  <Searchbar/>
             </div>
             <div className='mt-4'>
                 <Filterbar/>
             </div>
             
-            <div className='h-[630px] overflow-y-auto '>
+            <div className='h-[630px] pl-[24px]  pr-[24px] overflow-y-auto '>
             {Object.entries(menudata.menu).map(([category, items]:any) => (
                 <div key={category} className=' md:w-[729px] md:ml-20 mt-8 '> 
                     <div className='font-urbanist mt-[32px]  text-lg text-left font-semibold text-[#004BAD]'>

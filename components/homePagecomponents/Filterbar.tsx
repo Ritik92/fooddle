@@ -64,7 +64,7 @@ const Filterbar=()=>
 
             </div>)}
             <div id="mainbar" ref={mainbarRef}>
-        {['All', 'G-block', 'H-block', 'Aahar', 'cos', 'Teslas', 'Outside','Outside2','Outside3'].map(location => (
+        {['All', 'G-block', 'H-block', 'Aahar', 'Cos', 'Teslas', 'Outside','Outside2','Outside3'].map(location => (
           <FilterButton key={location} name={location} onClick={handleFilterClick(location)} isActive={selectedFilter===location} />
         ))}
       </div>
