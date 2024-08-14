@@ -29,6 +29,12 @@
     display: none;
    
 }
+.deflogo
+{
+   padding-left: 40px;
+   
+   
+}
 /* .logo {
     display: block;
     height: 47.25px;
@@ -59,7 +65,8 @@ display: none;
 .icon {
     height: 111.25px;
     width: 116px;
-    padding: 32px; /* Adjust padding as needed */
+    padding-top: 32px;
+     /* Adjust padding as needed */
     transition: all 0.5s ease;
 }
 
@@ -135,7 +142,7 @@ align-items: center;
 .outernav:hover .icon{
     width:116px;
     height: 111.25px;
-    padding-left: 20px;
+    
     
 }
 .outernav:hover .fulllogo{

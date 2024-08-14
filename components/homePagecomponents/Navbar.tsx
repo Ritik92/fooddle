@@ -14,9 +14,9 @@ const Navbar=()=>{
   };
     return(
         <div className='outernav'>
-            <div className='icon'>
+            <div className='icon '>
             <Image className='deflogo' src = "/logos.png" />
-            <Image className='fulllogo' src = "/logocom.png" />
+            <Image className='fulllogo ' src = "/logocom.png" />
             
             </div>
 
@@ -26,18 +26,18 @@ const Navbar=()=>{
           onClick={() => handleNavigation('/home')}
         ><Image src="/home.png"  className='defaultim'/>
         <Image src="/homeYes.png" className='activeim'/>
-        <p>home</p></button>
+        <p>Home</p></button>
 
 
                 <button className={pathname === '/search' ? 'active' : ''} 
           onClick={() => handleNavigation('/search')}><Image src="/searchNo.png"  className='defaultim'/>
-        <Image src="/SearchYes.png" className='activeim'/><p>search</p></button>
+        <Image src="/SearchYes.png" className='activeim'/><p>Search</p></button>
                 <button className={pathname === '/cart' ? 'active' : ''} 
           onClick={() => handleNavigation('/cart')}><Image src="/cart.png"  className='defaultim'/>
-        <Image src="/cartYes.png" className='activeim'/><p>cart</p></button>
+        <Image src="/cartYes.png" className='activeim'/><p>Cart</p></button>
                 <button className={pathname === '/note' ? 'active' : ''} 
           onClick={() => handleNavigation('/note')}><Image src="/ordersNo.png"  className='defaultim'/>
-        <Image src="/orderYes.png" className='activeim'/><p>orders</p></button>
+        <Image src="/orderYes.png" className='activeim'/><p>Orders</p></button>
 
             </div>
             

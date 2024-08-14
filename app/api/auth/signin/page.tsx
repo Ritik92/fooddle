@@ -19,29 +19,29 @@ const SignIn = () => {
         <div className="hidden md:block p-3  md:ml-3 mt-1 ">
           <Image src="/logo.png" alt="Foodle logo" width={128} height={55} className="w-24 md:w-32" />
         </div>
-          <div className="block bg-[#004BAD] md:hidden h-[14.75rem] flex items-center justify-center md:ml-3">
+          <div className=" bg-[#004BAD] md:hidden h-[14.75rem] flex items-center justify-center md:ml-3">
              <Image src="/logo2.png" alt="Foodle logo" width={150} height={63} className=" md:w-32" />
           </div>
         <div className="flex flex-col md:flex-row flex-grow">
-          <div className="hidden md:block md:basis-1/2 relative">
-            <div className="absolute top-[30px] left-[10%] lg:left-[20%]">
+          <div className="hidden  md:basis-1/2  md:grid md:mt-8 items-center justify-center relative">
+            <div className="">
               <Image src="/food-illustration.png" alt="Food illustration" width={360} height={341.48} className="w-full max-w-[360px]" />
               <div className="">
                 <Image src="/Group 59459.png" alt="Transforming Campus Dining" width={310} height={155} className="w-full max-w-[310px] ml-8" />
               </div>
             </div>
           </div>
-          <div className="md:basis-1/2 flex items-center justify-center p-4 md:p-0">
+          <div className="md:basis-1/2  flex items-center justify-center p-4 md:p-0">
             <div className="bg-blue md:bg-white  absolute top-[11rem]  md:static  lg:mt-10 rounded-xl  w-full md:max-w-md overflow-hidden">
               <div className="flex ">
                 <button
-                  className={`flex-1 py-4  font-semibold text-[27px]  ${isLogin ? 'text-[#004BAD] bg-white rounded-t-xl ' : 'text-white bg-[#004BAD] md:text-[#4D4D4D] md:bg-white font-urbanist'}`}
+                  className={`flex-1 py-4  font-semibold text-[27px]  ${isLogin ? 'text-[#004BAD] bg-white rounded-t-xl ' : 'text-white bg-[#004BAD] md:text-[#4D4D4D] md:bg-white '}`}
                   onClick={() => setIsLogin(true)}
                 >
                   Login
                 </button>
                 <button
-                  className={`flex-1 py-4 text-[27px]  font-semibold ${!isLogin ? 'text-[#004BAD]  bg-white rounded-t-xl' : 'text-white md:text-[#4D4D4D] bg-[#004BAD] md:bg-white font-urbanist'}`}
+                  className={`flex-1 py-4 text-[27px]  font-semibold ${!isLogin ? 'text-[#004BAD]  bg-white rounded-t-xl' : 'text-white md:text-[#4D4D4D] bg-[#004BAD] md:bg-white t'}`}
                   onClick={() => setIsLogin(false)}
                 >
                   Sign up
