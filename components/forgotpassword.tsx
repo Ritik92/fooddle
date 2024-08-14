@@ -36,23 +36,26 @@ const ForgotPassword = () => {
 
   return (
     <div className=" bg-[#FCFCFC]   min-h-screen
-      md:bg-[#EAF3FF] md:justify-between">
+      md:bg-[#EAF3FF] md:justify-center md:flex md:items-center">
       {/*Foodle logo*/}
+      <div className=' absolute left-1 top-1'>
       <Image
         src="/Foodle-logo.png"
         alt="logo"
-        className="w-[128px] h-[55px] top-[2.03rem] left-[3.5rem] object-cover hidden md:block"
+        className="w-[128px] h-[55px]  hidden md:block"
       />
-      <div className="flex flex-col md:mt-56 md:flex-row md:justify-between md:px-10">
+      </div>
+     
+      <div className="flex ">
       {/* Heading Container for larger screens */}
-      <div className="flex justify-center  md:w-1/2">
+      <div className="flex  items-center  md:w-1/2">
         <Image
           src="/check-mail.png"
           alt="Check your mail"
-          className="w-[357.17px] h-[259.68px]   object-cover mt-14 px-6 hidden md:block"
+          className="w-[357.17px] h-[259.68px]   hidden md:block"
         />
       </div>
-      <div className="w-full h-[120px] rounded-bl-lg rounded-br-lg bg-[#004BAD] flex items-center justify-center mb-8 absolute md:hidden">
+      <div className="w-full h-[120px] rounded-bl-lg rounded-br-lg bg-[#004BAD] flex items-center  mb-8 absolute md:hidden">
 
         <div className="flex items-center w-full px-4 pt-16">
           <button
