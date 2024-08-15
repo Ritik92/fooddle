@@ -35,31 +35,35 @@ const ResetPassword: React.FC = () => {
   return (
     <div
       className=" bg-[#FCFCFC]   min-h-screen
-      md:bg-[#EAF3FF] md:justify-between"
+      md:bg-[#EAF3FF] md:justify-evenly  md:flex md:items-center"
     >
       {/*Foodle logo*/}
+      <div className="absolute top-1 left-1">
       <Image
         src="/Foodle-logo.png"
         alt="logo"
-        className="w-[128px] h-[55px] top-[2.03rem] left-[3.5rem] object-cover hidden md:block"
+        className="w-[128px] h-[55px]  hidden md:block"
       />
-      <div className="hidden md:pt-20 md:block position-relative md:px-72">
+      </div>
+      
+      <div >
         {error && (
-          <div className="mb-4 px-2 py-3 text-red-500 border border-red-500 rounded hidden md:block">
+          <div className="mb-4 px-2 py-3  text-red-500 border border-red-500 rounded hidden md:block">
             {error}
           </div>
         )}
       </div>
-      <div className="flex flex-col md:mt-28 md:flex-row md:justify-between md:px-16 lg:pt-8">
+     
         {/* Heading Container for larger screens */}
-        <div className="flex justify-center md:w-1/2">
+        <div className="flex  justify-center md:w-1/2">
           <Image
             src="/check-mail.png"
             alt="Check your mail"
-            className="w-full h-72 object-cover mt-14 px-6 hidden md:block"
+            className="w-full h-72 object-cover  hidden md:block"
           />
         </div>
-        <div className="w-full h-[120px] rounded-bl-lg rounded-br-lg bg-[#004BAD] flex items-center justify-center mb-8 absolute md:hidden">
+        <div className="flex grow ">
+        <div className="w-full h-[120px] rounded-bl-lg rounded-br-lg bg-[#004BAD]  flex items-center justify-center mb-8 absolute md:hidden">
           <div className="flex items-center w-full px-4 pt-16">
             <button
               className="text-white mr-4 hover:bg-[#1a1c1e] rounded-full p-2"
@@ -71,8 +75,8 @@ const ResetPassword: React.FC = () => {
           </div>
         </div>
         <div className="flex-grow flex items-center justify-center mt-32 md:mt-0">
-          <div className="max-w-sm  w-full rounded-lg bg-[#FCFCFC] md:w-50 md:max-w-xl md:h-[26rem] ">
-            <div className="hidden md:flex w-full max-w-[500px] md:max-w-none md:w-[100%] lg:w-[100%] h-[120px] bg-[#004BAD] items-center justify-center mb-8 md:h-24 md:mb-14 ">
+          <div className="max-w-sm  w-full rounded-lg bg-[#FCFCFC] md:w-[28.125rem] md:max-w-xl md:h-[26rem] ">
+            <div className="hidden md:flex w-full max-w-[500px] md:max-w-none md:w-[100%] lg:w-[100%] md:rounded-t-[16px] h-[120px] bg-[#004BAD] items-center justify-center mb-8 md:h-[3.75rem] md:mb-14 ">
               <div className="flex items-center w-full px-4 pt-16 md:pt-0">
                 <button
                   className="text-white mr-4 hover:bg-[#003b8c] rounded-full p-2"
@@ -80,7 +84,7 @@ const ResetPassword: React.FC = () => {
                 >
                   <IoIosArrowBack size={24} />
                 </button>
-                <h2 className="text-white text-2xl">Forgot Password</h2>
+                <h2 className="text-white text-[25.7px] font-semibold">Forgot Password</h2>
               </div>
             </div>
             {/* Error Message */}
@@ -167,7 +171,9 @@ const ResetPassword: React.FC = () => {
             </div>
           </div>
         </div>
-      </div>
+        </div>
+       
+      
     </div>
   );
 };
