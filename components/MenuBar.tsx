@@ -6,10 +6,17 @@ import { useState } from "react";
 import { Button,  menu, MenuItem } from '@nextui-org/react';
 import Menuitems from './Menuitems';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 export default function MenuBar(props:any){
     const[searchmenu,setsearhmenu]=useState();
     const menudata=props.menuData;
-    
+    const router=useRouter();
+    const handleBackClick = () => {
+        router.push("/");
+      };
+      const routetocart = () => {
+        router.push("/cart");
+      };
     return(
      
         <div className=' flex '>
@@ -23,8 +30,8 @@ export default function MenuBar(props:any){
             
             <div className='flex  flex-row justify-between'>
             <div className=' flex'>
-                <div className='p-4 pt-16 '>
-                <Image src='/arrowWhite.png' width={24} height={24} alt="Eye hide icon" />
+                <div className='p-4 pt-16   '>
+                <Image src='/arrowWhite.png' className=' hover:cursor-pointer rounded-full' onClick={handleBackClick} width={24} height={24} alt="Eye hide icon" />
                 </div>
                  <div className=' font-semibold text-[#FCFCFC] leading-[26.4px] text-[25.7px] pt-16 text-left'>
                  {menudata.name}
@@ -54,7 +61,7 @@ export default function MenuBar(props:any){
                 <Filterbar/>
             </div>
             
-            <div className='h-[630px] pl-[24px]  pr-[24px] overflow-y-auto '>
+            <div className='h-screen pl-[24px]  pr-[24px] overflow-y-auto '>
             {Object.entries(menudata.menu).map(([category, items]:any) => (
                 <div key={category} className=' md:w-[729px] md:ml-20 mt-8 '> 
                     <div className='font-urbanist mt-[32px]  text-lg text-left font-semibold text-[#004BAD]'>
@@ -93,7 +100,7 @@ export default function MenuBar(props:any){
                
            </div>
            <div className='pl-4 md:mr-[32px] mr-[24px] '>
-                    <button className='bg-primary-100 text-primary-700 w-[138px] h-[38px] rounded-[25.71px] flex justify-center items-center font-semibold text-base '>View Cart 
+                    <button className='bg-primary-100 text-primary-700 w-[138px] h-[38px] rounded-[25.71px] flex justify-center items-center font-semibold text-base ' onClick={routetocart}>View Cart 
                     
                     <Image src='/cartI.png'  className='ml-2' width={18} height={18} alt="Cart Image" /> </button>
                     

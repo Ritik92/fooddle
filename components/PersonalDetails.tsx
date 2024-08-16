@@ -43,9 +43,7 @@ const PersonalDetails = () => {
   return (
 
     <div className="flex">
-      <div className="hidden md:flex md:items-center">
-        <button className="w-[2vw] h-[50px]" onClick={handleHomeClick}><img src="/F.png" alt="Fooddle" /></button>
-      </div>
+      
       <div className="flex flex-col">
         <div className="hidden md:block mb-5">
           <ProfileHeader />

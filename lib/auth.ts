@@ -2,6 +2,10 @@
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from "next-auth/providers/google";
 import { NextAuthOptions } from 'next-auth';
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
+
 export const NEXT_AUTH_CONFIG = {
     providers: [
       
@@ -37,6 +41,18 @@ export const NEXT_AUTH_CONFIG = {
         if (account.provider === 'google') {
           const email = profile.email;
           if (email.endsWith('@thapar.edu')) {
+            await prisma.user.upsert({
+              where: { email: profile.email },
+              update: {
+                name: profile.name,
+               
+              },
+              create: {
+                email: profile.email,
+                name: profile.name,
+                
+              },
+            });
             return true;
           } else {
             return false;
@@ -53,6 +69,7 @@ export const NEXT_AUTH_CONFIG = {
       session: ({ session, token, user }: any) => {
           if (session.user) {
               session.user.id = token.uid
+              console.log(session);
           }
           return session
       }

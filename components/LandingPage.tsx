@@ -1,24 +1,34 @@
 "use client"
-import SignIn from '@/app/api/auth/signin/page';
-import { Button } from '@nextui-org/react';
-import { signIn, signOut, useSession } from 'next-auth/react';
-import { Image } from '@nextui-org/react';
+
+import { useSession } from 'next-auth/react';
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import HomeP from './homePagecomponents/homeP';
-const Login =  () => {
+import Loader from './Loader';
+
+const Login = () => {
   const { data: session, status } = useSession();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (status === 'unauthenticated') {
+      router.push('/api/auth/signin');
+    }
+  }, [status, router]);
+
+  if (status === 'loading') {
+    return <div>
+      <Loader/>
+    </div>;
+  }
+
+  if (!session) {
+    return null; // This will briefly show while redirecting
+  }
 
   return (
     <div className='flex flex-col'>
-      {status === 'loading' ? (
-        <p>Loading...</p>
-      ) : session ? (
-       <div>
-        <HomeP/>
-       </div>
-        
-      ) : (
-       signIn()
-      )}
+      <HomeP />
     </div>
   );
 };
