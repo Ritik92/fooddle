@@ -2,9 +2,8 @@
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from "next-auth/providers/google";
 import { NextAuthOptions } from 'next-auth';
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
+import prisma from '../lib/prisma';
+import { use } from 'react';
 
 export const NEXT_AUTH_CONFIG = {
     providers: [
@@ -19,8 +18,14 @@ export const NEXT_AUTH_CONFIG = {
           async authorize(credentials: any) {
             const { username, password } = credentials;
             if (username.endsWith('@thapar.edu')){
-              //backend Logic
-              return username;
+              const user = await prisma.user.findFirst({
+                where: {
+                  email: username,     // Replace `username` with the actual email address
+                  password: password   // Make sure the password is handled securely (e.g., hashed)
+                }
+              });
+              
+              return user;
             }
             else{
               return null;

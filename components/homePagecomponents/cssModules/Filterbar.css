@@ -21,7 +21,8 @@
 }
 @media screen and (min-width: 768px) {
     #bar {
-        background: #F5F5F5; /* Show on larger screens */
+        background: #F5F5F5;
+        width: 650px;; /* Show on larger screens */
     }
 }
 

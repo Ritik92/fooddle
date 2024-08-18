@@ -21,6 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={urbanist.variable}>
+      
       <body className="font-sans">
          <Providers>
           {children}

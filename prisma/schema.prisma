@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -12,13 +6,79 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
 model User {
   id            String    @id @default(cuid())
   email         String    @unique
   name          String?
-  password      String?   // Hashed password for credential login
+  password      String?   
   phoneNumber   String?
   address       String?
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
+  orders        Order[]
+}
+
+model Restaurant {
+  id         String       @unique
+  name       String       @unique
+  location   String
+  phone      String?
+  img        String?
+  time       String
+  menu       Menu?
+}
+
+model Menu {
+  id           String       @id @default(uuid())
+  restaurant   Restaurant   @relation(fields: [restaurantId], references: [id])
+  restaurantId String       @unique
+  categories   Category[]
+}
+
+model Category {
+  id       String     @id @default(uuid())
+  name     String
+  menu     Menu       @relation(fields: [menuId], references: [id])
+  menuId   String
+  items    MenuItem[]
+}
+
+model MenuItem {
+  id             String             @id @default(uuid())
+  name           String
+  price          Float
+  category       Category           @relation(fields: [categoryId], references: [id])
+  categoryId     String
+  customizations Customization[]    @relation("MenuItemCustomizations")
+  orderItems     OrderItem[]
+}
+
+model Customization {
+  id          String             @id @default(uuid())
+  name        String
+  price       Float
+  menuItems   MenuItem[]         @relation("MenuItemCustomizations")
+  orderItems  OrderItem[]        @relation("OrderItemCustomizations")
+}
+
+model Order {
+  id            String       @id @default(uuid())
+  user          User         @relation(fields: [userId], references: [id])
+  userId        String
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  items         OrderItem[]
+  totalAmount   Float
+  status        String
+}
+
+model OrderItem {
+  id             String             @id @default(uuid())
+  order          Order              @relation(fields: [orderId], references: [id])
+  orderId        String
+  menuItem       MenuItem           @relation(fields: [menuItemId], references: [id])
+  menuItemId     String
+  quantity       Int
+  customizations Customization[]    @relation("OrderItemCustomizations")
 }

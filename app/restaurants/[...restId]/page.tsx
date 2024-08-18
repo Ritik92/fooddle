@@ -1,5 +1,6 @@
 "use client"; // Ensure this is used for client-side rendering
 
+import Loader from "@/components/Loader";
 import MenuBar from "@/components/MenuBar";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -24,7 +25,7 @@ export default function MenuPage(context: { params: { restId: string }  }) {
     }, [restId]);
 
     if (error) return <p>{error}</p>;
-    if (!menuData) return <p>Loading...</p>;
+    if (!menuData) return <div><Loader/></div>;
         const {name}=menuData
     return (
         <div>

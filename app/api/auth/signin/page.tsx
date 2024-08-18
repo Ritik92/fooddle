@@ -6,6 +6,7 @@ import { Image } from '@nextui-org/react';
 import { signIn } from 'next-auth/react';
 import { Button } from '@nextui-org/button';
 import { useRouter } from 'next/router';
+import axios from 'axios';
 
 
 const SignIn = () => {
@@ -177,7 +178,22 @@ const SignupForm = ({ toggleForm }: { toggleForm: () => void }) => {
       setError('Please use a valid Thapar email address.');
       return;
     }
+    
 
+
+    try {
+      const response = await axios.post('/api/signup', {
+        email,
+        password,
+      });
+
+      if (response.status === 200) {
+        alert('Please check your email for a verification link.');
+      }
+    } catch (error) {
+      console.error('Sign up failed:', error);
+      alert('Sign up failed. Please try again.');
+    }
     // call an API to register the user
     console.log('Registration submitted:', { email, password });
     // After successful registration

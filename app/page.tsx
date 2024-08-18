@@ -8,13 +8,14 @@ import Accordian from "@/components/Accordian";
 import Profile from "@/components/profile";
 import PersonalDetails from "@/components/PersonalDetails";
 import HomeP from "@/components/homePagecomponents/homeP";
+import MenuBar from "@/components/MenuBar";
 
 
 export default function Home() {
 
   return (
    
-    <Login/>
+    <HomeP/>
     
   );
 }

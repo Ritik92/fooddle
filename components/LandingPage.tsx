@@ -9,7 +9,6 @@ import Loader from './Loader';
 const Login = () => {
   const { data: session, status } = useSession();
   const router = useRouter();
-
   useEffect(() => {
     if (status === 'unauthenticated') {
       router.push('/api/auth/signin');
@@ -27,9 +26,9 @@ const Login = () => {
   }
 
   return (
-    <div className='flex flex-col'>
-      <HomeP />
-    </div>
+   
+      <Login />
+    
   );
 };
 

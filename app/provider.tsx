@@ -7,7 +7,7 @@ import { store } from '@/redux/store';
 export const Providers = ({ children }: { children: React.ReactNode }) => {
   return (
     <SessionProvider>
-      <NextUIProvider>
+      <NextUIProvider >
       <Provider store={store}>
       {children}
   </Provider>,
