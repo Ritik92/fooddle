@@ -1,13 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import tempUsersStore from '@/lib/tempuserstore';
 import prisma from '@/lib/prisma';
-import { sign } from 'jsonwebtoken';
-import { serialize } from 'cookie';
+import bcrypt from 'bcrypt';
 
-export async function GET(req: NextRequest) {
+export async function POST(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const token = searchParams.get('token');
-
 
   if (!token) {
     return NextResponse.json({ error: 'Invalid token' }, { status: 400 });
@@ -22,18 +20,18 @@ export async function GET(req: NextRequest) {
   const { username, password } = tempUser;
 
   try {
-    
+    const hashedPassword = await bcrypt.hash(password, 10);
     const user = await prisma.user.create({
       data: {
         email: username,
-        password: password, // Use a hashed password in practice
+        password: password,
       },
     });
-        
-    // Redirect with the Set-Cookie header
-    const response = NextResponse.redirect(new URL('/dashboard', req.url));
-    return response;
 
+    // Clean up the temporary user data
+    tempUsersStore.delete(token);
+
+    return NextResponse.json({ email: user.email, password: password });
   } catch (error) {
     console.error('Error saving user to database:', error);
     return NextResponse.json({ error: 'Failed to save user' }, { status: 500 });

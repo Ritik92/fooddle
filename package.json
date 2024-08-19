@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -H 0.0.0.0",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -17,6 +17,7 @@
     "@radix-ui/react-slot": "^1.1.0",
     "@reduxjs/toolkit": "^2.2.6",
     "axios": "^1.7.2",
+    "date-fns": "^3.6.0",
     "framer-motion": "^11.3.8",
     "jsonwebtoken": "^9.0.2",
     "lottie-react": "^2.4.0",

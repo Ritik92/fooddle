@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
     tempUsersStore.set(token, { username, password, expires: Date.now() + 3600000 }); // 1-hour expiry
     console.log(tempUsersStore.get(token))
     // Send the verification email
-    const verificationLink = `${process.env.NEXT_PUBLIC_BASE_URL}/api/verify?token=${token}`;
+    const verificationLink = `${process.env.NEXT_PUBLIC_BASE_URL}/verify?token=${token}`;
     
     await sendVerificationEmail(username, verificationLink);
 

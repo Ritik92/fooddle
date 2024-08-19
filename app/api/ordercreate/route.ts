@@ -50,15 +50,35 @@ export async function GET(request: NextRequest) {
 
     const orders = await prisma.order.findMany({
       where: { userId },
+      orderBy: {
+        createdAt: 'desc',  
+      },
       include: {
         items: {
           include: {
-            menuItem: true,
+            menuItem: {
+              include: {
+                category: {
+                  include: {
+                    menu: {
+                      include: {
+                        restaurant: {
+                          select: {
+                            name: true,
+                          },
+                        },
+                      },
+                    },
+                  },
+                },
+              },
+            },
             customizations: true,
           },
         },
       },
     });
+    
     
     return NextResponse.json(orders, { status: 200 });
   } catch (error) {

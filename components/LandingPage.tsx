@@ -27,7 +27,7 @@ const Login = () => {
 
   return (
    
-      <Login />
+      <HomeP />
     
   );
 };

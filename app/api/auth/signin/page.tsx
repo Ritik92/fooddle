@@ -1,21 +1,29 @@
 "use client"
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Image } from '@nextui-org/react';
 import { signIn } from 'next-auth/react';
 import { Button } from '@nextui-org/button';
 import { useRouter } from 'next/router';
 import axios from 'axios';
-
+import { useSearchParams } from 'next/navigation';
 
 const SignIn = () => {
   const [isLogin, setIsLogin] = useState(true);
-
+  const [googleSignInError, setGoogleSignInError] = useState('');
+  const searchParams = useSearchParams();
+  useEffect(() => {
+    const error = searchParams.get('error');
+    if (error === 'AccessDenied') {
+      setGoogleSignInError('Please use Thapar Email to Login');
+    }
+  }, [searchParams]);
   const toggleForm = () => setIsLogin(!isLogin);
 
   return (
     <div className="flex flex-col min-h-screen bg-white md:bg-[#EAF3FF]">
+         
       <div className="flex-grow flex flex-col">
         <div className="hidden md:block p-3  md:ml-3 mt-1 ">
           <Image src="/logo.png" alt="Foodle logo" width={128} height={55} className="w-24 md:w-32" />
@@ -48,6 +56,7 @@ const SignIn = () => {
                   Sign up
                 </button>
               </div>
+              
               <AnimatePresence mode="wait">
                 <motion.div
                   key={isLogin ? 'login' : 'signup'}
@@ -60,6 +69,9 @@ const SignIn = () => {
                   {isLogin ? <LoginForm toggleForm={toggleForm} /> : <SignupForm toggleForm={toggleForm} />}
                 </motion.div>
               </AnimatePresence>
+              {googleSignInError && (
+        <div className="text-red-500 text-sm pb-3 text-center">{googleSignInError}</div>
+      )}
             </div>
           </div>
         </div>
@@ -72,7 +84,7 @@ const SignIn = () => {
 };
 
 
-const LoginForm = ({ toggleForm }: { toggleForm: () => void }) => {
+const LoginForm = ({ toggleForm }: { toggleForm: () => void },Error) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -196,15 +208,12 @@ const SignupForm = ({ toggleForm }: { toggleForm: () => void }) => {
     }
     // call an API to register the user
     console.log('Registration submitted:', { email, password });
-    // After successful registration
-    // or redirect them to the home page
     window.location.href = '/';
   };
 
   const handleGoogleSignIn = () => {
     signIn('google', { callbackUrl: '/' });
   };
-
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePasswordVisibility = () => {

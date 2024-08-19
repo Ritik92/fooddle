@@ -39,6 +39,7 @@ export const NEXT_AUTH_CONFIG = {
     ],
     pages: {
       signIn: '/auth/signin',
+       error: '/api/auth/signin',
     },
     secret: process.env.NEXTAUTH_SECRET,
     callbacks: {

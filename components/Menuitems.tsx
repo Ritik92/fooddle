@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { cartActions } from '@/redux/slices/cartSlice';
 import { Image } from '@nextui-org/react';
 import CustomizationPopup from './customization';
-import RemoveItemPopup from './RemoveItemPopup'; // New component we'll create
+import RemoveItemPopup from './RemoveItemPopup'; 
 
 const Menuitems = (props) => {
   const dispatch = useDispatch();

@@ -1,7 +1,7 @@
 import { Image } from "@nextui-org/react";
 
 export default function Bluebar({title}){
-    return <div className='w-full  h-[7.5rem] bg-[#004BAD] flex items-end'>
+    return <div className='w-full rounded-b-[8px]  h-[7.5rem] bg-[#004BAD] flex items-end'>
     <div className='flex pb-4'>
     <div className='p-4 '>     
     <Image src="/arrowWhite.png" alt="Arrow logo" width={17.27} height={24} className="mr-2" />
