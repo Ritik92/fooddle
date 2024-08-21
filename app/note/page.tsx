@@ -5,7 +5,9 @@ import Bluebar from '@/components/bluebar';
 import Searchbar from '@/components/homePagecomponents/Searchbar';
 import dynamic from 'next/dynamic';
 import { format } from 'date-fns';
-import { Image } from '@nextui-org/react';
+import { Button, Image, Navbar } from '@nextui-org/react';
+import BluebarWide from '@/components/bluebarwide';
+
 const DotLottieReact = dynamic(() => import('@lottiefiles/dotlottie-react').then(mod => mod.DotLottieReact), { ssr: false });
 
 const Home = () => {
@@ -18,7 +20,7 @@ const Home = () => {
         setIsClient(true);
         const fetchOrders = async () => {
             try {
-                const userId = "clzyjtich0000zj0efz6daw6u"; // Replace with dynamic userId if needed
+                const userId = "user-3"; // Replace with dynamic userId if needed
                 const response = await axios.get(`/api/ordercreate?userId=${userId}`);
                 setOrders(response.data);
             } catch (err) {
@@ -59,24 +61,29 @@ const Home = () => {
             return formattedDate
     }
     return (
-        <div>
-            <Bluebar title={'Orders'} />
-            <div className='flex justify-center bg-[#F5F5F5] pt-[18px]'>
+        <div className='bg-[#F5F5F5]'>
+            
+             
+           <div className='flex justify-center md:pt-10'>
+           <BluebarWide title={'Orders'} />
+           </div>
+           
+            <div className='flex justify-center  pt-[18px] md:pt-0'>
                 <div className='p-2'>
                 <Searchbar text={'Search Orders'} />
                 </div>
                 
             </div>
-            <div className='h-screen bg-[#F5F5F5] overflow-auto'>
+            <div className='h-screen bg-[#F5F5F5] md:pl-[15%] md:pr-[15%] overflow-auto'>
                 <div className='p-4'>
                     <div>
                     {orders.length > 0 ? (
                         orders.map((order) => (
-                            <div key={order.id} className=" mb-4 p-2 bg-white   rounded-[12px]">
-                                <div className='flex justify-between'>
-                                <p className='font-bold text-xl'> {order.items[0]?.menuItem?.category?.menu?.restaurant?.name || 'Your Orders'} </p>
+                            <div key={order.id} className=" mb-4 p-6 bg-white   rounded-[12px]">
+                                <div className='flex justify-between pb-2'>
+                                <p className='font-semibold text-xl'> {order.items[0]?.menuItem?.category?.menu?.restaurant?.name || 'Your Orders'} </p>
                                 
-                                <p className='text-right text-yellow-500'>{order.status}</p>
+                                <p className='text-right font-medium text-green-500'>{order.status}</p>
                                 
                                 </div>
                                
@@ -106,8 +113,12 @@ const Home = () => {
                                 <div className='flex justify-between'>
                                 <p>{dataConvert(order.createdAt)}</p>
                                 <p className=' text-primary-700 font-bold'> ₹{order.totalAmount}</p>
-                               
+                                
                                 </div>
+                                <div className='text-right pt-4'>
+                                <button className='bg-primary-700 w-[20%] p-1 rounded-3xl text-white'>Reorder</button>
+                                </div>
+                                
                                 </div>
                                 
                             </div>

@@ -75,7 +75,7 @@ export const NEXT_AUTH_CONFIG = {
       session: ({ session, token, user }: any) => {
           if (session.user) {
               session.user.id = token.uid
-              console.log(session);
+             
           }
           return session
       }

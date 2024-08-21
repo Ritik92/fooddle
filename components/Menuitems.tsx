@@ -11,7 +11,7 @@ const Menuitems = (props) => {
   const [showRemoveItemPopup, setShowRemoveItemPopup] = useState(false);
   const [selectedCustomizations, setSelectedCustomizations] = useState([]);
 
-  const { id, name, price, customizations } = props.data;
+  const { id, name, price, customizations, restaurantId } = props.data;
   
   // Get all items with the same id (regardless of customizations)
   const cartItems = useSelector((state: any) =>
@@ -34,7 +34,8 @@ const Menuitems = (props) => {
       id,
       name,
       price,
-      customizations
+      customizations,
+      restaurantId
     }));
   };
   

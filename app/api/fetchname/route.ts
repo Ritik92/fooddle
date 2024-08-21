@@ -22,6 +22,7 @@ export async function GET(req: NextRequest) {
                 restaurant: {
                   select: {
                     name: true,
+                    id:true
                   },
                 },
               },

@@ -11,20 +11,44 @@ async function main() {
   await prisma.category.deleteMany({});
   await prisma.menu.deleteMany({});
   await prisma.restaurant.deleteMany({});
+  await prisma.user.deleteMany({});
+
+  // Seed users
+  const users = [
+    { id: 'user-1', email: 'user1@example.com', isVendor: true },
+    { id: 'user-2', email: 'user2@example.com', isVendor: false },
+    { id: 'user-3', email: 'user3@example.com', isVendor: true },
+  ];
+
+  for (const user of users) {
+    await prisma.user.create({
+      data: {
+        id: user.id,
+        email: user.email,
+        isVendor: user.isVendor,
+      },
+    });
+  }
 
   // Seed restaurants
   const restaurants = [
-    { id: '1', img: '/pizzaNation.png', name: 'Pizza Nation', time: '12:00 pm', location: 'Cos' },
-    { id: '2', img: '/restpic.png', name: 'Honey Cafe', time: '12:00 pm', location: 'Cos' },
-    { id: '3', img: '/restpic2.png', name: 'The Dessert Club', time: '12:00 pm', location: 'Cos' },
-    { id: '4', img: '/restpic2.png', name: 'Sip n Bites', time: '12:00 pm', location: 'Cos' },
-    { id: '5', img: '/pizzaNation.png', name: 'Fashion Point Cos', time: '12:00 pm', location: 'Cos' },
-    { id: '6', img: '/restpic.png', name: 'Bombay Munchery', time: '12:00 pm', location: 'Cos' },
-    { id: '7', img: '/restpic2.png', name: 'JP Foods', time: '12:00 pm', location: 'G-block' },
-    { id: '8', img: '/pizzaNation.png', name: 'Patiala Shahi', time: '12:00 pm', location: 'G-block' },
-    { id: '9', img: '/pizzaNation.png', name: 'RP Fresh Soda', time: '12:00 pm', location: 'G-block' },
-    { id: '10', img: '/restpic.png', name: 'The Brotherz Kitchen', time: '12:00 pm', location: 'G-block' },
-    { id: '11', img: '/restpic.png', name: 'Amritsari Kulcha Zone', time: '12:00 pm', location: 'H-block' },
+    {
+      id: '1',
+      img: '/pizzaNation.png',
+      name: 'Pizza Nation',
+      time: '12:00 pm',
+      location: 'Cos',
+      vendorId: 'user-1',
+    },
+    {
+      id: '2',
+      img: '/restpic.png',
+      name: 'Honey Cafe',
+      time: '12:00 pm',
+      location: 'Cos',
+      vendorId: 'user-3',
+    },
+    // Add more restaurants as needed
   ];
 
   for (const restaurant of restaurants) {
@@ -35,6 +59,11 @@ async function main() {
         name: restaurant.name,
         location: restaurant.location,
         time: restaurant.time,
+        vendor: {
+          connect: {
+            id: restaurant.vendorId,
+          },
+        },
         menu: {
           create: {
             categories: {
@@ -46,44 +75,70 @@ async function main() {
                       {
                         name: `${restaurant.name} Special`,
                         price: 15.99,
+                        restaurant: {
+                          connect: {
+                            id: restaurant.id,
+                          },
+                        },
                         customizations: {
                           create: [
                             { name: 'Extra topping', price: 2.50 },
                             { name: 'Large size', price: 3.00 },
-                          ]
-                        }
+                          ],
+                        },
                       },
                       {
                         name: "Chef's Choice",
                         price: 18.99,
+                        restaurant: {
+                          connect: {
+                            id: restaurant.id,
+                          },
+                        },
                         customizations: {
                           create: [
                             { name: 'Spicy', price: 1.00 },
                             { name: 'Gluten-free', price: 2.00 },
-                          ]
-                        }
-                      }
-                    ]
-                  }
+                          ],
+                        },
+                      },
+                    ],
+                  },
                 },
                 {
                   name: 'Drinks',
                   items: {
                     create: [
-                      { name: 'Soda', price: 2.50 },
-                      { name: 'Iced Tea', price: 3.00 },
-                    ]
-                  }
-                }
-              ]
-            }
-          }
-        }
-      }
+                      {
+                        name: 'Soda',
+                        price: 2.50,
+                        restaurant: {
+                          connect: {
+                            id: restaurant.id,
+                          },
+                        },
+                      },
+                      {
+                        name: 'Iced Tea',
+                        price: 3.00,
+                        restaurant: {
+                          connect: {
+                            id: restaurant.id,
+                          },
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        },
+      },
     });
   }
 
-  console.log("Seed data added successfully.");
+  console.log('Seed data added successfully.');
 }
 
 main()
