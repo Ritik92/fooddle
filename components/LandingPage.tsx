@@ -1,35 +1,54 @@
-"use client"
+"use client";
 
 import { useSession } from 'next-auth/react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import HomeP from './homePagecomponents/homeP';
 import Loader from './Loader';
+import VendorLandingPage from './vendorlandingpage';
+import axios from 'axios';
 
 const Login = () => {
   const { data: session, status } = useSession();
   const router = useRouter();
+  const [isVendor, setIsVendor] = useState(null);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     if (status === 'unauthenticated') {
       router.push('/api/auth/signin');
+    } else if (status === 'authenticated') {
+      const { email } = session.user;
+      axios.get(`/api/navigate?email=${email}`)
+        .then(response => {
+          setIsVendor(response.data.isVendor);
+        })
+        .catch(error => {
+          console.error('Error checking vendor status:', error);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
     }
-  }, [status, router]);
+  }, [status, router, session]);
 
-  if (status === 'loading') {
-    return <div>
-      <Loader/>
-    </div>;
+  if (status === 'loading' || loading) {
+    return <Loader />;
   }
 
   if (!session) {
     return null; // This will briefly show while redirecting
   }
 
-  return (
-   
-      <HomeP />
-    
-  );
+  if (isVendor === null) {
+    return <Loader />; // This ensures that a loading state is shown while checking the vendor status
+  }
+
+  if (isVendor) {
+    return <VendorLandingPage />;
+  } else {
+    return <HomeP />;
+  }
 };
 
 export default Login;

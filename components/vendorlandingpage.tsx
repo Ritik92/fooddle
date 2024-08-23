@@ -1,85 +1,32 @@
-"use client";
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import Bluebar from '@/components/bluebar';
-import Searchbar from '@/components/homePagecomponents/Searchbar';
-import dynamic from 'next/dynamic';
-import { format } from 'date-fns';
-import { Button, Image } from '@nextui-org/react';
-import Navbar from '@/components/homePagecomponents/Navbar';
-import BluebarWide from '@/components/bluebarwide';
-
-const DotLottieReact = dynamic(() => import('@lottiefiles/dotlottie-react').then(mod => mod.DotLottieReact), { ssr: false });
-
-const Home = () => {
+import { Button } from "@nextui-org/react";
+import axios from "axios";
+import { format } from "path";
+import { useState } from "react";
+import { Image } from "@nextui-org/react";
+import { signOut } from "next-auth/react";
+import Navbar from "./homePagecomponents/Navbar";
+export default function VendorLandingPage(){
     const [orders, setOrders] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-    const [isClient, setIsClient] = useState(false);
-
-    useEffect(() => {
-        setIsClient(true);
+    const fetchorders=() => {
+        
         const fetchOrders = async () => {
             try {
                 const userId = "user-12"; // Replace with dynamic userId if needed
                 const response = await axios.get(`/api/ordercreate?userId=${userId}`);
                 setOrders(response.data);
             } catch (err) {
-                setError('Failed to fetch orders');
-            } finally {
-                setLoading(false);
-            }
+                console.log('Failed to fetch orders');
+            } 
         };
 
         fetchOrders();
-    }, []);
-
-    if (!isClient) {
-        return null; // Or return a loading spinner
     }
-    if (loading) {
-        return (
-            <div className='flex items-center justify-center h-screen'>
-                <DotLottieReact
-                    src="https://lottie.host/4f806c6a-0425-4ed0-8920-2953a579810c/Z6LE7AXB72.lottie"
-                    
-                    style={{ width: '300px', height: '300px' }}
-                    autoplay
-                />
-            </div>
-        );
-    }
-    if (error) {
-        return <div>{error}</div>;
-    }
-    
-    function dataConvert(input){
-        
-        const date = new Date(input);
-
-            const formattedDate = format(date, "d MMMM'’'yy, h:mm a");
-
-            return formattedDate
-    }
+   
     return (
-        <div className='bg-[#F5F5F5]'>
-            
-            <div className='hidden lg:block'>
-                <Navbar/>
-            </div>
-           <div className='flex justify-center md:pt-10'>
-           <BluebarWide title={'Orders'} />
-           </div>
-           
-            <div className='flex justify-center  pt-[18px] md:pt-0'>
-                <div className='p-2'>
-                <Searchbar text={'Search Orders'} />
-                </div>
-                
-            </div>
-            <div className='h-screen bg-[#F5F5F5] md:pl-[15%] md:pr-[15%] overflow-auto'>
-                <div className='p-4'>
-                    <div>
+        <div className="flex gap-8">
+         
+            <Button onClick={fetchorders}>My Orders</Button>
+            <div className="w-full">
                     {orders.length > 0 ? (
                         orders.map((order) => (
                             <div key={order.id} className=" mb-4 p-6 bg-white   rounded-[12px]">
@@ -114,7 +61,7 @@ const Home = () => {
                                 <div className='mt-2'>
                                 <hr className="border-gray-500 p-1" />
                                 <div className='flex justify-between'>
-                                <p>{dataConvert(order.createdAt)}</p>
+                                
                                 <p className=' text-primary-700 font-bold'> ₹{order.totalAmount}</p>
                                 
                                 </div>
@@ -130,12 +77,10 @@ const Home = () => {
                         <div>No orders found.</div>
                     )}
                     </div>
-                   
-                </div>
-                <div className='p-[7rem]'></div>
-            </div>
+                    <Button onClick={()=>{signOut()}}>Log out</Button>
+            <Button color="success">Go Online</Button>
+            <Button color="danger">Go Offline</Button>
+            
         </div>
-    );
-};
-
-export default Home;
+    )
+}

@@ -13,11 +13,23 @@ async function main() {
   await prisma.restaurant.deleteMany({});
   await prisma.user.deleteMany({});
 
-  // Seed users
+  // Seed users (11 vendors + 4 customers)
   const users = [
-    { id: 'user-1', email: 'user1@example.com', isVendor: true },
-    { id: 'user-2', email: 'user2@example.com', isVendor: false },
-    { id: 'user-3', email: 'user3@example.com', isVendor: true },
+    { id: 'user-1', email: 'vendor1@example.com', isVendor: true },
+    { id: 'user-2', email: 'vendor2@example.com', isVendor: true },
+    { id: 'user-3', email: 'vendor3@example.com', isVendor: true },
+    { id: 'user-4', email: 'vendor4@example.com', isVendor: true },
+    { id: 'user-5', email: 'vendor5@example.com', isVendor: true },
+    { id: 'user-6', email: 'vendor6@example.com', isVendor: true },
+    { id: 'user-7', email: 'vendor7@example.com', isVendor: true },
+    { id: 'user-8', email: 'vendor8@example.com', isVendor: true },
+    { id: 'user-9', email: 'vendor9@example.com', isVendor: true },
+    { id: 'user-10', email: 'vendor10@example.com', isVendor: true },
+    { id: 'user-11', email: 'vendor11@example.com', isVendor: true },
+    { id: 'user-12', email: 'customer1@example.com', isVendor: false },
+    { id: 'user-13', email: 'customer2@example.com', isVendor: false },
+    { id: 'user-14', email: 'customer3@example.com', isVendor: false },
+    { id: 'user-15', email: 'customer4@example.com', isVendor: false },
   ];
 
   for (const user of users) {
@@ -30,25 +42,19 @@ async function main() {
     });
   }
 
-  // Seed restaurants
+  // Seed restaurants (each with a unique vendor)
   const restaurants = [
-    {
-      id: '1',
-      img: '/pizzaNation.png',
-      name: 'Pizza Nation',
-      time: '12:00 pm',
-      location: 'Cos',
-      vendorId: 'user-1',
-    },
-    {
-      id: '2',
-      img: '/restpic.png',
-      name: 'Honey Cafe',
-      time: '12:00 pm',
-      location: 'Cos',
-      vendorId: 'user-3',
-    },
-    // Add more restaurants as needed
+    { id: '1', img: '/pizzaNation.png', name: 'Pizza Nation', time: '12:00 pm', location: 'Cos', vendorId: 'user-1' },
+    { id: '2', img: '/restpic.png', name: 'Honey Cafe', time: '12:00 pm', location: 'Cos', vendorId: 'user-2' },
+    { id: '3', img: '/restpic2.png', name: 'The Dessert Club', time: '12:00 pm', location: 'Cos', vendorId: 'user-3' },
+    { id: '4', img: '/restpic2.png', name: 'Sip n Bites', time: '12:00 pm', location: 'Cos', vendorId: 'user-4' },
+    { id: '5', img: '/pizzaNation.png', name: 'Fashion Point Cos', time: '12:00 pm', location: 'Cos', vendorId: 'user-5' },
+    { id: '6', img: '/restpic.png', name: 'Bombay Munchery', time: '12:00 pm', location: 'Cos', vendorId: 'user-6' },
+    { id: '7', img: '/restpic2.png', name: 'JP Foods', time: '12:00 pm', location: 'G-block', vendorId: 'user-7' },
+    { id: '8', img: '/pizzaNation.png', name: 'Patiala Shahi', time: '12:00 pm', location: 'G-block', vendorId: 'user-8' },
+    { id: '9', img: '/pizzaNation.png', name: 'RP Fresh Soda', time: '12:00 pm', location: 'G-block', vendorId: 'user-9' },
+    { id: '10', img: '/restpic.png', name: 'The Brotherz Kitchen', time: '12:00 pm', location: 'G-block', vendorId: 'user-10' },
+    { id: '11', img: '/restpic.png', name: 'Amritsari Kulcha Zone', time: '12:00 pm', location: 'H-block', vendorId: 'user-11' },
   ];
 
   for (const restaurant of restaurants) {

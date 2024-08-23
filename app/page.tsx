@@ -9,6 +9,8 @@ import Profile from "@/components/profile";
 import PersonalDetails from "@/components/PersonalDetails";
 import HomeP from "@/components/homePagecomponents/homeP";
 import MenuBar from "@/components/MenuBar";
+import OrderTracking from "@/components/ordertracking";
+import OrderTrackingMobile from "@/components/ordertrackingweb";
 
 
 export default function Home() {

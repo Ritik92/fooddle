@@ -5,12 +5,11 @@ import Bluebar from '@/components/bluebar';
 import Searchbar from '@/components/homePagecomponents/Searchbar';
 import dynamic from 'next/dynamic';
 import { format } from 'date-fns';
-import { Button, Image } from '@nextui-org/react';
-import Navbar from '@/components/homePagecomponents/Navbar';
+import { Button, Image, Navbar } from '@nextui-org/react';
 import BluebarWide from '@/components/bluebarwide';
-
-const DotLottieReact = dynamic(() => import('@lottiefiles/dotlottie-react').then(mod => mod.DotLottieReact), { ssr: false });
-
+import OrderTracking from '@/components/ordertracking';
+import OrderTrackingMobile from '@/components/ordertrackingweb';
+import Loader from '@/components/Loader';
 const Home = () => {
     const [orders, setOrders] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -35,20 +34,9 @@ const Home = () => {
     }, []);
 
     if (!isClient) {
-        return null; // Or return a loading spinner
+        return <Loader/>; // Or return a loading spinner
     }
-    if (loading) {
-        return (
-            <div className='flex items-center justify-center h-screen'>
-                <DotLottieReact
-                    src="https://lottie.host/4f806c6a-0425-4ed0-8920-2953a579810c/Z6LE7AXB72.lottie"
-                    
-                    style={{ width: '300px', height: '300px' }}
-                    autoplay
-                />
-            </div>
-        );
-    }
+  
     if (error) {
         return <div>{error}</div>;
     }
@@ -61,34 +49,40 @@ const Home = () => {
 
             return formattedDate
     }
+    let restaurantName;
+    {orders.length > 0 ? (
+        orders.map((order) => {
+             restaurantName = order.items?.[0]?.menuItem?.category?.menu?.restaurant?.name || ' Restaurant';
+        })
+    ) : (
+        <p>No orders found</p>
+    )}
+    
+
     return (
         <div className='bg-[#F5F5F5]'>
             
-            <div className='hidden lg:block'>
-                <Navbar/>
-            </div>
+             
            <div className='flex justify-center md:pt-10'>
-           <BluebarWide title={'Orders'} />
+           <Bluebar title={'Order Tracking'} />
            </div>
-           
-            <div className='flex justify-center  pt-[18px] md:pt-0'>
-                <div className='p-2'>
-                <Searchbar text={'Search Orders'} />
-                </div>
-                
+           <div className='block md:hidden'>
+           <OrderTrackingMobile status={'preparing'} restaurantName={restaurantName}  />
+           </div>
+           <div className='md:block hidden'>
+           <OrderTracking orderStatus={'preparing'}/>
+           </div>
+          
+            <div className='flex justify-center  pt-[18px] md:pt-0'>   
             </div>
             <div className='h-screen bg-[#F5F5F5] md:pl-[15%] md:pr-[15%] overflow-auto'>
-                <div className='p-4'>
+                <div className=''>
                     <div>
+                   
                     {orders.length > 0 ? (
                         orders.map((order) => (
-                            <div key={order.id} className=" mb-4 p-6 bg-white   rounded-[12px]">
-                                <div className='flex justify-between pb-2'>
-                                <p className='font-semibold text-xl'> {order.items[0]?.menuItem?.category?.menu?.restaurant?.name || 'Your Orders'} </p>
+                            <div key={order.id} className=" mb-4 pl-6 pr-6 bg-[#F5F5F5]  rounded-[12px]">
                                 
-                                <p className='text-right font-medium text-green-500'>{order.status}</p>
-                                
-                                </div>
                                
                                 <ul>
                                     {order.items.map((item) => (
@@ -118,9 +112,7 @@ const Home = () => {
                                 <p className=' text-primary-700 font-bold'> ₹{order.totalAmount}</p>
                                 
                                 </div>
-                                <div className='text-right pt-4'>
-                                <button className='bg-primary-700 w-[20%] p-1 rounded-3xl text-white'>Reorder</button>
-                                </div>
+                                
                                 
                                 </div>
                                 

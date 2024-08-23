@@ -101,10 +101,7 @@ const LoginForm = ({ toggleForm }: { toggleForm: () => void },Error) => {
     e.preventDefault();
     setError('');
 
-    if (!email.endsWith('@thapar.edu')) {
-      setError('Please use a valid Thapar email address.');
-      return;
-    }
+  
 
     const result = await signIn('credentials', {
       username: email,

@@ -43,7 +43,7 @@ const [error, setError] = useState(null);
     try {
       setLoading(true);
       const response = await axios.post('/api/ordercreate', {
-        userId: 'user-1', // Replace with the actual user ID
+        userId: 'user-12', // Replace with the actual user ID
         items: cartItems.map((item) => ({
           menuItemId: item.id,
           quantity: item.quantity,
@@ -72,21 +72,24 @@ const [error, setError] = useState(null);
   return (
     <>
       <div className='bg-[#F5F5F5] h-screen overflow-auto'>
+      <div className='hidden lg:block'>
+                <Navbar/>
+            </div>
         <div className='flex justify-center md:mt-6'>
         <Bluebar title={'Cart'} />
         </div>
        
         <div className='flex flex-col items-center   '>
           <h2 className='text-xl font-bold  mb-4 '>{restaurantName}</h2>
-          <div className='md:h-12'></div>
+          <div className='md:h-12 '></div>
           {cartItems.map((item: any) => (
             <div key={item.id} className='w-full max-w-md md:max-w-full md:pl-[20%] md:pr-[20%]  p-4    rounded '>
               <div className='flex justify-between'>
-                <div className='flex'>
+                <div className='flex  w-[30%]'>
                   <Image className='mt-2.5' src="./vegicon.png" width={20} height={15} />
-                  <h3 className='md:text-lg  font-semibold pl-1'>{item.name}</h3>
+                  <h3 className='md:text-lg  font-semibold pl-1'>{item.name} </h3>
                 </div>
-                <p className='md:text-lg font-medium'> ₹ {item.price}</p>
+                <p className='md:text-lg font-medium  text-center '><div className='flex justify-center'>₹ {item.price}</div> </p>
                 <div className='flex items-center justify-between w-[90px] h-[36.04px] bg-[#EAF3FF] rounded-[30.03px] font-urbanist text-[#004BAD] text-base font-semibold'>
                   <button
                     className='w-[36.04px] h-[36.04px] rounded-full flex items-center justify-center'
@@ -168,7 +171,7 @@ const [error, setError] = useState(null);
         </div>
      
         <div className='flex justify-center'>
-          <div className='bg-blue-800 h-[104px] w-full flex justify-between items-center md:h-[56.38px] md:w-[80%] mt-[30px] md:rounded-t-[24px] fixed bottom-0 z-50'>
+          <div className='bg-blue-800 h-[104px] w-full flex justify-between items-center md:h-[56.38px] md:w-[80%] lg:w-[70%]  mt-[30px] md:rounded-t-[24px] fixed bottom-0 z-50'>
             <div className='md:pl-[32px] flex pl-[24px] gap-[30px] text-white text-xs'>
               <div>
                 <div className='text-base pl-5'>{cartTotalQuantity}</div>
