@@ -35,16 +35,11 @@ const Login = () => {
   if (status === 'loading' || loading) {
     return <Loader />;
   }
-
+  let condition=(session.user as any).isVendor
   if (!session) {
     return null; // This will briefly show while redirecting
   }
-
-  if (isVendor === null) {
-    return <Loader />; // This ensures that a loading state is shown while checking the vendor status
-  }
-
-  if (isVendor) {
+  if (condition) {
     return <VendorLandingPage />;
   } else {
     return <HomeP />;

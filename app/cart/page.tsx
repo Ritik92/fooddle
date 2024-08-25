@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
 import { cartActions } from '@/redux/slices/cartSlice';
 import prisma from '@/lib/prisma';
+import { useSession } from 'next-auth/react';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -39,11 +40,13 @@ const [error, setError] = useState(null);
       customizations: item.customizations
     }));
   };
+  let {data:session}=useSession();
+  const userID = session?.user ? (session.user as any).id : null;
   const orderConfirm = async () => {
     try {
       setLoading(true);
       const response = await axios.post('/api/ordercreate', {
-        userId: 'user-12', // Replace with the actual user ID
+        userId: userID, // Replace with the actual user ID
         items: cartItems.map((item) => ({
           menuItemId: item.id,
           quantity: item.quantity,

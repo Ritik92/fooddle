@@ -21,7 +21,7 @@ const Home = () => {
         const fetchOrders = async () => {
             try {
                 const userId = "user-12"; // Replace with dynamic userId if needed
-                const response = await axios.get(`/api/ordercreate?userId=${userId}`);
+                const response = await axios.get(`/api/ordertracking?userId=${userId}`);
                 setOrders(response.data);
             } catch (err) {
                 setError('Failed to fetch orders');
@@ -55,7 +55,7 @@ const Home = () => {
              restaurantName = order.items?.[0]?.menuItem?.category?.menu?.restaurant?.name || ' Restaurant';
         })
     ) : (
-        <p>No orders found</p>
+        <p><Loader/></p>
     )}
     
 
@@ -119,7 +119,7 @@ const Home = () => {
                             </div>
                         ))
                     ) : (
-                        <div>No orders found.</div>
+                        <div className='flex  justify-center h-screen'>Fetching Orders</div>
                     )}
                     </div>
                    

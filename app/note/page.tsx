@@ -8,6 +8,7 @@ import { format } from 'date-fns';
 import { Button, Image } from '@nextui-org/react';
 import Navbar from '@/components/homePagecomponents/Navbar';
 import BluebarWide from '@/components/bluebarwide';
+import { useSession } from 'next-auth/react';
 
 const DotLottieReact = dynamic(() => import('@lottiefiles/dotlottie-react').then(mod => mod.DotLottieReact), { ssr: false });
 
@@ -16,54 +17,60 @@ const Home = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [isClient, setIsClient] = useState(false);
+    const { data: session, status } = useSession();
 
     useEffect(() => {
         setIsClient(true);
         const fetchOrders = async () => {
-            try {
-                const userId = "user-12"; // Replace with dynamic userId if needed
-                const response = await axios.get(`/api/ordercreate?userId=${userId}`);
-                setOrders(response.data);
-            } catch (err) {
-                setError('Failed to fetch orders');
-            } finally {
+            if (status === 'authenticated' && session?.user) {
+                try {
+                    const userId = (session.user as any).id;
+                    const response = await axios.get(`/api/ordercreate?userId=${userId}`);
+                    setOrders(response.data);
+                } catch (err) {
+                    setError('Failed to fetch orders');
+                } finally {
+                    setLoading(false);
+                }
+            } else if (status === 'unauthenticated') {
+                setError('Please sign in to view orders');
                 setLoading(false);
             }
         };
 
-        fetchOrders();
-    }, []);
+        if (status !== 'loading') {
+            fetchOrders();
+        }
+    }, [status, session]);
 
     if (!isClient) {
         return null; // Or return a loading spinner
     }
-    if (loading) {
+
+    if (status === 'loading' || loading) {
         return (
             <div className='flex items-center justify-center h-screen'>
                 <DotLottieReact
                     src="https://lottie.host/4f806c6a-0425-4ed0-8920-2953a579810c/Z6LE7AXB72.lottie"
-                    
                     style={{ width: '300px', height: '300px' }}
                     autoplay
                 />
             </div>
         );
     }
+
     if (error) {
         return <div>{error}</div>;
     }
     
     function dataConvert(input){
-        
         const date = new Date(input);
-
-            const formattedDate = format(date, "d MMMM'’'yy, h:mm a");
-
-            return formattedDate
+        const formattedDate = format(date, "d MMMM'''yy, h:mm a");
+        return formattedDate;
     }
+
     return (
         <div className='bg-[#F5F5F5]'>
-            
             <div className='hidden lg:block'>
                 <Navbar/>
             </div>
@@ -75,7 +82,6 @@ const Home = () => {
                 <div className='p-2'>
                 <Searchbar text={'Search Orders'} />
                 </div>
-                
             </div>
             <div className='h-screen bg-[#F5F5F5] md:pl-[15%] md:pr-[15%] overflow-auto'>
                 <div className='p-4'>
@@ -138,4 +144,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default Home;    

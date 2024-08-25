@@ -91,7 +91,10 @@ useEffect(() => {
                     {loader?<div><Loader/></div>:<div id="restbar">
 
 {filter2.map((restaurant, index) => (
-<RestCard key={index} {...restaurant} />
+  <div className='hover:cursor-pointer'>
+      <RestCard  key={index} {...restaurant} />
+  </div>
+
 ))}
 <div className='m-[10rem]'>
 

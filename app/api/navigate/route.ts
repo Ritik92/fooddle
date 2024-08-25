@@ -14,7 +14,7 @@ export async function GET(req: NextRequest) {
     // Find the user by email
     const user = await prisma.user.findUnique({
       where: { email },
-      select: { isVendor: true },
+      select: { isVendor: true }
     });
 
     if (!user) {

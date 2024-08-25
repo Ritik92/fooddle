@@ -62,14 +62,14 @@ export const NEXT_AUTH_CONFIG: NextAuthOptions = {
         },
         jwt: async ({ user, token }: any) => {
             if (user) {
-                token.uid = user.id;
+                token.id = token.sub;
                 token.isVendor = user.isVendor;
             }
             return token;
         },
         session: ({ session, token, user }: any) => {
             if (session.user) {
-                session.user.id = token.uid;
+                session.user.id = token.id;
                 session.user.isVendor = token.isVendor;
             }
             return session;

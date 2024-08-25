@@ -1,20 +1,40 @@
-// middleware.ts
-import { NextResponse, type NextRequest } from 'next/server';
+import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
+import { getToken } from 'next-auth/jwt'
 
 export async function middleware(request: NextRequest) {
-  // Get the user's session from the cookies
-  const session = request.cookies.get('session');
+  const path = request.nextUrl.pathname
 
-  // If there's no session, redirect the user to the sign-in page
-  if (!session) {
-    return NextResponse.redirect(new URL('/api/auth/signin', request.url));
+  // Define which paths are considered public (don't need authentication)
+  const publicPaths = [ '/api/auth/signin']
+  const isPublicPath = publicPaths.includes(path)
+
+  // Get the session token
+  const token = await getToken({ 
+    req: request,
+    secret: process.env.NEXTAUTH_SECRET
+  })
+
+  // If the path is public or the user has a valid token, allow the request
+  if (isPublicPath || token) {
+    return NextResponse.next()
   }
-  
-  // If the user has a session, allow the request to proceed
-  return NextResponse.next();
+
+  // If the user doesn't have a token and the path isn't public, redirect to login
+  if (!token && !isPublicPath) {
+    return NextResponse.redirect(new URL('/api/auth/signin', request.url))
+  }
 }
 
+// Specify which paths this middleware should run on
 export const config = {
-  // Apply this middleware to all routes
-  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
-};
+  matcher: [
+    /*
+     * Match all request paths except:
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico (favicon file)
+     */
+    '/((?!_next/static|_next/image|favicon.ico).*)',
+  ],
+}
