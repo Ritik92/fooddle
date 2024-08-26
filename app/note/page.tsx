@@ -64,9 +64,12 @@ const Home = () => {
     }
     
     function dataConvert(input){
+        
         const date = new Date(input);
-        const formattedDate = format(date, "d MMMM'''yy, h:mm a");
-        return formattedDate;
+
+            const formattedDate = format(date, "d MMMM'’'yy, h:mm a");
+
+            return formattedDate
     }
 
     return (

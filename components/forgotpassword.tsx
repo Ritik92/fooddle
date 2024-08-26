@@ -9,7 +9,7 @@ import { IoIosArrowBack } from 'react-icons/io';
 import { useSession } from 'next-auth/react';
 import { useRouter } from "next/navigation";
 
-const ForgotPassword = () => {
+const ForgotPassword = ({email}) => {
   const router = useRouter();
 
   const handleBackClick = () => {
@@ -91,7 +91,7 @@ const ForgotPassword = () => {
               We have sent you an activation email.
             </p>
             <p className="text-center mb-6 text-sm md:text-lg md:mb-10">
-              An email has been sent to email@example.com with a link to reset
+              An email has been sent to {email} with a link to reset
               your password. Check your inbox!
             </p>
             <p className="text-center mb-4 text-xs md:text-sm md:mb-6">

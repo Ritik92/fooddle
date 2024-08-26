@@ -89,10 +89,17 @@ const LoginForm = ({ toggleForm }: { toggleForm: () => void },Error) => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  const handleForgotPassword = () => {
+  const handleForgotPassword = async() => {
     
     if (email.endsWith('@thapar.edu')) {
-      window.location.href='/forgotpassword';
+      try{
+        const res=await axios.get(`/api/validateEmail?email=${email}`);
+       if(res.status===200) window.location.href=`/forgotpassword?email=${email}`;
+      }
+      catch(error){
+        setError('User Does Not Exist');
+      }
+      
     } else {
       setError('Please enter an  valid email  to reset password.');
     }

@@ -21,7 +21,9 @@ const Home = () => {
 const [error, setError] = useState(null);
   const router = useRouter();
 
-  
+  const handleemptycart=()=>{
+    router.push('/')
+      }
   const handleIncrement = (item) => {
     dispatch(cartActions.addItemToCart({
       id: item.id,
@@ -71,7 +73,12 @@ const [error, setError] = useState(null);
       console.error('Error:', error);
     }
   }, [error]);
-
+  useEffect(() => {
+    if (cartItems.length==0) {
+      // Add additional error handling logic, such as displaying an error message to the user
+     router.push('/')
+    }
+  }, [cartItems]);
   return (
     <>
       <div className='bg-[#F5F5F5] h-screen overflow-auto'>
@@ -81,8 +88,7 @@ const [error, setError] = useState(null);
         <div className='flex justify-center md:mt-6'>
         <Bluebar title={'Cart'} />
         </div>
-       
-        <div className='flex flex-col items-center   '>
+        {cartItems.length>0? <div><div className='flex flex-col items-center   '>
           <h2 className='text-xl font-bold  mb-4 '>{restaurantName}</h2>
           <div className='md:h-12 '></div>
           {cartItems.map((item: any) => (
@@ -195,7 +201,8 @@ const [error, setError] = useState(null);
 </button>
             </div>
           </div>
-        </div>
+        </div></div>:<div></div>}
+        
       </div>
     </>
   );

@@ -4,7 +4,9 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET(req: NextRequest) {
   try {
     
-    const restaurantData = await prisma.restaurant.findMany();
+    const restaurantData = await prisma.restaurant.findMany({
+     where:{isOnline:true}
+    });
     return NextResponse.json(restaurantData);
   } catch (error) {
     console.error("Error fetching restaurant data:", error);

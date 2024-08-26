@@ -13,7 +13,7 @@ export async function GET(request: Request, context: { params: { restId: string[
 
     try {
         const restaurant = await prisma.restaurant.findUnique({
-            where: { id },
+            where: { id ,isOnline:true},
             include: {
                 menu: {
                     include: {
