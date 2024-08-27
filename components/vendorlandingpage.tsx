@@ -14,15 +14,30 @@ export default function VendorLandingPage() {
   const [error, setError] = useState(null);
   const [activebutton, setActivebutton] = useState('Home');
   const [isOrderConfirmed,setisOrderConfirmed]=useState('Received')
-
+  const [orderStatuses, setOrderStatuses] = useState({});
   const { data: session, status } = useSession();
  
-  const handleCancel = () => {
-    setisOrderConfirmed('Canceled');
+  const updateOrderStatus = (orderId, newStatus) => {
+    setOrderStatuses(prevStatuses => ({
+      ...prevStatuses,
+      [orderId]: newStatus
+    }));
   };
-  
-  const handleConfirm = () => {
-    setisOrderConfirmed('Confirmed');
+
+  const handleCancel = (orderId) => {
+    updateOrderStatus(orderId, 'Canceled');
+  };
+
+  const handleOutForDelivery = (orderId) => {
+    updateOrderStatus(orderId, 'Out for Delivery');
+  };
+
+  const handleDelivered = (orderId) => {
+    updateOrderStatus(orderId, 'Delivered');
+  };
+
+  const handleConfirm = (orderId) => {
+    updateOrderStatus(orderId, 'Confirmed');
   };
   
   useEffect(() => {
@@ -205,38 +220,33 @@ export default function VendorLandingPage() {
               Please make sure Pizzas are extra hot and spicy 
              </div>
              <div>
-             <StatusTracker  initialStatus={isOrderConfirmed} />
-             </div>
-             {isOrderConfirmed === 'Confirmed' ? (
-  <div>
-    <div className='flex justify-between gap-4'>
-      <button className='bg-green-500 text-white w-[50%] pt-2 pb-2 rounded-3xl text-lg font-bold mt-4' onClick={handleCancel}>
-        Call
-      </button>
-      <button className='bg-yellow-500 text-white w-[50%] pt-2 pb-2 rounded-3xl text-lg font-bold mt-4' onClick={handleConfirm}>
-        Out For Delivery
-      </button>
-    </div>
-    <button className='bg-primary-700 text-white w-full pt-2 pb-2 rounded-3xl text-lg font-bold mt-4' onClick={handleConfirm}>
-      Delivery Done
-    </button>
-  </div>
-) : isOrderConfirmed === 'Received' ? (
-  <div className='flex justify-between'>
-    <button className='bg-red-500 text-white w-[50%] pt-2 pb-2 rounded-3xl text-lg font-bold mt-4' onClick={handleCancel}>
-      Cancel
-    </button>
-    <button className='bg-green-500 text-white w-[50%] pt-2 pb-2 rounded-3xl text-lg font-bold mt-4' onClick={handleConfirm}>
-      Confirm
-    </button>
-  </div>
-) : null}
-
-           
-             
-             
-              </div>
-            );
+             <StatusTracker initialStatus={orderStatuses[order.id] || 'Received'} />
+                </div>
+                {(orderStatuses[order.id] === 'Confirmed' || orderStatuses[order.id] === 'Out for Delivery') ? (
+                  <div>
+                    <div className='flex justify-between gap-4'>
+                      <button className='bg-green-500 text-white w-[50%] pt-2 pb-2 rounded-3xl text-lg font-bold mt-4'>
+                        Call
+                      </button>
+                      <button className='bg-yellow-500 text-white w-[50%] pt-2 pb-2 rounded-3xl text-lg font-bold mt-4' onClick={() => handleOutForDelivery(order.id)}>
+                        Out For Delivery
+                      </button>
+                    </div>
+                    <button className='bg-primary-700 text-white w-full pt-2 pb-2 rounded-3xl text-lg font-bold mt-4' onClick={() => handleDelivered(order.id)}>
+                      Delivery Done
+                    </button>
+                  </div>
+                ) : (orderStatuses[order.id] === 'Received' || !orderStatuses[order.id]) ? (
+                  <div className='flex justify-between'>
+                    <button className='bg-red-500 text-white w-[50%] pt-2 pb-2 rounded-3xl text-lg font-bold mt-4' onClick={() => handleCancel(order.id)}>
+                      Cancel
+                    </button>
+                    <button className='bg-green-500 text-white w-[50%] pt-2 pb-2 rounded-3xl text-lg font-bold mt-4' onClick={() => handleConfirm(order.id)}>
+                      Confirm
+                    </button>
+                  </div>
+                ) : null}
+              </div>            );
           })
           
         ) : (
