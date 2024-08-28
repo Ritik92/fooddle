@@ -27,7 +27,7 @@ export async function POST(request: NextRequest) {
       data: {
         userId: user.id,
         totalAmount,
-        status: 'Pending',
+        status: 'Received',
         restaurantId: restaurantId,
         items: {
           create: items.map((item: any) => ({

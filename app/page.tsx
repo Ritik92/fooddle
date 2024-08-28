@@ -11,6 +11,7 @@ import HomeP from "@/components/homePagecomponents/homeP";
 import MenuBar from "@/components/MenuBar";
 import OrderTracking from "@/components/ordertracking";
 import OrderTrackingMobile from "@/components/ordertrackingweb";
+import VendorLandingPage from "@/components/vendorlandingpage";
 
 
 export default function Home() {
