@@ -13,7 +13,7 @@ export default function MenuPage(context: { params: { restId: string }  }) {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`http://localhost:3000/api/restaurants/${restId[0]}`);
+                const response = await axios.get(`/api/restaurants/${restId[0]}`);
                 setMenuData(response.data);
             } catch (error: any) {
                 console.error('Error fetching data:', error.message); // Log specific error message

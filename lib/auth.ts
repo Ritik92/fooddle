@@ -60,14 +60,23 @@ export const NEXT_AUTH_CONFIG: NextAuthOptions = {
             }
             return true;
         },
-        jwt: async ({ user, token }: any) => {
+        async jwt({ token, user, account }: any) {
             if (user) {
-                token.id = token.sub;
+                token.id = user.id;
                 token.isVendor = user.isVendor;
+            }
+            if (account && account.provider === 'google') {
+                const dbUser = await prisma.user.findUnique({
+                    where: { email: token.email },
+                });
+                if (dbUser) {
+                    token.id = dbUser.id;
+                    token.isVendor = dbUser.isVendor;
+                }
             }
             return token;
         },
-        session: ({ session, token, user }: any) => {
+        session: ({ session, token }: any) => {
             if (session.user) {
                 session.user.id = token.id;
                 session.user.isVendor = token.isVendor;

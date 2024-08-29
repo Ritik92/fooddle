@@ -1,13 +1,18 @@
 "use client"
+import React, { Suspense } from 'react';
 import ForgotPassword from "@/components/forgotpassword";
-import Email from "next-auth/providers/email";
-import { useParams, usePathname, useSearchParams } from "next/navigation";
-import path from "path";
+import { useSearchParams } from "next/navigation";
 
-export default function forgot(){
-    const pathname=useSearchParams();
-    const email = pathname.get('email') || '';
-    return(
-        <ForgotPassword email={email} />
-    )
+function ForgotContent() {
+    const searchParams = useSearchParams();
+    const email = searchParams.get('email') || '';
+    return <ForgotPassword email={email} />;
+}
+
+export default function Forgot() {
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <ForgotContent />
+        </Suspense>
+    );
 }

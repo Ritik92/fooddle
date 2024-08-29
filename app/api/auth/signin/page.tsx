@@ -1,38 +1,44 @@
-"use client"
+'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Image } from '@nextui-org/react';
 import { signIn } from 'next-auth/react';
-import { Button } from '@nextui-org/button';
-import { useRouter } from 'next/router';
-import axios from 'axios';
 import { useSearchParams } from 'next/navigation';
+import axios from 'axios';
 
-const SignIn = () => {
+function SignInContent() {
   const [isLogin, setIsLogin] = useState(true);
   const [googleSignInError, setGoogleSignInError] = useState('');
   const searchParams = useSearchParams();
+  const [clientRendered, setClientRendered] = useState(false);
+
   useEffect(() => {
-    const error = searchParams.get('error');
-    if (error === 'AccessDenied') {
-      setGoogleSignInError('Please use Thapar Email to Login');
+    setClientRendered(true);
+  }, []);
+
+  useEffect(() => {
+    if (clientRendered) {
+      const error = searchParams.get('error');
+      if (error === 'AccessDenied') {
+        setGoogleSignInError('Please use Thapar Email to Login');
+      }
     }
-  }, [searchParams]);
+  }, [clientRendered, searchParams]);
+
   const toggleForm = () => setIsLogin(!isLogin);
 
   return (
     <div className="flex flex-col min-h-screen bg-white md:bg-[#EAF3FF]">
-         
       <div className="flex-grow flex flex-col">
-        <div className="hidden md:block p-3  md:ml-3 mt-1 ">
+        <div className="hidden md:block p-3 md:ml-3 mt-1 ">
           <Image src="/logo.png" alt="Foodle logo" width={128} height={55} className="w-24 md:w-32" />
         </div>
-          <div className=" bg-[#004BAD] md:hidden h-[14.75rem] flex items-center justify-center md:ml-3">
-             <Image src="/logo2.png" alt="Foodle logo" width={150} height={63} className=" md:w-32" />
-          </div>
+        <div className="bg-[#004BAD] md:hidden h-[14.75rem] flex items-center justify-center md:ml-3">
+          <Image src="/logo2.png" alt="Foodle logo" width={150} height={63} className="md:w-32" />
+        </div>
         <div className="flex flex-col md:flex-row flex-grow">
-          <div className="hidden  md:basis-1/2  md:grid md:mt-8 items-center justify-center relative">
+          <div className="hidden md:basis-1/2 md:grid md:mt-8 items-center justify-center relative">
             <div className="">
               <Image src="/food-illustration.png" alt="Food illustration" width={360} height={341.48} className="w-full max-w-[360px]" />
               <div className="">
@@ -40,23 +46,23 @@ const SignIn = () => {
               </div>
             </div>
           </div>
-          <div className="md:basis-1/2  flex items-center justify-center p-4 md:p-0">
-            <div className="bg-blue md:bg-white  absolute top-[11rem]  md:static  lg:mt-10 rounded-xl  w-full md:max-w-md overflow-hidden">
+          <div className="md:basis-1/2 flex items-center justify-center p-4 md:p-0">
+            <div className="bg-blue md:bg-white absolute top-[11rem] md:static lg:mt-10 rounded-xl w-full md:max-w-md overflow-hidden">
               <div className="flex ">
                 <button
-                  className={`flex-1 py-4  font-semibold text-[27px]  ${isLogin ? 'text-[#004BAD] bg-white rounded-t-xl ' : 'text-white bg-[#004BAD] md:text-[#4D4D4D] md:bg-white '}`}
+                  className={`flex-1 py-4 font-semibold text-[27px] ${isLogin ? 'text-[#004BAD] bg-white rounded-t-xl ' : 'text-white bg-[#004BAD] md:text-[#4D4D4D] md:bg-white '}`}
                   onClick={() => setIsLogin(true)}
                 >
                   Login
                 </button>
                 <button
-                  className={`flex-1 py-4 text-[27px]  font-semibold ${!isLogin ? 'text-[#004BAD]  bg-white rounded-t-xl' : 'text-white md:text-[#4D4D4D] bg-[#004BAD] md:bg-white t'}`}
+                  className={`flex-1 py-4 text-[27px] font-semibold ${!isLogin ? 'text-[#004BAD] bg-white rounded-t-xl' : 'text-white md:text-[#4D4D4D] bg-[#004BAD] md:bg-white t'}`}
                   onClick={() => setIsLogin(false)}
                 >
                   Sign up
                 </button>
               </div>
-              
+
               <AnimatePresence mode="wait">
                 <motion.div
                   key={isLogin ? 'login' : 'signup'}
@@ -70,8 +76,8 @@ const SignIn = () => {
                 </motion.div>
               </AnimatePresence>
               {googleSignInError && (
-        <div className="text-red-500 text-sm pb-3 text-center">{googleSignInError}</div>
-      )}
+                <div className="text-red-500 text-sm pb-3 text-center">{googleSignInError}</div>
+              )}
             </div>
           </div>
         </div>
@@ -81,7 +87,11 @@ const SignIn = () => {
       </div>
     </div>
   );
-};
+}
+
+
+
+// The rest of the code (LoginForm and SignupForm) remains unchanged.
 
 
 const LoginForm = ({ toggleForm }: { toggleForm: () => void },Error) => {
@@ -175,7 +185,7 @@ const LoginForm = ({ toggleForm }: { toggleForm: () => void },Error) => {
         Log in with Google
       </button>
       <p className="text-center text-sm ">
-        Don't have an account yet? <button type="button" onClick={toggleForm} className="text-blue-600 hover:underline">Sign up</button>
+      Don&apos;t have an account yet? <button type="button" onClick={toggleForm} className="text-blue-600 hover:underline">Sign up</button>
       </p>
     </form>
   );
@@ -271,4 +281,10 @@ const SignupForm = ({ toggleForm }: { toggleForm: () => void }) => {
   );
 };
 
-export default SignIn;
+export default function SignIn() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <SignInContent />
+    </Suspense>
+  );
+}

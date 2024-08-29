@@ -22,7 +22,7 @@ const HomeP=()=>{
 useEffect(() => {
   async function fetchRestaurants() {
     try {
-      const response = await axios.get('http://localhost:3000/api/restaurant');
+      const response = await axios.get('/api/restaurant');
       SetRestaurantData(response.data);
       setloader(false) // Update state with fetched data
     } catch (error) {
@@ -90,12 +90,12 @@ useEffect(() => {
                 </div>
                     {loader?<div><Loader/></div>:<div id="restbar">
 
-{filter2.map((restaurant, index) => (
-  <div className='hover:cursor-pointer'>
-      <RestCard  key={index} {...restaurant} />
+                      {filter2.map((restaurant) => (
+  <div key={restaurant.id} className='hover:cursor-pointer'>
+      <RestCard {...restaurant} />
   </div>
-
 ))}
+
 <div className='m-[10rem]'>
 
 </div>

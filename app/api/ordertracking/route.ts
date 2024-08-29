@@ -1,8 +1,10 @@
+export const dynamic = 'force-dynamic';
 import { NextRequest, NextResponse } from "next/server";
 import prisma from '@/lib/prisma';
 export async function GET(request: NextRequest) {
     try {
-      const userId = request.nextUrl.searchParams.get('userId');
+      const { searchParams } = new URL(request.url);
+      const userId = searchParams.get('userId');
   
       if (!userId) {
         return NextResponse.json({ error: 'User ID is required' }, { status: 400 });

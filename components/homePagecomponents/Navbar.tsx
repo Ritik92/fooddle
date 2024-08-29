@@ -34,9 +34,9 @@ const Navbar=()=>{
         <Image src="/SearchYes.png" className='activeim'/><p>Search</p></button>
                 <button className={pathname === '/cart' ? 'active' : ''} 
           onClick={() => handleNavigation('/cart')}><Image src="/cart.png"  className='defaultim'/>
-        <Image src="/cartYes.png" className='activeim'/><p>Cart</p></button>
+        <Image src="/CartYes.png" className='activeim'/><p>Cart</p></button>
                 <button className={pathname === '/note' ? 'active' : ''} 
-          onClick={() => handleNavigation('/note')}><Image src="/ordersNo.png"  className='defaultim'/>
+          onClick={() => handleNavigation('/note')}><Image src="/OrdersNo.png"  className='defaultim'/>
         <Image src="/orderYes.png" className='activeim'/><p>Orders</p></button>
 
             </div>

@@ -1,11 +1,11 @@
 'use client';
 
+import React, { Suspense } from 'react';
 import { useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { signIn } from 'next-auth/react';
 
-
-export default function RegistrationHandler() {
+function RegistrationHandlerContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const token = searchParams.get('token');
@@ -52,4 +52,11 @@ export default function RegistrationHandler() {
   }, [token, router]);
 
   return <div>Processing your registration...</div>;
+}
+export default function RegistrationHandler() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <RegistrationHandlerContent />
+    </Suspense>
+  );
 }

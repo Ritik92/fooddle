@@ -9,7 +9,7 @@ interface SupportProps {
     toggleHelpbox: () => void;
     isActive: boolean;
   }
-const support: React.FC<SupportProps> = ({ toggleHelpbox, isActive })=>{
+const Support: React.FC<SupportProps> = ({ toggleHelpbox, isActive })=>{
 
     const dotRef = useRef<HTMLImageElement>(null);
    
@@ -93,4 +93,4 @@ const support: React.FC<SupportProps> = ({ toggleHelpbox, isActive })=>{
 
     )
 };
-export default support
+export default Support

@@ -2,7 +2,7 @@
 import { Button } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
 
-export default function dashboard(){
+export default function Dashboard(){
     const router=useRouter();
     function handlenavigate(){
        
