@@ -7,6 +7,7 @@ import { signOut, useSession } from "next-auth/react";
 import Navbar from "./homePagecomponents/Navbar";
 import StatusTracker from './vendortracker';
 import SidebarMenu from './Sidebarmenu';
+import VendorNavbar from './VendorNavbar';
 
 export default function VendorLandingPage() {
   const [isOpen, setIsOpen] = useState(true);
@@ -117,33 +118,10 @@ export default function VendorLandingPage() {
 
   return (
     <div className="bg-[#F5F5F5]">
-      <div className=" hidden bg-primary-700 h-[4rem] md:flex justify-between items-center">
-      
-        <div className="ml-4">
-        <Image src='/logo2.png' className=" w-2/3 "/>
-        </div>
-        
-        <div className="gap-6 text-white flex mr-[4rem]">
-            <div><button onClick={()=>setActivebutton('Home')} className={` ${activebutton=='Home'?'bg-white text-blue-500':''} rounded-lg pl-2 pr-2`}>Home</button></div>
-            <div> <button onClick={()=>setActivebutton('Shop Settings')} className={` ${activebutton=='Shop Settings'?'bg-white text-blue-500':''} rounded-lg pl-2 pr-2`}>Shop Settings</button></div>
-            <div> <button onClick={()=>setActivebutton('Manage Orders')} className={` ${activebutton=='Manage Orders'?'bg-white text-blue-500':''} rounded-lg pl-2 pr-2`}>Manage Orders</button></div>
-            <div><button onClick={()=>setActivebutton('Customer Mode')} className={` ${activebutton=='Customer Mode'?'bg-white text-blue-500':''} rounded-lg pl-2 pr-2`}>Customer Mode</button></div>
-            <div><button onClick={()=>setActivebutton('Contact Foodle ')} className={` ${activebutton=='Contact Foodle '?'bg-white text-blue-500':''} rounded-lg pl-2 pr-2`}>Contact Foodle </button></div>
-            <div><button  onClick={()=>{ setActivebutton('Log out'); signOut() }} className={` ${activebutton=='Log out'?'bg-white text-blue-500':''} rounded-lg pl-2 pr-2`}>Log out</button></div>
-        </div>
-       
-      
-      </div>
-     
-      
-      <div className="md:hidden ml-4 flex justify-between">
-        <Image src='/logo.png' className=" w-2/3 pt-3 "/>
-        
-        <SidebarMenu/>
-        </div>
+      <VendorNavbar active="Home" />
       
     
-      
+      <div>
       <div className="text-center md:mt-10 text-lg md:text-2xl font-bold flex justify-center">
         Pending Orders - <div className='text-primary-700'>  {pendingOrders.length}</div>
       </div>
@@ -151,14 +129,14 @@ export default function VendorLandingPage() {
         Orders can only be cancelled within 10 mins of order time
       </div>
       
-      <div className="p-4  overflow-auto h-screen text-sm ">
+      <div className="p-4   text-sm ">
         {pendingOrders.length > 0 ? (
           pendingOrders.map((order) => {
             // Calculate total quantity for this order
             const totalQuantity = order.items.reduce((sum, item) => sum + item.quantity, 0);
           
             return (
-              <div key={order.id} className="mb-4 p-2 md:p-6 t bg-white md:ml-[25%] md:w-1/2">
+              <div key={order.id} className="mb-4 p-2 md:p-6 t bg-white overflow-auto h-screen md:ml-[25%] md:w-1/2">
                 <div className='text-center'>
                   Order No. 3086
                 </div>
@@ -277,9 +255,7 @@ export default function VendorLandingPage() {
 ) : null}
 
 
-                <div className='h-[20%]'>
-
-                </div>
+             <div className='h-[30%]'></div>   
               </div>            );
           })
           
@@ -291,6 +267,9 @@ export default function VendorLandingPage() {
             </div>
           </div>
         )}
+        <div className='h-[20%]'>
+
+        </div>
       </div>
         
       <div className="absolute bottom-[4rem] hidden md:block">
@@ -311,6 +290,8 @@ export default function VendorLandingPage() {
           <div className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
         </label>
       </div>
+      </div>
+     
     </div>
   );
 }

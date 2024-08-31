@@ -44,17 +44,17 @@ async function main() {
 
   // Seed restaurants (each with a unique vendor)
   const restaurants = [
-    { id: '1', img: '/pizzaNation.png', name: 'Pizza Nation', time: '12:00 pm', location: 'Cos', vendorId: 'user-1' },
-    { id: '2', img: '/restpic.png', name: 'Honey Cafe', time: '12:00 pm', location: 'Cos', vendorId: 'user-2' },
-    { id: '3', img: '/restpic2.png', name: 'The Dessert Club', time: '12:00 pm', location: 'Cos', vendorId: 'user-3' },
-    { id: '4', img: '/restpic2.png', name: 'Sip n Bites', time: '12:00 pm', location: 'Cos', vendorId: 'user-4' },
-    { id: '5', img: '/pizzaNation.png', name: 'Fashion Point Cos', time: '12:00 pm', location: 'Cos', vendorId: 'user-5' },
-    { id: '6', img: '/restpic.png', name: 'Bombay Munchery', time: '12:00 pm', location: 'Cos', vendorId: 'user-6' },
-    { id: '7', img: '/restpic2.png', name: 'JP Foods', time: '12:00 pm', location: 'G-block', vendorId: 'user-7' },
-    { id: '8', img: '/pizzaNation.png', name: 'Patiala Shahi', time: '12:00 pm', location: 'G-block', vendorId: 'user-8' },
-    { id: '9', img: '/pizzaNation.png', name: 'RP Fresh Soda', time: '12:00 pm', location: 'G-block', vendorId: 'user-9' },
-    { id: '10', img: '/restpic.png', name: 'The Brotherz Kitchen', time: '12:00 pm', location: 'G-block', vendorId: 'user-10' },
-    { id: '11', img: '/restpic.png', name: 'Amritsari Kulcha Zone', time: '12:00 pm', location: 'H-block', vendorId: 'user-11' },
+    { id: '1', img: '/pizzaNation.png', name: 'Pizza Nation', openingTime: '11:00', closingTime: '22:00', location: 'Cos', vendorId: 'user-1', deliveryCharge: 2.50 },
+    { id: '2', img: '/restpic.png', name: 'Honey Cafe', openingTime: '08:00', closingTime: '20:00', location: 'Cos', vendorId: 'user-2', deliveryCharge: 1.50 },
+    { id: '3', img: '/restpic2.png', name: 'The Dessert Club', openingTime: '10:00', closingTime: '21:00', location: 'Cos', vendorId: 'user-3', deliveryCharge: 3.00 },
+    { id: '4', img: '/restpic2.png', name: 'Sip n Bites', openingTime: '09:00', closingTime: '23:00', location: 'Cos', vendorId: 'user-4', deliveryCharge: 2.00 },
+    { id: '5', img: '/pizzaNation.png', name: 'Fashion Point Cos', openingTime: '10:00', closingTime: '22:00', location: 'Cos', vendorId: 'user-5', deliveryCharge: 2.75 },
+    { id: '6', img: '/restpic.png', name: 'Bombay Munchery', openingTime: '11:30', closingTime: '23:30', location: 'Cos', vendorId: 'user-6', deliveryCharge: 3.50 },
+    { id: '7', img: '/restpic2.png', name: 'JP Foods', openingTime: '07:00', closingTime: '21:00', location: 'G-block', vendorId: 'user-7', deliveryCharge: 1.75 },
+    { id: '8', img: '/pizzaNation.png', name: 'Patiala Shahi', openingTime: '11:00', closingTime: '22:30', location: 'G-block', vendorId: 'user-8', deliveryCharge: 2.25 },
+    { id: '9', img: '/pizzaNation.png', name: 'RP Fresh Soda', openingTime: '09:00', closingTime: '20:00', location: 'G-block', vendorId: 'user-9', deliveryCharge: 1.00 },
+    { id: '10', img: '/restpic.png', name: 'The Brotherz Kitchen', openingTime: '10:30', closingTime: '23:00', location: 'G-block', vendorId: 'user-10', deliveryCharge: 3.25 },
+    { id: '11', img: '/restpic.png', name: 'Amritsari Kulcha Zone', openingTime: '08:30', closingTime: '21:30', location: 'H-block', vendorId: 'user-11', deliveryCharge: 2.50 },
   ];
 
   for (const restaurant of restaurants) {
@@ -64,7 +64,9 @@ async function main() {
         img: restaurant.img,
         name: restaurant.name,
         location: restaurant.location,
-        time: restaurant.time,
+        openingTime: restaurant.openingTime,
+        closingTime: restaurant.closingTime,
+        deliveryCharge: restaurant.deliveryCharge,
         vendor: {
           connect: {
             id: restaurant.vendorId,

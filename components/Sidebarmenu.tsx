@@ -2,11 +2,13 @@
 
 import { Image } from "@nextui-org/react";
 import { signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-const SidebarMenu = () => {
+const SidebarMenu = ({active}) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [activeButton, setActiveButton] = useState("Home");
+  const router=useRouter()
+  const [activeButton, setActiveButton] = useState(active);
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
@@ -34,7 +36,7 @@ const SidebarMenu = () => {
       <ul className="space-y-2">
       <li>
               <button
-                onClick={() => setActiveButton("Home")}
+                onClick={() =>{ setActiveButton("Home");  router.push('/')}}
                 className={`w-full text-left ${activeButton === "Home" ? "bg-white text-blue-500" : "hover:bg-blue-700"} p-2 rounded-lg`}
               >
                 Home
@@ -42,7 +44,7 @@ const SidebarMenu = () => {
             </li>
             <li>
               <button
-                onClick={() => setActiveButton("Shop Settings")}
+                onClick={() =>{ setActiveButton("Shop Settings"); router.push('/shopsettings')}}
                 className={`w-full text-left ${activeButton === "Shop Settings" ? "bg-white text-blue-500" : "hover:bg-blue-700"} p-2 rounded-lg`}
               >
                 Shop Settings

@@ -12,6 +12,7 @@ import MenuBar from "@/components/MenuBar";
 import OrderTracking from "@/components/ordertracking";
 import OrderTrackingMobile from "@/components/ordertrackingweb";
 import VendorLandingPage from "@/components/vendorlandingpage";
+import ShopSettings from "@/components/shopsettings";
 
 
 export default function Home() {

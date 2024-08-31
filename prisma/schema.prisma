@@ -22,21 +22,23 @@ model User {
 }
 
 model Restaurant {
-  id         String       @id @default(uuid())
-  name       String       @unique
-  location   String
-  phone      String?
-  img        String?
-  time       String
-  menu       Menu?
-  vendor     User         @relation(fields: [vendorId], references: [id])
-  vendorId   String       @unique
-  isOnline   Boolean      @default(true)
-  createdAt  DateTime     @default(now())
-  updatedAt  DateTime     @updatedAt
-  orders     Order[]
-  totalRevenue Float      @default(0.0)
-  menuItems  MenuItem[]
+  id             String       @id @default(uuid())
+  name           String       @unique
+  location       String
+  phone          String?
+  img            String?
+  openingTime    String
+  closingTime    String
+  deliveryCharge Float
+  menu           Menu?
+  vendor         User         @relation(fields: [vendorId], references: [id])
+  vendorId       String       @unique
+  isOnline       Boolean      @default(true)
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  orders         Order[]
+  totalRevenue   Float        @default(0.0)
+  menuItems      MenuItem[]
 }
 
 model Menu {
