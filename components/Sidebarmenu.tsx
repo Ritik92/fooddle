@@ -52,7 +52,7 @@ const SidebarMenu = ({active}) => {
             </li>
             <li>
               <button
-                onClick={() => setActiveButton("Manage Orders")}
+                onClick={() =>{ setActiveButton('Manage Orders'); router.push('/orderhistory')}}
                 className={`w-full text-left ${activeButton === "Manage Orders" ? "bg-white text-blue-500" : "hover:bg-blue-700"} p-2 rounded-lg`}
               >
                 Manage Orders
