@@ -9,6 +9,8 @@ export default function EditMenu(){
     const [error, setError] = useState<string | null>(null);
     const [isAddingCategory, setIsAddingCategory] = useState(false);
     const [categories, setCategories] = useState(null);
+    const [isAddingItem, setIsAddingItem] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState(null);
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -21,14 +23,53 @@ export default function EditMenu(){
         };
 
         fetchData();
-    }, []);
+    }, [categories]);
 
     if (error) return <p>{error}</p>;
     if (!categories) return <div><Loader/></div>;
     
-    const handleAddCategorySubmit = (newCategory) => {
-        setCategories([...categories, { ...newCategory, id: Date.now().toString(), items: [] }]);
-      };
+    const handleAddCategorySubmit = async (newCategory) => {
+      try {
+        setError(null);
+    
+        // Making the PUT request with axios
+        const response = await axios.put('/api/menu/categories?userId=user-1', { category: newCategory });
+    
+        // Check if the response contains the correct data structure
+        if (response.status === 200) {
+          setCategories([...categories, response.data]); // Assuming response.data.categories contains the new category
+        } else {
+          setError('Failed to add category. Please try again.');
+        }
+    
+      } catch (err) {
+        setError('Failed to add category. Please try again.');
+        console.error('Error adding category:', err);
+      }
+    };
+    const handleAddItem = (categoryId) => {
+      setSelectedCategory(categoryId);
+      setIsAddingItem(true);
+    };
+  
+  
+  
+    const handleAddItemSubmit = async (categoryId, newItem) => {
+      try {
+        setError(null);
+        console.log(newItem,categoryId)
+        const response = await axios.post(`/api/editmenu/additem`, {newItem,categoryId});
+        setCategories(categories.map(category => 
+          category.id === categoryId
+            ? { ...category, items: [...category.items, response.data] }
+            : category
+        ));
+      } catch (err) {
+        setError('Failed to add item. Please try again.');
+        console.error('Error adding item:', err);
+      }
+    };
+  
     return(
         <div className="overflow-auto h-screen"> 
             <VendorNavbar active={'Customer Mode'}/>
@@ -41,17 +82,22 @@ export default function EditMenu(){
             <Button  onClick={() => setIsAddingCategory(true)}>Add Category</Button>
         </div>
     </div>
-            <Menu categories={categories} />
-           
+            <Menu categories={categories}   onAddItem={handleAddItem} />
+            <AddItemModal
+        isOpen={isAddingItem}
+        onClose={() => setIsAddingItem(false)}
+        onAdd={handleAddItemSubmit}
+        categoryId={selectedCategory}
+      />
              <AddCategoryModal
                  isOpen={isAddingCategory}
-               onClose={() => setIsAddingCategory(false)}
+                  onClose={() => setIsAddingCategory(false)}
                   onAdd={handleAddCategorySubmit}
                    />
         </div>
     )
 }
-const Menu = ({ categories }) => {
+const Menu = ({ categories,onAddItem }) => {
     return (
       <div className="container mx-auto p-4 ">
    
@@ -62,14 +108,14 @@ const Menu = ({ categories }) => {
                 <div className="flex justify-between items-center mb-2">
                 <h2 className="text-xl font-semibold">{category.name}</h2>
                   <button
-           //   onClick={() => onAddItem(category.id)}
+             onClick={() => onAddItem(category.id)}
        className="bg-blue-500 text-white px-4 py-2 rounded"
              >
         Add Item
     </button>
   </div>
   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-    {category.items.map((item) => (
+    {category.items?.map((item) => (
       <div key={item.id} className="border p-4 rounded">
         <div className="flex justify-between items-center">
           <span>{item.name}</span>
@@ -200,4 +246,5 @@ const Menu = ({ categories }) => {
       </div>
     );
   };
+  
   

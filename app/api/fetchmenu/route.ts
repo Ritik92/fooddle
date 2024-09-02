@@ -2,7 +2,7 @@ import prisma from '@/lib/prisma';
 import { NextResponse } from 'next/server';
 
 export async function GET(request: Request, context: { params: { restId: string[] } }) {
-    const { restId } = context.params;
+    const restId = context.params?.restId;
 
     if (!restId || restId.length === 0) {
         return NextResponse.json({ error: 'Restaurant ID is required' }, { status: 400 });
