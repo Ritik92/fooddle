@@ -11,6 +11,8 @@ export default function EditMenu(){
     const [categories, setCategories] = useState(null);
     const [isAddingItem, setIsAddingItem] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [isEditingItem, setIsEditingItem] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -57,8 +59,8 @@ export default function EditMenu(){
     const handleAddItemSubmit = async (categoryId, newItem) => {
       try {
         setError(null);
-        console.log(newItem,categoryId)
-        const response = await axios.post(`/api/editmenu/additem`, {newItem,categoryId});
+        console.log("New Item is",newItem)
+        const response = await axios.post(`/api/menu/additem?userId=user-1`, {newItem,categoryId});
         setCategories(categories.map(category => 
           category.id === categoryId
             ? { ...category, items: [...category.items, response.data] }
@@ -69,7 +71,26 @@ export default function EditMenu(){
         console.error('Error adding item:', err);
       }
     };
-  
+    const handleEditItem = (item, categoryId) => {
+      setSelectedItem(item);
+      setSelectedCategory(categoryId);
+      setIsEditingItem(true);
+    };
+    const handleEditItemSubmit = async (editedItem) => {
+      try {
+        setError(null);
+        console.log(editedItem)
+        const response = await axios.put(`/api/menu/edititem?userId=user-1`, editedItem);
+        setCategories(categories.map(category => 
+          category.id === selectedCategory
+            ? { ...category, items: category.items.map(item => item.id === editedItem.id ? response.data : item) }
+            : category
+        ));
+      } catch (err) {
+        setError('Failed to edit item. Please try again.');
+        console.error('Error editing item:', err);
+      }
+    };
     return(
         <div className="overflow-auto h-screen"> 
             <VendorNavbar active={'Customer Mode'}/>
@@ -82,13 +103,29 @@ export default function EditMenu(){
             <Button  onClick={() => setIsAddingCategory(true)}>Add Category</Button>
         </div>
     </div>
-            <Menu categories={categories}   onAddItem={handleAddItem} />
+    {categories.map((category) => (
+        <Category
+          key={category.id}
+          category={category}
+          onAddItem={handleAddItem}
+          onEditItem={(item) => handleEditItem(item, category.id)}
+          // onDeleteItem={(itemId) => handleDeleteItem(itemId, category.id)}
+        />
+      ))}
             <AddItemModal
         isOpen={isAddingItem}
         onClose={() => setIsAddingItem(false)}
         onAdd={handleAddItemSubmit}
         categoryId={selectedCategory}
       />
+        <EditItemModal
+        isOpen={isEditingItem}
+        onClose={() => setIsEditingItem(false)}
+        onEdit={handleEditItemSubmit}
+        item={selectedItem}
+      />
+
+
              <AddCategoryModal
                  isOpen={isAddingCategory}
                   onClose={() => setIsAddingCategory(false)}
@@ -97,66 +134,37 @@ export default function EditMenu(){
         </div>
     )
 }
-const Menu = ({ categories,onAddItem }) => {
-    return (
-      <div className="container mx-auto p-4 ">
-   
-        
-        {categories.map((category) => (
-          <div key={category.id} className="mb-8 mt-8  ">
-            <div className="mb-6">
-                <div className="flex justify-between items-center mb-2">
-                <h2 className="text-xl font-semibold">{category.name}</h2>
-                  <button
-             onClick={() => onAddItem(category.id)}
-       className="bg-blue-500 text-white px-4 py-2 rounded"
-             >
-        Add Item
-    </button>
-  </div>
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-    {category.items?.map((item) => (
-      <div key={item.id} className="border p-4 rounded">
-        <div className="flex justify-between items-center">
-          <span>{item.name}</span>
-          <span>₹{item.price.toFixed(2)}</span>
-        </div>
-        {item.customizations.map((customization)=>(
-            <div key={customization.id}>
-                
-                <div className="flex justify-between text-gray-400 text-sm">
-                <div>{customization.name}</div>
-                <div>₹{customization.price} </div>
-                </div>
-               
-            </div>
-        ))}
-        <div className="mt-2">
-          <button
-            // onClick={() => onEditItem(item)}
-            className="mr-2 text-blue-500"
-          >
-            Edit
-          </button>
-          <button
-            // onClick={() => onDeleteItem(item.id)}
-            className="text-red-500"
-          >
-            Delete
-          </button>
-        </div>
+const Category = ({ category, onAddItem, onEditItem }) => {
+  return (
+    <div className="mb-6">
+      <div className="flex justify-between items-center mb-2">
+        <h2 className="text-xl font-semibold">{category.name}</h2>
+        <button
+          onClick={() => onAddItem(category.id)}
+          className="bg-blue-500 text-white px-4 py-2 rounded"
+        >
+          Add Item
+        </button>
       </div>
-    ))}
-  </div>
-</div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {category.items?.map((item) => (
+          <div key={item.id} className="border p-4 rounded">
+            <div className="flex justify-between items-center">
+              <span>{item.name}</span>
+              <span>₹{item.price?.toFixed(2)}</span>
+            </div>
+            <button
+              onClick={() => onEditItem(item)}
+              className="mt-2 text-blue-500"
+            >
+              Edit
+            </button>
           </div>
         ))}
-        <div className="h-[10%]">
-
-        </div>
       </div>
-    );
-  };
+    </div>
+  );
+};
   const AddCategoryModal = ({ isOpen, onClose, onAdd }) => {
     const [name, setName] = useState('');
   
@@ -240,6 +248,63 @@ const Menu = ({ categories,onAddItem }) => {
             <div className="flex justify-end">
               <button type="button" onClick={onClose} className="mr-2 px-4 py-2 border rounded">Cancel</button>
               <button type="submit" className="px-4 py-2 bg-blue-500 text-white rounded">Add</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    );
+  };
+  const EditItemModal = ({ isOpen, onClose, onEdit, item }) => {
+    const [name, setName] = useState(item?.name || '');
+    const [price, setPrice] = useState(item?.price?.toString() || '');
+  
+    useEffect(() => {
+      if (item) {
+        setName(item.name);
+        setPrice(item.price.toString());
+      }
+    }, [item]);
+  
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      onEdit({ ...item, name, price: parseFloat(price) });
+      onClose();
+    };
+  
+    if (!isOpen) return null;
+  
+    return (
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+        <div className="bg-white p-6 rounded-lg">
+          <h2 className="text-xl font-bold mb-4">Edit Item</h2>
+          <form onSubmit={handleSubmit}>
+            <div className="mb-4">
+              <label htmlFor="editName" className="block mb-2">Name</label>
+              <input
+                type="text"
+                id="editName"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="w-full px-3 py-2 border rounded"
+                required
+              />
+            </div>
+            <div className="mb-4">
+              <label htmlFor="editPrice" className="block mb-2">Price</label>
+              <input
+                type="number"
+                id="editPrice"
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
+                className="w-full px-3 py-2 border rounded"
+                step="0.01"
+                min="0"
+                required
+              />
+            </div>
+            <div className="flex justify-end">
+              <button type="button" onClick={onClose} className="mr-2 px-4 py-2 border rounded">Cancel</button>
+              <button type="submit" className="px-4 py-2 bg-blue-500 text-white rounded">Save</button>
             </div>
           </form>
         </div>
