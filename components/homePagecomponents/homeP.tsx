@@ -96,7 +96,7 @@ useEffect(() => {
   </div>
 ))}
 
-<div className='m-[10rem]'>
+<div className='h-[10%]'>
 
 </div>
 

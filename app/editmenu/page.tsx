@@ -91,8 +91,33 @@ export default function EditMenu(){
         console.error('Error editing item:', err);
       }
     };
+    const handleDeleteItem = async (itemId, categoryId) => {
+      console.log(itemId);
+    
+      if (window.confirm('Are you sure you want to delete this item?')) {
+        try {
+          setError(null);
+    
+          // Sending a DELETE request with the itemId in the request body
+          await axios.delete('/api/menu/edititem?userId=user-1', {
+            data: { itemId }  // Sending the itemId in the data property
+          });
+    
+          // Update the state after deletion
+          setCategories(categories.map(category => 
+            category.id === categoryId
+              ? { ...category, items: category.items.filter(item => item.id !== itemId) }
+              : category
+          ));
+        } catch (err) {
+          setError('Failed to delete item. Please try again.');
+          console.error('Error deleting item:', err);
+        }
+      }
+    };
+    
     return(
-        <div className="overflow-auto h-screen"> 
+        <div className="overflow-auto h-screen bg-[#F5F5F5]"> 
             <VendorNavbar active={'Customer Mode'}/>
             
       <div className="flex justify-between text-blue-700 text-2xl font-bold p-6">
@@ -109,7 +134,7 @@ export default function EditMenu(){
           category={category}
           onAddItem={handleAddItem}
           onEditItem={(item) => handleEditItem(item, category.id)}
-          // onDeleteItem={(itemId) => handleDeleteItem(itemId, category.id)}
+          onDeleteItem={(itemId) => handleDeleteItem(itemId, category.id)}
         />
       ))}
             <AddItemModal
@@ -134,9 +159,9 @@ export default function EditMenu(){
         </div>
     )
 }
-const Category = ({ category, onAddItem, onEditItem }) => {
+const Category = ({ category, onAddItem, onEditItem , onDeleteItem }) => {
   return (
-    <div className="mb-6">
+    <div className="mb-6 p-6 ">
       <div className="flex justify-between items-center mb-2">
         <h2 className="text-xl font-semibold">{category.name}</h2>
         <button
@@ -146,19 +171,25 @@ const Category = ({ category, onAddItem, onEditItem }) => {
           Add Item
         </button>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
         {category.items?.map((item) => (
-          <div key={item.id} className="border p-4 rounded">
+          <div key={item.id} className="border p-4 rounded bg-white">
             <div className="flex justify-between items-center">
               <span>{item.name}</span>
               <span>₹{item.price?.toFixed(2)}</span>
             </div>
             <button
               onClick={() => onEditItem(item)}
-              className="mt-2 text-blue-500"
+              className="mt-2 text-blue-500 "
             >
               Edit
             </button>
+            <button
+                onClick={() => onDeleteItem(item.id)}
+                className="text-red-500 ml-2"
+              >
+                Delete
+              </button>
           </div>
         ))}
       </div>

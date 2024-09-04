@@ -10,7 +10,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { cartActions } from '@/redux/slices/cartSlice';
 import prisma from '@/lib/prisma';
 import { useSession } from 'next-auth/react';
-
+import Script from 'next/script';
+declare global {
+  interface Window {
+    Razorpay: any;
+  }
+}
 const Home = () => {
   const dispatch = useDispatch();
   const cartTotalQuantity = useSelector((state: any) => state.cart.totalQuantity);
@@ -20,6 +25,71 @@ const Home = () => {
   const [loading, setLoading] = useState(false);
 const [error, setError] = useState(null);
   const router = useRouter();
+  const [orderId, setOrderId] = useState(null);
+  let {data:session}=useSession();
+  const createRazorpayOrder = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.post('/api/create-razorpay-order', {
+        amount: cartTotalAmount * 100, // Razorpay expects amount in paise
+        currency: 'INR',
+        receipt: `order_${Date.now()}`,
+      });
+      setOrderId(response.data.id);
+      setLoading(false);
+    } catch (error) {
+      console.error('Error creating Razorpay order:', error);
+      setLoading(false);
+      setError('Failed to create order. Please try again.');
+    }
+  };
+  
+  const handlePayment = async () => {
+    if (!orderId) {
+      await createRazorpayOrder();
+    }
+      
+    const options = {
+      key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+      amount: cartTotalAmount * 100,
+      currency: 'INR',
+      name: 'Your Food Delivery App',
+      description: 'Food Order Payment',
+      order_id: orderId,
+      handler: async function (response) {
+        try {
+          setLoading(true);
+          // Verify payment on the server
+          const verificationResponse = await axios.post('/api/verify-payment', {
+            razorpay_order_id: response.razorpay_order_id,
+            razorpay_payment_id: response.razorpay_payment_id,
+            razorpay_signature: response.razorpay_signature,
+          });
+
+          if (verificationResponse.data.success) {
+            // Payment verified, create order in your system
+            await orderConfirm();
+          } else {
+            setError('Payment verification failed. Please try again.');
+          }
+        } catch (error) {
+          console.error('Error handling payment:', error);
+          setError('An error occurred while processing your payment. Please try again.');
+        } finally {
+          setLoading(false);
+        }
+      },
+      prefill: {
+        name: session?.user?.name || '',
+        email: session?.user?.email || '',
+      },
+      theme: {
+        color: '#004BAD',
+      },
+    };
+    const paymentObject = new window.Razorpay(options);
+    paymentObject.open();
+  };
 
   const handleemptycart=()=>{
     router.push('/')
@@ -42,7 +112,7 @@ const [error, setError] = useState(null);
       customizations: item.customizations
     }));
   };
-  let {data:session}=useSession();
+ 
   const userID = session?.user ? (session.user as any).id : null;
   const orderConfirm = async () => {
     try {
@@ -81,6 +151,7 @@ const [error, setError] = useState(null);
   }, [cartItems]);
   return (
     <>
+     <Script src="https://checkout.razorpay.com/v1/checkout.js" />
       <div className='bg-[#F5F5F5] h-screen overflow-auto'>
       <div className='hidden lg:block'>
                 <Navbar/>
@@ -193,12 +264,12 @@ const [error, setError] = useState(null);
             </div>
             <div className='pl-4 md:mr-[32px] mr-[24px]'>
             <button
-  onClick={orderConfirm}
-  className='bg-primary-100 text-primary-700 w-[138px] h-[38px] rounded-[25.71px] flex justify-center items-center font-semibold text-base'
-  disabled={loading}
->
-  {loading ? 'Loading...' : 'Pay Now'}
-</button>
+          onClick={handlePayment}
+          className='bg-primary-100 text-primary-700 w-[138px] h-[38px] rounded-[25.71px] flex justify-center items-center font-semibold text-base'
+          disabled={loading}
+        >
+          {loading ? 'Loading...' : 'Pay Now'}
+        </button>
             </div>
           </div>
         </div></div>:<div></div>}

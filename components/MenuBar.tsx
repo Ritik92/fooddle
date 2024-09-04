@@ -120,10 +120,10 @@ export default function MenuBar({ menuData }: MenuBarProps) {
                         </div>
                     </div>
 
-                    <div className='  flex justify-center'>
+                    <div className=' mt-4 flex justify-center'>
                         <Searchbar  searchtext={searchTerm} setsearchtext={setSearchTerm}/>
                     </div>
-                    <div className='mt-4 flex justify-center'>
+                    <div className='mt-4 flex justify-center '>
                         <FilterbarMenu  categories={menuData.menu.categories}
                                         activeCategory={activeCategory}
                                          onCategorySelect={handleCategoryFilter}
