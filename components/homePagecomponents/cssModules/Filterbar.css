@@ -1,12 +1,12 @@
 #bar{
     position: relative;
-    width: 856px;
+    max-width: 856px;
+    width:80vw;
     height: 44px;
-    /* top:70px;
-    left:212px; */
      
  
     gap: 0px;
+    opacity: 0px;
     background: #F5F5F5;
     display: inline-flex;
     flex-direction: row;
@@ -20,28 +20,30 @@
 }
 @media screen and (min-width: 768px) {
     #bar {
-        background: #F5F5F5;
-        width: 650px;; /* Show on larger screens */
+        background: #F5F5F5; /* Show on larger screens */
     }
 }
 
 #mainbar
 {
-     width: 768.54px;
+     /* width: 768.54px; */
+     width:100%;
     height: 29.2px; 
     
-    
+    opacity: 0px;
 
     display:flex;
     justify-content: space-between;
     gap:14.02px;
-    overflow:hidden;
+    overflow-x:scroll;
     white-space: nowrap;
      
     scroll-behavior: smooth;
 
 }
-
+#mainbar::-webkit-scrollbar{
+    display: none;
+}
 #larrow{
     width: Hug (26.81px)px;
     height: Fixed (29.2px)px;
@@ -70,6 +72,9 @@
 
 @media (max-width:768px)
 {
+    #bar{
+        width: 85vw;
+    }
     #rarrow,#larrow{
         display:none;
     }
