@@ -11,20 +11,30 @@ import { cartActions } from '@/redux/slices/cartSlice';
 import prisma from '@/lib/prisma';
 import { useSession } from 'next-auth/react';
 import Script from 'next/script';
+import { useNavigate } from 'react-router-dom';
+
 declare global {
   interface Window {
     Razorpay: any;
   }
 }
 const Home = () => {
+  
+
+
+  const BackClickHandle = () => {
+    router.back();
+    
+  };
   const dispatch = useDispatch();
   const cartTotalQuantity = useSelector((state: any) => state.cart.totalQuantity);
   const cartTotalAmount = useSelector((state: any) => state.cart.totalAmount);
   const cartItems = useSelector((state: any) => state.cart.items.filter(item => item.quantity > 0));
   const [restaurantName, setRestaurantName] = useState<string|null>('');
   const [loading, setLoading] = useState(false);
-const [error, setError] = useState(null);
+  const [error, setError] = useState(null);
   const router = useRouter();
+  
   const [orderId, setOrderId] = useState(null);
   let {data:session}=useSession();
   const createRazorpayOrder = async () => {
@@ -148,7 +158,7 @@ const [error, setError] = useState(null);
   return (
     <>
      <Script src="https://checkout.razorpay.com/v1/checkout.js" />
-      <div className='bg-[#F5F5F5] h-screen overflow-auto'>
+      <div className='bg-[#F5F5F5] h-screen overflow-auto' onClick={BackClickHandle}>
       <div className='hidden lg:block'>
                 <Navbar/>
             </div>
