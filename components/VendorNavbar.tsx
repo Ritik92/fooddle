@@ -23,7 +23,7 @@ export default function VendorNavbar({active}){
         router.push('/shopsettings')
           }} className={` ${activebutton=='Shop Settings'?'bg-white text-blue-500':''} rounded-lg pl-2 pr-2`}>Shop Settings</button></div>
           <div> <button onClick={()=>{setActivebutton('Manage Orders'); router.push('/orderhistory')}} className={` ${activebutton=='Manage Orders'?'bg-white text-blue-500':''} rounded-lg pl-2 pr-2`}>Manage Orders</button></div>
-          <div><button onClick={()=>setActivebutton('Customer Mode')} className={` ${activebutton=='Customer Mode'?'bg-white text-blue-500':''} rounded-lg pl-2 pr-2`}>Customer Mode</button></div>
+          <div><button onClick={()=>{setActivebutton('Edit Menu'); router.push('/editmenu')}} className={` ${activebutton=='Edit Menu'?'bg-white text-blue-500':''} rounded-lg pl-2 pr-2`}>Edit Menu</button></div>
           <div><button onClick={()=>setActivebutton('Contact Foodle ')} className={` ${activebutton=='Contact Foodle '?'bg-white text-blue-500':''} rounded-lg pl-2 pr-2`}>Contact Foodle </button></div>
           <div><button  onClick={()=>{ setActivebutton('Log out'); signOut() }} className={` ${activebutton=='Log out'?'bg-white text-blue-500':''} rounded-lg pl-2 pr-2`}>Log out</button></div>
       </div>

@@ -19,27 +19,29 @@ const Home = () => {
     const [isClient, setIsClient] = useState(false);
     const { data: session, status } = useSession();
 
-    useEffect(() => {
-        setIsClient(true);
-        const fetchOrders = async () => {
-            if (status === 'authenticated' && session?.user) {
-                try {
-                    const userId = (session.user as any).id;
-                    const response = await axios.get(`/api/ordercreate?userId=${userId}`);
-                    setOrders(response.data);
-                } catch (err) {
-                    setError('Failed to fetch orders');
-                } finally {
-                    setLoading(false);
-                }
-            } else if (status === 'unauthenticated') {
-                setError('Please sign in to view orders');
+    const fetchOrders = async () => {
+        if (status === 'authenticated' && session?.user) {
+            try {
+                const userId = (session.user as any).id;
+                const response = await axios.get(`/api/ordercreate?userId=${userId}`);
+                setOrders(response.data);
+            } catch (err) {
+                setError('Failed to fetch orders');
+            } finally {
                 setLoading(false);
             }
-        };
+        } else if (status === 'unauthenticated') {
+            setError('Please sign in to view orders');
+            setLoading(false);
+        }
+    };
 
+    useEffect(() => {
+        setIsClient(true);
         if (status !== 'loading') {
             fetchOrders();
+            const interval = setInterval(fetchOrders, 1000);
+            return () => clearInterval(interval);
         }
     }, [status, session]);
 
@@ -50,11 +52,11 @@ const Home = () => {
     if (status === 'loading' || loading) {
         return (
             <div className='flex items-center justify-center h-screen'>
-                <DotLottieReact
+                {/* <DotLottieReact
                     src="https://lottie.host/4f806c6a-0425-4ed0-8920-2953a579810c/Z6LE7AXB72.lottie"
                     style={{ width: '300px', height: '300px' }}
                     autoplay
-                />
+                /> */}
             </div>
         );
     }

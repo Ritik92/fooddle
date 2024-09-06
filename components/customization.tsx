@@ -34,7 +34,7 @@ const CustomizationPopup = ({ customizations, onClose, onComplete }) => {
               />
               <label htmlFor={customization.id} className="ml-3 flex justify-between items-center w-full">
                 <span className="font-medium">{customization.name}</span>
-                <span className="text-gray-600">+${customization.price.toFixed(2)}</span>
+                <span className="text-gray-600">+₹{customization.price.toFixed(2)}</span>
               </label>
             </div>
           ))}

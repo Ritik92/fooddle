@@ -102,7 +102,7 @@ export default function ManageOrders(){
                     ) : (
                         <div className="text-center text-[#4D4D4D] grid place-items-center pb-[20%] h-full">
                             <div>
-                                <div>No orders</div>
+                                <div>Fetching orders....</div>
                             </div>
                         </div>
                     )}

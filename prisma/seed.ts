@@ -44,18 +44,19 @@ async function main() {
 
   // Seed restaurants (each with a unique vendor)
   const restaurants = [
-    { id: '1', img: '/pizzaNation.png', name: 'Pizza Nation', openingTime: '11:00', closingTime: '22:00', location: 'Cos', vendorId: 'user-1', deliveryCharge: 2.50 },
-    { id: '2', img: '/restpic.png', name: 'Honey Cafe', openingTime: '08:00', closingTime: '20:00', location: 'Cos', vendorId: 'user-2', deliveryCharge: 1.50 },
-    { id: '3', img: '/restpic2.png', name: 'The Dessert Club', openingTime: '10:00', closingTime: '21:00', location: 'Cos', vendorId: 'user-3', deliveryCharge: 3.00 },
-    { id: '4', img: '/restpic2.png', name: 'Sip n Bites', openingTime: '09:00', closingTime: '23:00', location: 'Cos', vendorId: 'user-4', deliveryCharge: 2.00 },
-    { id: '5', img: '/pizzaNation.png', name: 'Fashion Point Cos', openingTime: '10:00', closingTime: '22:00', location: 'Cos', vendorId: 'user-5', deliveryCharge: 2.75 },
-    { id: '6', img: '/restpic.png', name: 'Bombay Munchery', openingTime: '11:30', closingTime: '23:30', location: 'Cos', vendorId: 'user-6', deliveryCharge: 3.50 },
-    { id: '7', img: '/restpic2.png', name: 'JP Foods', openingTime: '07:00', closingTime: '21:00', location: 'G-block', vendorId: 'user-7', deliveryCharge: 1.75 },
-    { id: '8', img: '/pizzaNation.png', name: 'Patiala Shahi', openingTime: '11:00', closingTime: '22:30', location: 'G-block', vendorId: 'user-8', deliveryCharge: 2.25 },
+    { id: '1', img: '/pic6p.jpg', name: 'Pizza Nation', openingTime: '11:00', closingTime: '22:00', location: 'Cos', vendorId: 'user-1', deliveryCharge: 2.50 },
+    { id: '2', img: '/pic2.jpg', name: 'Honey Cafe', openingTime: '08:00', closingTime: '20:00', location: 'Cos', vendorId: 'user-2', deliveryCharge: 1.50 },
+    { id: '3', img: '/pic3.jpg', name: 'The Dessert Club', openingTime: '10:00', closingTime: '21:00', location: 'Cos', vendorId: 'user-3', deliveryCharge: 3.00 },
+    { id: '4', img: '/pic4.jpg', name: 'Sip n Bites', openingTime: '09:00', closingTime: '23:00', location: 'Cos', vendorId: 'user-4', deliveryCharge: 2.00 },
+    { id: '5', img: '/pic5.jpg', name: 'Fashion Point Cos', openingTime: '10:00', closingTime: '22:00', location: 'Cos', vendorId: 'user-5', deliveryCharge: 2.75 },
+    { id: '6', img: '/pic6.jpg', name: 'Bombay Munchery', openingTime: '11:30', closingTime: '23:30', location: 'Cos', vendorId: 'user-6', deliveryCharge: 3.50 },
+    { id: '7', img: '/pic7.jpg', name: 'JP Foods', openingTime: '07:00', closingTime: '21:00', location: 'G-block', vendorId: 'user-7', deliveryCharge: 1.75 },
+    { id: '8', img: '/pic1.jpg', name: 'Patiala Shahi', openingTime: '11:00', closingTime: '22:30', location: 'G-block', vendorId: 'user-8', deliveryCharge: 2.25 },
     { id: '9', img: '/pizzaNation.png', name: 'RP Fresh Soda', openingTime: '09:00', closingTime: '20:00', location: 'G-block', vendorId: 'user-9', deliveryCharge: 1.00 },
     { id: '10', img: '/restpic.png', name: 'The Brotherz Kitchen', openingTime: '10:30', closingTime: '23:00', location: 'G-block', vendorId: 'user-10', deliveryCharge: 3.25 },
-    { id: '11', img: '/restpic.png', name: 'Amritsari Kulcha Zone', openingTime: '08:30', closingTime: '21:30', location: 'H-block', vendorId: 'user-11', deliveryCharge: 2.50 },
-  ];
+    { id: '11', img: '/restpic2.png', name: 'Amritsari Kulcha Zone', openingTime: '08:30', closingTime: '21:30', location: 'H-block', vendorId: 'user-11', deliveryCharge: 2.50 },
+];
+
 
   for (const restaurant of restaurants) {
     await prisma.restaurant.create({
@@ -82,7 +83,7 @@ async function main() {
                     create: [
                       {
                         name: `${restaurant.name} Special`,
-                        price: 15.99,
+                        price: 150,
                         restaurant: {
                           connect: {
                             id: restaurant.id,
@@ -90,14 +91,14 @@ async function main() {
                         },
                         customizations: {
                           create: [
-                            { name: 'Extra topping', price: 2.50 },
-                            { name: 'Large size', price: 3.00 },
+                            { name: 'Extra topping', price: 25 },
+                            { name: 'Large size', price: 30 },
                           ],
                         },
                       },
                       {
                         name: "Chef's Choice",
-                        price: 18.99,
+                        price: 120,
                         restaurant: {
                           connect: {
                             id: restaurant.id,
@@ -105,8 +106,8 @@ async function main() {
                         },
                         customizations: {
                           create: [
-                            { name: 'Spicy', price: 1.00 },
-                            { name: 'Gluten-free', price: 2.00 },
+                            { name: 'Spicy', price: 10 },
+                            { name: 'Gluten-free', price: 20 },
                           ],
                         },
                       },
@@ -119,7 +120,7 @@ async function main() {
                     create: [
                       {
                         name: 'Soda',
-                        price: 2.50,
+                        price: 50,
                         restaurant: {
                           connect: {
                             id: restaurant.id,
@@ -128,7 +129,7 @@ async function main() {
                       },
                       {
                         name: 'Iced Tea',
-                        price: 3.00,
+                        price: 90,
                         restaurant: {
                           connect: {
                             id: restaurant.id,
