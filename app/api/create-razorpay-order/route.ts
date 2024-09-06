@@ -11,7 +11,7 @@ export async function POST(request) {
 
   try {
     const order = await razorpay.orders.create({
-      amount: amount * 100, // Razorpay expects amount in paise
+      amount: amount , // Razorpay expects amount in paise
       currency,
       receipt,
     });

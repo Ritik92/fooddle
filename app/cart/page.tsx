@@ -90,10 +90,6 @@ const [error, setError] = useState(null);
     const paymentObject = new window.Razorpay(options);
     paymentObject.open();
   };
-
-  const handleemptycart=()=>{
-    router.push('/')
-      }
   const handleIncrement = (item) => {
     dispatch(cartActions.addItemToCart({
       id: item.id,
@@ -118,7 +114,7 @@ const [error, setError] = useState(null);
     try {
       setLoading(true);
       const response = await axios.post('/api/ordercreate', {
-        userId: userID, // Replace with the actual user ID
+        userId: userID, 
         items: cartItems.map((item) => ({
           menuItemId: item.id,
           quantity: item.quantity,

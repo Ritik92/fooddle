@@ -22,6 +22,7 @@
     "framer-motion": "^11.3.8",
     "jsonwebtoken": "^9.0.2",
     "lottie-react": "^2.4.0",
+    "lucide-react": "^0.438.0",
     "next": "14.2.5",
     "next-auth": "^4.24.7",
     "nodemailer": "^6.9.14",

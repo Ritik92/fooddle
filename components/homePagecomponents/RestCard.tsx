@@ -10,11 +10,11 @@ type RestCardProps = {
     id: string;
     img: string;
     name: string;
-    time: string;
+    closingTime: string;
     location:string;
 };
 
-const RestCard: React.FC<RestCardProps> = ({ id,img, name, time ,location}) => {
+const RestCard: React.FC<RestCardProps> = ({ id,img, name, closingTime ,location}) => {
     const router=useRouter()
     return (
        
@@ -33,7 +33,7 @@ const RestCard: React.FC<RestCardProps> = ({ id,img, name, time ,location}) => {
                 <div>
                 <div id="time-block">
                    <div><Image height={15} width={15}  src= "/door.png"/></div> 
-                    <p>{time}</p>
+                    <p>{closingTime}</p>
                 </div>
                     
                 </div>
