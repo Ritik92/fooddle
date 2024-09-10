@@ -11,6 +11,10 @@ const Navbar=()=>{
   // Function to handle navigation and setting active state
   const handleNavigation = (path: string) => {
     router.push(path);
+    
+  };
+  const isActive = (path: string) => {
+    return pathname === path;
   };
     return(
         <div className='outernav'>
@@ -22,11 +26,11 @@ const Navbar=()=>{
 
             <div className='options'>
 
-                <button  className={pathname === '/' ? 'active' : ''} 
-          onClick={() => handleNavigation('/')}
-        ><Image src="/home.png"  className='defaultim'/>
-        <Image src="/homeYes.png" className='activeim'/>
-        <p>Home</p></button>
+            <button className={isActive('/home') ? 'active' : ''} onClick={() => handleNavigation('/home')}>
+          <Image src="/home.png" className='defaultim' />
+          <Image src="/homeYes.png" className='activeim' />
+          <p>Home</p>
+        </button>
 
 
                 <button className={pathname === '/search' ? 'active' : ''} 

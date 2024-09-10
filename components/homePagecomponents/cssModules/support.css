@@ -119,7 +119,7 @@ display: flex;
 flex-direction: column;
 justify-content: flex-end;
 align-items: center;
-opacity: 0px;
+
 border:1px solid black;
 }
 
@@ -127,7 +127,7 @@ border:1px solid black;
     width: 250px;
 height: 119px;
 gap: 0px;
-opacity: 0px;
+
 
 font-family: Urbanist;
 font-size: 14px;
@@ -146,7 +146,7 @@ color: #4D4D4D;
     width: 100px;
 height: 14px;
 gap: 0px;
-opacity: 0px;
+
 
 font-family: Urbanist;
 font-size: 12px;
