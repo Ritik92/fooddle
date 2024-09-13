@@ -9,7 +9,7 @@ const SALT_INDEX = 1;
 export  async function POST(req:NextRequest, res:NextResponse) {
   if (true) {
     const { amount, orderId } = await req.json();
-
+    
     const payload = {
       merchantId: MERCHANT_ID,
       merchantTransactionId: orderId,

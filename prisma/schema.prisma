@@ -87,6 +87,8 @@ model Order {
   status        String
   restaurant    Restaurant   @relation(fields: [restaurantId], references: [id])
   restaurantId  String
+  isPickup        Boolean?   @default(false)
+  isPaidOnline    Boolean?   @default(false)
 }
 
 model OrderItem {

@@ -40,7 +40,7 @@ const Home = () => {
         setIsClient(true);
         if (status !== 'loading') {
             fetchOrders();
-            const interval = setInterval(fetchOrders, 1000);
+            const interval = setInterval(fetchOrders, 10000);
             return () => clearInterval(interval);
         }
     }, [status, session]);

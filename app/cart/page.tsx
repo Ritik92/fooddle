@@ -13,11 +13,11 @@ import { useSession } from 'next-auth/react';
 import Script from 'next/script';
 // import { useNavigate } from 'react-router-dom';
 
-declare global {
-  interface Window {
-    Razorpay: any;
-  }
-}
+// declare global {
+//   interface Window {
+//     Razorpay: any;
+//   }
+// }
 const Home = () => {
   
 
@@ -35,7 +35,7 @@ const Home = () => {
   const [error, setError] = useState(null);
   const router = useRouter();
   
-  const [orderId, setOrderId] = useState(null);
+  // const [orderId, setOrderId] = useState(null);
   let {data:session}=useSession();
   // const createRazorpayOrder = async () => {
   //   try {
@@ -54,16 +54,10 @@ const Home = () => {
   //   }
   // };
   const handlePayment = async () => {
+    await orderConfirm();
     let amount=50
-   const orderId="MT785099006888111"
-    try {
-      const response = await axios.post('/api/phonpe/initiate-payment', { amount, orderId });
-      // Redirect to PhonePe payment page
-      window.location.href = response.data.data.instrumentResponse.redirectInfo.url;
-    } catch (error) {
-      console.error('Payment initiation failed:', error);
-    
-    }
+   
+   
   };
   // const handlePayment1 = async () => {
 
@@ -145,10 +139,20 @@ const Home = () => {
         totalAmount: Number(cartTotalAmount),
         restaurantId: cartItems[0].restaurantId,
       });
-  
+      // setOrderId(response.data.id);
       console.log('Order created successfully:', response.data);
+      try {
+        const amount=response.data.totalAmount;
+        const orderId=response.data.id;
+        const response2 = await axios.post('/api/phonpe/initiate-payment', { amount, orderId });
+        // Redirect to PhonePe payment page
+        window.location.href = response2.data.data.instrumentResponse.redirectInfo.url;
+      } catch (error) {
+        console.error('Payment initiation failed:', error);
+      
+      }
       setLoading(false);
-      window.location.href = '/note';
+      // window.location.href = '/note';
     } catch (error) {
       console.error('Error creating order:', error.response?.data || error.message);
       setLoading(false);
