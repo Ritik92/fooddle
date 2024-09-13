@@ -6,7 +6,7 @@
     position: relative;
     display: block;
     overflow: hidden;
-    
+   
     
 
 }
@@ -21,9 +21,12 @@
     background-size: cover;
     background-position: center;
     position: absolute;
+    width:100%;
+    height:100%;
     top: 0;
     left: 0;
     z-index: 1;
+    border-radius:20px 20px 0px 0px;
 }
 #panel
 {
@@ -31,21 +34,23 @@
     justify-content: space-evenly;
     
     height:51px;
-    width: 344px;
+    width: 100%;
     position: absolute;
     background: #FFFFFF;
 
     align-items:center;
     z-index:2;
     bottom:0;
-    
+    font-family: Urbanist;
+     border-radius:0px 0px 20px 20px ;
 }
 #info
 {
     height:19px;
     display:flex;
-    width: 312px;
-    justify-content: center;
+    width: 95%;
+    justify-content: space-between;
+    align-items: center;
 }
 #rname{
     display: flex;
@@ -61,6 +66,7 @@
 {
     width:94px;
     height:19px;
+    right:10px;
     font-size: 14px;
     display: flex;
     justify-content: center;
@@ -75,12 +81,88 @@
 {
     position:absolute;
     top:11px;
-    left:312px;
+    right:10px;
     height:20px;
     width:20px;
     border-color: aliceblue;
     z-index:3;
 }
+
+.fav path {
+    fill: none;
+    stroke: #FCFCFC;
+}
+
+
+
+
+#like.favorite-button:not(.active):hover .fav path {
+    fill: #F69B9B;
+    stroke: #F69B9B;
+}
+
+#like.favorite-button.active .fav path {
+    fill: #EF4D4D;
+    stroke: #EF4D4D;
+}
+
+
+@media (max-width:450px){
+    #like.favorite-button:not(.active) .fav path {
+        fill: none;
+        stroke: #FCFCFC;
+    }
+    #like.favorite-button.active .fav path {
+        fill: #EF4D4D;
+        stroke: #EF4D4D;
+    }
+    #like.favorite-button:not(.active):hover .fav path {
+        fill: none;
+        stroke: #FCFCFC;
+    }
+    
+    #outer-box{
+        width:90vw;
+        height:180px;
+        border-radius:20px;
+        
+        position: relative;
+        display: block;
+        overflow: hidden;
+       
+        
+    
+    }
+}
+
+@media ((min-width:451px) and (max-width:768px)){
+    #like.favorite-button:not(.active) .fav path {
+        fill: none;
+        stroke: #FCFCFC;
+    }
+    #like.favorite-button.active .fav path {
+        fill: #EF4D4D;
+        stroke: #EF4D4D;
+    }
+    #like.favorite-button:not(.active):hover .fav path {
+        fill: none;
+        stroke: #FCFCFC;
+    }
+    
+    #outer-box{
+        width:67vw;
+        height:180px;
+        border-radius:20px;
+        
+        position: relative;
+        display: block;
+        overflow: hidden;
+       
+        
+    
+    }
+}
+
 
 /* #like img {
     height: 100%; 

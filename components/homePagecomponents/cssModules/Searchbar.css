@@ -10,7 +10,7 @@
     border-radius: 30px ;
     justify-content: space-between;
     align-items: center;
-  
+    opacity: 0px;
     background: #EDEDED;
     
 
@@ -58,7 +58,7 @@
 @media (max-width:768px){
     .out{
         /* display:inline-flex ; */
-        width:342px;
+        width:90%;
         border-radius: 30px;
         padding: 12px 18px;
         /* position:fixed; */
@@ -71,5 +71,9 @@
 
         
 
+    }
+
+    .holder{
+        font-size: 15px;
     }
 }
