@@ -27,69 +27,81 @@ const [error, setError] = useState(null);
   const router = useRouter();
   const [orderId, setOrderId] = useState(null);
   let {data:session}=useSession();
-  const createRazorpayOrder = async () => {
-    try {
-      setLoading(true);
-      const response = await axios.post('/api/create-razorpay-order', {
-        amount: cartTotalAmount * 100, // Razorpay expects amount in paise
-        currency: 'INR',
-        receipt: `order_${Date.now()}`,
-      });
-      setOrderId(response.data.id);
-      setLoading(false);
-    } catch (error) {
-      console.error('Error creating Razorpay order:', error);
-      setLoading(false);
-      setError('Failed to create order. Please try again.');
-    }
-  };
-  
+  // const createRazorpayOrder = async () => {
+  //   try {
+  //     setLoading(true);
+  //     const response = await axios.post('/api/create-razorpay-order', {
+  //       amount: cartTotalAmount * 100, // Razorpay expects amount in paise
+  //       currency: 'INR',
+  //       receipt: `order_${Date.now()}`,
+  //     });
+  //     setOrderId(response.data.id);
+  //     setLoading(false);
+  //   } catch (error) {
+  //     console.error('Error creating Razorpay order:', error);
+  //     setLoading(false);
+  //     setError('Failed to create order. Please try again.');
+  //   }
+  // };
   const handlePayment = async () => {
-    if (!orderId) {
-      await createRazorpayOrder();
+    let amount=50
+   const orderId="MT785099006888111"
+    try {
+      const response = await axios.post('/api/phonpe/initiate-payment', { amount, orderId });
+      // Redirect to PhonePe payment page
+      window.location.href = response.data.data.instrumentResponse.redirectInfo.url;
+    } catch (error) {
+      console.error('Payment initiation failed:', error);
+    
     }
-      
-    const options = {
-      key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
-      amount: cartTotalAmount * 100,
-      currency: 'INR',
-      name: 'Your Food Delivery App',
-      description: 'Food Order Payment',
-      order_id: orderId,
-      handler: async function (response) {
-        try {
-          setLoading(true);
-          // Verify payment on the server
-          const verificationResponse = await axios.post('/api/verify-payment', {
-            razorpay_order_id: response.razorpay_order_id,
-            razorpay_payment_id: response.razorpay_payment_id,
-            razorpay_signature: response.razorpay_signature,
-          });
-
-          if (verificationResponse.data.success) {
-            // Payment verified, create order in your system
-            await orderConfirm();
-          } else {
-            setError('Payment verification failed. Please try again.');
-          }
-        } catch (error) {
-          console.error('Error handling payment:', error);
-          setError('An error occurred while processing your payment. Please try again.');
-        } finally {
-          setLoading(false);
-        }
-      },
-      prefill: {
-        name: session?.user?.name || '',
-        email: session?.user?.email || '',
-      },
-      theme: {
-        color: '#004BAD',
-      },
-    };
-    const paymentObject = new window.Razorpay(options);
-    paymentObject.open();
   };
+  // const handlePayment1 = async () => {
+
+  //   if (!orderId) {
+  //     await createRazorpayOrder();
+  //   }
+      
+  //   const options = {
+  //     key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+  //     amount: cartTotalAmount * 100,
+  //     currency: 'INR',
+  //     name: 'Your Food Delivery App',
+  //     description: 'Food Order Payment',
+  //     order_id: orderId,
+  //     handler: async function (response) {
+  //       try {
+  //         setLoading(true);
+  //         // Verify payment on the server
+  //         const verificationResponse = await axios.post('/api/verify-payment', {
+  //           razorpay_order_id: response.razorpay_order_id,
+  //           razorpay_payment_id: response.razorpay_payment_id,
+  //           razorpay_signature: response.razorpay_signature,
+  //         });
+
+  //         if (verificationResponse.data.success) {
+  //           // Payment verified, create order in your system
+  //           await orderConfirm();
+  //         } else {
+  //           setError('Payment verification failed. Please try again.');
+  //         }
+  //       } catch (error) {
+  //         console.error('Error handling payment:', error);
+  //         setError('An error occurred while processing your payment. Please try again.');
+  //       } finally {
+  //         setLoading(false);
+  //       }
+  //     },
+  //     prefill: {
+  //       name: session?.user?.name || '',
+  //       email: session?.user?.email || '',
+  //     },
+  //     theme: {
+  //       color: '#004BAD',
+  //     },
+  //   };
+  //   const paymentObject = new window.Razorpay(options);
+  //   paymentObject.open();
+  // };
   const handleIncrement = (item) => {
     dispatch(cartActions.addItemToCart({
       id: item.id,

@@ -142,7 +142,7 @@ export default function MenuBar({ menuData }: MenuBarProps) {
                                 ))}
                             </div>
                         ))}
-                        <div className='p-[15rem]'></div>
+                        <div className='h-[50%]'></div>
                     </div>
 
                             {cartTotalQuantity==0?<div></div>:<div className='bg-blue-800 h-[104px] w-full flex justify-between items-center lg:h-[56.38px] lg:w-[892px] mt-[30px] lg:rounded-t-[24px] fixed bottom-0 z-50'>

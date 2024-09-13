@@ -60,10 +60,10 @@ const SidebarMenu = ({active}) => {
             </li>
             <li>
               <button
-                onClick={() => setActiveButton("Customer Mode")}
-                className={`w-full text-left ${activeButton === "Customer Mode" ? "bg-white text-blue-500" : "hover:bg-blue-700"} p-2 rounded-lg`}
+                onClick={() =>{ setActiveButton('Edit Menu'); router.push('/editmenu')}}
+                className={`w-full text-left ${activeButton === "Edit Menu" ? "bg-white text-blue-500" : "hover:bg-blue-700"} p-2 rounded-lg`}
               >
-                Customer Mode
+               Edit Menu
               </button>
             </li>
             <li>
