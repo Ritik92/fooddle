@@ -11,7 +11,7 @@ import { cartActions } from '@/redux/slices/cartSlice';
 import prisma from '@/lib/prisma';
 import { useSession } from 'next-auth/react';
 import Script from 'next/script';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 declare global {
   interface Window {
