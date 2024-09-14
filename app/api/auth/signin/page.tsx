@@ -200,10 +200,10 @@ const SignupForm = ({ toggleForm }: { toggleForm: () => void }) => {
     e.preventDefault();
     setError('');
 
-    if (!email.endsWith('@thapar.edu')) {
-      setError('Please use a valid Thapar email address.');
-      return;
-    }
+    // if (!email.endsWith('@thapar.edu')) {
+    //   setError('Please use a valid Thapar email address.');
+    //   return;
+    // }
     
 
 

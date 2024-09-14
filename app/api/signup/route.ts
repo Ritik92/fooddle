@@ -1,19 +1,19 @@
 // app/api/signup/route.ts
 import { NextRequest, NextResponse } from 'next/server';
 import crypto from 'crypto';
-import tempUsersStore from '@/lib/tempuserstore';
+import tempUsersStore from '@/lib/redisStore';
 import { sendVerificationEmail } from '../../../lib/mail';
 
 export async function POST(req: NextRequest) {
   try {
     const { email, password } = await req.json();
-    const username=email
+    const username = email;
     // Generate a verification token
     const token = crypto.randomBytes(32).toString('hex');
-    console.log('Token is' ,{token})
+    
     // Store the temporary user data
-    tempUsersStore.set(token, { username, password, expires: Date.now() + 3600000 }); // 1-hour expiry
-    console.log(tempUsersStore.get(token))
+    await tempUsersStore.set(token, { username, password });
+    
     // Send the verification email
     const verificationLink = `${process.env.NEXT_PUBLIC_BASE_URL}/verify?token=${token}`;
     

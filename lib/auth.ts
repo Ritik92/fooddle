@@ -13,7 +13,7 @@ export const NEXT_AUTH_CONFIG: NextAuthOptions = {
             },
             async authorize(credentials: any) {
                 const { username, password } = credentials;
-                if (username.endsWith('.com')) {
+                if (true) {
                     const user = await prisma.user.findFirst({
                         where: {
                             email: username,

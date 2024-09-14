@@ -29,7 +29,7 @@ function RegistrationHandlerContent() {
         }
 
         const data = await response.json();
-
+          console.log(data)
         // Sign in the user
         const result = await signIn('credentials', {
             username: data.email,
@@ -44,7 +44,7 @@ function RegistrationHandlerContent() {
           }
       } catch (error) {
         console.error('Registration error:', error);
-        router.push('/error?message=Registration failed');
+       
       }
     }
 
