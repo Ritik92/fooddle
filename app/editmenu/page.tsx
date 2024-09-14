@@ -127,7 +127,7 @@ export default function EditMenu(){
     
     return(
         <div className="overflow-auto h-screen bg-[#F5F5F5]"> 
-            <VendorNavbar active={'Customer Mode'}/>
+            <VendorNavbar active={'Edit Menu'}/>
             
       <div className="flex justify-between text-blue-700 text-2xl font-bold p-6">
         <div>

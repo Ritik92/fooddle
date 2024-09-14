@@ -79,7 +79,7 @@ const SidebarMenu = ({active}) => {
                 onClick={async () => {
                   setActiveButton("Log out");
                   await signOut();
-                  router.push('/')
+                  router.push('/api/auth/signin')
                 }}
                 className={`w-full text-left ${activeButton === "Log out" ? "bg-white text-blue-500" : "hover:bg-blue-700"} p-2 rounded-lg`}
               >
