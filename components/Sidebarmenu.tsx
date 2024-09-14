@@ -14,19 +14,19 @@ const SidebarMenu = ({active}) => {
   };
 
   return (
-    <div className="pt-2 ">
+    <div className="pt-2  ">
       {/* Toggle Button */}
       <button
         onClick={toggleMenu}
        
       >
-        <Image alt="/fe" src='/menuicon.png' className=" p-3 pt-2"/>
+        <Image alt="/fe" src='/menuicon.png' className="  p-3 pt-2"/>
       </button>
 
       {/* Sidebar Menu */}
       {isOpen && (
         <div> 
-             <div className="absolute top-3 pt-[4rem] right-4 bg-primary-700 text-white rounded-lg shadow-md p-4 z-50">
+             <div className="absolute top-0 pt-[4rem] right-0 bg-primary-700 text-white rounded-bl-lg shadow-md p-4 z-50">
              <button
         onClick={toggleMenu}
         className="absolute top-4 right-4 bg-red-500 text-white rounded-[8px] w-[30px] h-[30px] focus:outline-none"
@@ -76,9 +76,10 @@ const SidebarMenu = ({active}) => {
             </li>
             <li>
               <button
-                onClick={() => {
+                onClick={async () => {
                   setActiveButton("Log out");
-                  signOut();
+                  await signOut();
+                  router.push('/')
                 }}
                 className={`w-full text-left ${activeButton === "Log out" ? "bg-white text-blue-500" : "hover:bg-blue-700"} p-2 rounded-lg`}
               >

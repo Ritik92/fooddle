@@ -1,8 +1,10 @@
 "use client"
 import Loader from "@/components/Loader";
 import VendorNavbar from "@/components/VendorNavbar";
+import { useUser } from "@/lib/useUser";
 import { Button } from "@nextui-org/react";
 import axios from "axios";
+import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
 export default function EditMenu(){
@@ -13,11 +15,18 @@ export default function EditMenu(){
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [isEditingItem, setIsEditingItem] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
+  let {data:session}=useSession();
+  const userID = session?.user ? (session.user as any).id : null;
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`/api/restaurants/1`);
-                setCategories(response.data.menu.categories);
+             if(userID) {const res = await axios.post(`/api/restaurant/fetchRestId`, {
+                userID: userID,  // Send userID in the request body
+              });
+              const restId = res.data.restaurant.id; // Extract the restaurant ID from the response
+              
+                const response = await axios.get(`/api/restaurants/${restId}`);
+                setCategories(response.data.menu.categories);}
             } catch (error: any) {
                 console.error('Error fetching data:', error.message); // Log specific error message
                 setError('There was an error fetching the data.');
@@ -25,7 +34,7 @@ export default function EditMenu(){
         };
 
         fetchData();
-    }, [categories]);
+    }, [categories,userID]);
 
     if (error) return <p>{error}</p>;
     if (!categories) return <div><Loader/></div>;
@@ -35,7 +44,7 @@ export default function EditMenu(){
         setError(null);
     
         // Making the PUT request with axios
-        const response = await axios.put('/api/menu/categories?userId=user-1', { category: newCategory });
+        const response = await axios.put(`/api/menu/categories?userId=${userID}`, { category: newCategory });
     
         // Check if the response contains the correct data structure
         if (response.status === 200) {
@@ -60,7 +69,7 @@ export default function EditMenu(){
       try {
         setError(null);
         console.log("New Item is",newItem)
-        const response = await axios.post(`/api/menu/additem?userId=user-1`, {newItem,categoryId});
+        const response = await axios.post(`/api/menu/additem?userId=${userID}`, {newItem,categoryId});
         setCategories(categories.map(category => 
           category.id === categoryId
             ? { ...category, items: [...category.items, response.data] }
@@ -80,7 +89,7 @@ export default function EditMenu(){
       try {
         setError(null);
         console.log(editedItem)
-        const response = await axios.put(`/api/menu/edititem?userId=user-1`, editedItem);
+        const response = await axios.put(`/api/menu/edititem?userId=${userID}`, editedItem);
         setCategories(categories.map(category => 
           category.id === selectedCategory
             ? { ...category, items: category.items.map(item => item.id === editedItem.id ? response.data : item) }
@@ -99,7 +108,7 @@ export default function EditMenu(){
           setError(null);
     
           // Sending a DELETE request with the itemId in the request body
-          await axios.delete('/api/menu/edititem?userId=user-1', {
+          await axios.delete(`/api/menu/edititem?userId=${userID}`, {
             data: { itemId }  // Sending the itemId in the data property
           });
     

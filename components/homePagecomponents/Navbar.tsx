@@ -26,7 +26,7 @@ const Navbar=()=>{
 
             <div className='options'>
 
-            <button className={isActive('/home') ? 'active' : ''} onClick={() => handleNavigation('/home')}>
+            <button className={isActive('/') ? 'active' : ''} onClick={() => handleNavigation('/')}>
           <Image src="/home.png" className='defaultim' />
           <Image src="/homeYes.png" className='activeim' />
           <p>Home</p>

@@ -120,26 +120,24 @@ export default function VendorLandingPage() {
     <div className="bg-[#F5F5F5]">
       <VendorNavbar active="Home" />
       
-    
       <div>
-      <div className="text-center md:mt-10 text-lg md:text-2xl font-bold flex justify-center">
-        Pending Orders - <div className='text-primary-700'>  {pendingOrders.length}</div>
-      </div>
-      <div className="text-center text-red-500 max-w-1/2 pl-2 pr-2">
-        Orders can only be cancelled within 10 mins of order time
-      </div>
-      
-      <div className="p-4   text-sm ">
-        {pendingOrders.length > 0 ? (
-          pendingOrders.map((order) => {
-            // Calculate total quantity for this order
-            const totalQuantity = order.items.reduce((sum, item) => sum + item.quantity, 0);
-          
-            return (
-              <div key={order.id} className="mb-4 p-2 md:p-6 t bg-white overflow-auto h-screen md:ml-[25%] md:w-1/2">
-                <div className='text-center'>
-                  Order No. 3086
-                </div>
+        <div className="text-center md:mt-10 text-lg md:text-2xl font-bold flex justify-center">
+          Pending Orders - <div className='text-primary-700'>  {pendingOrders.length}</div>
+        </div>
+        <div className="text-center text-red-500 max-w-1/2 pl-2 pr-2">
+          Orders can only be cancelled within 10 mins of order time
+        </div>
+        
+        <div className="p-4 text-sm overflow-auto h-screen md:ml-[25%] md:w-1/2">
+          {pendingOrders.length > 0 ? (
+            pendingOrders.map((order) => {
+              const totalQuantity = order.items.reduce((sum, item) => sum + item.quantity, 0);
+            
+              return (
+                <div key={order.id} className="mb-4 p-2 md:p-6 bg-white">
+                  <div className='text-center'>
+                    Order No. 2086
+                  </div>
                 <div className='bg-[#004BAD1A] p-4 rounded-[12px]'>
                   <ul>
                     <div className='flex justify-between text-primary-700 md:p-2'>
