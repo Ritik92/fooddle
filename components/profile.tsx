@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation';
 const Profile = () => {
     const router = useRouter();
     const BackClickHandle = () => {
-        router.push("/home");
+        // router.push("/home");
       };
 
     return (

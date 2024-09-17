@@ -9,6 +9,7 @@ import { Button, Image } from '@nextui-org/react';
 import Navbar from '@/components/homePagecomponents/Navbar';
 import BluebarWide from '@/components/bluebarwide';
 import { useSession } from 'next-auth/react';
+import Loader from '@/components/Loader';
 
 const DotLottieReact = dynamic(() => import('@lottiefiles/dotlottie-react').then(mod => mod.DotLottieReact), { ssr: false });
 
@@ -60,7 +61,8 @@ const Home = () => {
             </div>
         );
     }
-
+    if(loading)
+        return <div> Loading...</div>;
     if (error) {
         return <div>{error}</div>;
     }
@@ -130,7 +132,7 @@ const Home = () => {
                                 
                                 </div>
                                 <div className='text-right pt-4'>
-                                <button className='bg-primary-700 w-[20%] p-1 rounded-3xl text-white'>Reorder</button>
+                                {/* <button className='bg-primary-700 w-[20%] p-1 rounded-3xl text-white'>Reorder</button> */}
                                 </div>
                                 
                                 </div>

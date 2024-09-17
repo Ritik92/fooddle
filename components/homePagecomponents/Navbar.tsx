@@ -26,16 +26,16 @@ const Navbar=()=>{
 
             <div className='options'>
 
-            <button className={isActive('/') ? 'active' : ''} onClick={() => handleNavigation('/')}>
+            <button className={isActive('/')||isActive('/home') ? 'active' : ''} onClick={() => handleNavigation('/')}>
           <Image src="/home.png" className='defaultim' />
           <Image src="/homeYes.png" className='activeim' />
           <p>Home</p>
         </button>
 
 
-                <button className={pathname === '/search' ? 'active' : ''} 
+                {/* <button className={pathname === '/search' ? 'active' : ''} 
           onClick={() => handleNavigation('/search')}><Image src="/searchNo.png"  className='defaultim'/>
-        <Image src="/SearchYes.png" className='activeim'/><p>Search</p></button>
+        <Image src="/SearchYes.png" className='activeim'/><p>Search</p></button> */}
                 <button className={pathname === '/cart' ? 'active' : ''} 
           onClick={() => handleNavigation('/cart')}><Image src="/cart.png"  className='defaultim'/>
         <Image src="/CartYes.png" className='activeim'/><p>Cart</p></button>

@@ -13,9 +13,7 @@ const Accordian = () => {
 
   const router = useRouter();
 
-  function handleHomeClick() {
-    router.push('/home');
-  }
+  
 
   const handleBackClick = () => {
     router.push("/profilepage");
@@ -27,10 +25,10 @@ const Accordian = () => {
 
   return (
 
-    <div className="flex">
-      <div className="hidden md:flex md:items-center">
+    <div className="flex overflow-y-auto h-screen">
+      {/* <div className="hidden md:flex md:items-center">
         <button className="w-[2vw] h-[50px]" onClick={handleHomeClick}><img src="/F.png" alt="Fooddle" /></button>
-      </div>
+      </div> */}
       <div className="flex flex-col">
         <div className="hidden md:block mb-5">
           <ProfileHeader />
@@ -57,7 +55,7 @@ const Accordian = () => {
               </div>
             </div>
             <div className='pt-4 px-[10vw] mx-10 w-full text-[#4D4D4D] md:pt-0'>
-              <div className="w-full px-4 py-6 bg-white ">
+              <div className="w-full px-4 py-6  bg-white ">
 
                 <h2 className="text-[#4D4D4D] bg-white font-bold px--6">FAQs</h2>
 

@@ -19,6 +19,7 @@ const Login = () => {
       router.push('/api/auth/signin');
     } else if (status === 'authenticated') {
       const { email } = session.user;
+      console.log(session)
       axios.get(`/api/navigate?email=${email}`)
         .then(response => {
           setIsVendor(response.data.isVendor);

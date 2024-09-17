@@ -11,6 +11,7 @@ const ProfileButtons = () => {
     const [clickedIcon2, setClickedIcon2] = useState(false);
 
     function handlePersonalDetails() {
+       
         router.push('/personaldetails');
         setClickedIcon1(true);
         setClickedIcon2(false);
