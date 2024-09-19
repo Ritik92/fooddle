@@ -6,6 +6,7 @@ import { Image } from '@nextui-org/react';
 import { signIn } from 'next-auth/react';
 import { useSearchParams } from 'next/navigation';
 import axios from 'axios';
+import toast, { Toaster } from 'react-hot-toast';
 
 function SignInContent() {
   const [isLogin, setIsLogin] = useState(true);
@@ -30,7 +31,8 @@ function SignInContent() {
 
   return (
     <div className="flex flex-col min-h-screen bg-white md:bg-[#EAF3FF]">
-      <div className="flex-grow flex flex-col">
+     <Toaster position="top-center" reverseOrder={false} />
+     <div className="flex-grow flex flex-col">
         <div className="hidden md:block p-3 md:ml-3 mt-1 ">
           <Image src="/logo.png" alt="Foodle logo" width={128} height={55} className="w-24 md:w-32" />
         </div>
@@ -85,60 +87,71 @@ function SignInContent() {
       <div className="hidden md:block text-center text-sm text-gray-600 mt-4 mb-4 ">
         Need help? <a href="#" className="text-blue-600">Contact Us</a> for support.
       </div>
+      
     </div>
   );
 }
 
-
-
-// The rest of the code (LoginForm and SignupForm) remains unchanged.
-
-
-const LoginForm = ({ toggleForm }: { toggleForm: () => void },Error) => {
+const LoginForm = ({ toggleForm }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
-  const handleForgotPassword = async() => {
-    
+  const handleForgotPassword = async () => {
     if (email.endsWith('@thapar.edu')) {
-      try{
-        const res=await axios.get(`/api/validateEmail?email=${email}`);
-       if(res.status===200) window.location.href=`/forgotpassword?email=${email}`;
-      }
-      catch(error){
+      try {
+        const res = await axios.get(`/api/validateEmail?email=${email}`);
+        if (res.status === 200) window.location.href = `/forgotpassword?email=${email}`;
+      } catch (error) {
         setError('User Does Not Exist');
+        toast.error('User does not exist');
       }
-      
     } else {
-      setError('Please enter an  valid email  to reset password.');
+      setError('Please enter a valid email to reset password.');
+      toast.error('Please enter a valid Thapar email to reset password');
     }
   };
-  const handleSubmit = async (e: React.FormEvent) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+    setIsLoading(true);
 
-  
+    const loadingToast = toast.loading('Logging in...');
 
-    const result = await signIn('credentials', {
-      username: email,
-      password: password,
-      redirect: false,
-    });
+    try {
+      const result = await signIn('credentials', {
+        username: email,
+        password: password,
+        redirect: false,
+      });
 
-    if (result?.error) {
-      setError('Invalid credentials. Please try again.');
-    } else if (result?.ok) {
-      window.location.href = '/';
+      if (result?.error) {
+        setError('Invalid credentials. Please try again.');
+        toast.error('Invalid credentials', { id: loadingToast });
+      } else if (result?.ok) {
+        toast.success('Logged in successfully', { id: loadingToast });
+        setTimeout(() => {
+          window.location.href = '/';
+        }, 1000);
+      }
+    } catch (error) {
+      toast.error('An error occurred', { id: loadingToast });
+    } finally {
+      setIsLoading(false);
     }
   };
+
   const handleGoogleSignIn = () => {
     signIn('google', { callbackUrl: '/' });
   };
-  const [showPassword, setShowPassword] = useState(false);
+
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
+
   return (
     <form className="space-y-4 " onSubmit={handleSubmit}>
       <input 
@@ -175,7 +188,21 @@ const LoginForm = ({ toggleForm }: { toggleForm: () => void },Error) => {
         
         <a href="#" onClick={handleForgotPassword} className="text-sm text-blue-600">Forgot Password?</a>
       </div>
-      <button type="submit" className="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700  transition-colors">Login</button>
+      <button 
+        type="submit" 
+        className="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 transition-colors flex items-center justify-center"
+        disabled={isLoading}
+      >
+        {isLoading ? (
+          <>
+            <svg className="button-spinner -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+</svg>
+            Logging in...
+          </>
+        ) : 'Login'}
+      </button>
       <div className="relative text-center">
         <hr className="my-4" />
         <span className="bg-white px-2 text-sm text-gray-500 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">OR</span>
@@ -190,22 +217,19 @@ const LoginForm = ({ toggleForm }: { toggleForm: () => void },Error) => {
     </form>
   );
 };
-
-const SignupForm = ({ toggleForm }: { toggleForm: () => void }) => {
+const SignupForm = ({ toggleForm }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+    setIsLoading(true);
 
-    // if (!email.endsWith('@thapar.edu')) {
-    //   setError('Please use a valid Thapar email address.');
-    //   return;
-    // }
-    
-
+    const loadingToast = toast.loading('Signing up...');
 
     try {
       const response = await axios.post('/api/signup', {
@@ -214,21 +238,22 @@ const SignupForm = ({ toggleForm }: { toggleForm: () => void }) => {
       });
 
       if (response.status === 200) {
-        alert('Please check your email for a verification link.');
+        toast.success('Please check your email for a verification link.', { id: loadingToast });
+        setTimeout(() => {
+          window.location.href = '/';
+        }, 2000);
       }
     } catch (error) {
       console.error('Sign up failed:', error);
-      alert('Sign up failed. Please try again.');
+      toast.error('Sign up failed. Please try again.', { id: loadingToast });
+    } finally {
+      setIsLoading(false);
     }
-    // call an API to register the user
-    console.log('Registration submitted:', { email, password });
-    window.location.href = '/';
   };
 
   const handleGoogleSignIn = () => {
     signIn('google', { callbackUrl: '/' });
   };
-  const [showPassword, setShowPassword] = useState(false);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -265,7 +290,21 @@ const SignupForm = ({ toggleForm }: { toggleForm: () => void }) => {
       {error && (
         <div className="text-red-500 text-sm mt-2">{error}</div>
       )}
-      <button type="submit"  className="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 transition-colors font-urbanist">Sign Up</button>
+      <button 
+        type="submit"  
+        className="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 transition-colors font-urbanist flex items-center justify-center"
+        disabled={isLoading}
+      >
+        {isLoading ? (
+          <>
+          <svg className="button-spinner -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+</svg>
+            Signing up...
+          </>
+        ) : 'Sign Up'}
+      </button>
       <div className="relative text-center">
         <hr className="my-4" />
         <span className="bg-white px-2 text-sm text-gray-500 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">OR</span>

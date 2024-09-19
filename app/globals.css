@@ -84,4 +84,16 @@ html, body {
       box-shadow: .2em -.2em 0 0 currentcolor;
     }
   }
+  @keyframes button-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .button-spinner {
+    animation: button-spin 1s linear infinite;
+  }
 

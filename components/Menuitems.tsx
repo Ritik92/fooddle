@@ -1,24 +1,21 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { cartActions } from '@/redux/slices/cartSlice';
 import { Image } from '@nextui-org/react';
 import CustomizationPopup from './customization';
-import RemoveItemPopup from './RemoveItemPopup'; 
+import RemoveItemPopup from './RemoveItemPopup';
 
 const Menuitems = (props) => {
   const dispatch = useDispatch();
   const [showCustomizationPopup, setShowCustomizationPopup] = useState(false);
   const [showRemoveItemPopup, setShowRemoveItemPopup] = useState(false);
-  const [selectedCustomizations, setSelectedCustomizations] = useState([]);
 
   const { id, name, price, customizations, restaurantId } = props.data;
   
-  // Get all items with the same id (regardless of customizations)
   const cartItems = useSelector((state: any) =>
     state.cart.items.filter(item => item.id === id)
   );
 
-  // Sum the quantities of all instances of the item with the same id
   const totalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
 
   const handleAddToCart = () => {
@@ -58,38 +55,39 @@ const Menuitems = (props) => {
   };
 
   return (
-    <div className='flex mt-[24px] justify-between'>
-      <div className='flex'> 
-        <Image src="/foodimage.png" alt="Food Image" width={101.62} height={88.77} />
-        <div className='ml-[9.34px]'>
-          <Image src="/vegicon.png" alt="Food Image" width={15.18} height={15.71} />
-          <div className='mt-[4.27px]'>
-            {name}
-          </div>
-          <div className='text-[#004BAD] text-left'>
-            {price} 
-          </div>
-        </div> 
+    <div className="flex justify-between items-center p-4 border-b border-gray-200">
+      <div className="flex items-start">
+        <Image
+          src="/vegicon.png"
+          alt="Veg Icon"
+          width={16}
+          height={16}
+          className="mr-2 mt-1"
+        />
+        <div>
+          <h3 className="text-lg font-semibold text-gray-800">{name}</h3>
+          <p className="text-blue-600 font-medium">₹{price}</p>
+        </div>
       </div>
-      <div className='flex items-center'>
+      <div>
         {totalQuantity === 0 ? (
           <button 
-            className='w-[79.56px] h-[36.04px] bg-[#EAF3FF] rounded-[30.03px] font-urbanist text-[#004BAD] text-base font-semibold' 
+            className="px-4 py-2 bg-blue-100 text-blue-600 rounded-full font-semibold text-sm"
             onClick={handleAddToCart}
           >
             Add
           </button>
         ) : (
-          <div className='flex items-center justify-between w-[120px] h-[36.04px] bg-[#EAF3FF] rounded-[30.03px] font-urbanist text-[#004BAD] text-base font-semibold'>
+          <div className="flex items-center bg-blue-100 rounded-full">
             <button 
-              className='w-[36.04px] h-[36.04px] rounded-full flex items-center justify-center'
+              className="w-8 h-8 rounded-full bg-blue-200 text-blue-600 font-bold"
               onClick={handleRemoveItem}
             >
               -
             </button>
-            <span>{totalQuantity}</span>
+            <span className="mx-3 text-blue-600 font-semibold">{totalQuantity}</span>
             <button 
-              className='w-[36.04px] h-[36.04px] rounded-full flex items-center justify-center'
+              className="w-8 h-8 rounded-full bg-blue-200 text-blue-600 font-bold"
               onClick={handleAddToCart}
             >
               +

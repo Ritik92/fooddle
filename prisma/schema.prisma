@@ -8,95 +8,95 @@ datasource db {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  email         String    @unique
-  name          String?
-  password      String?   
-  phoneNumber   String?
-  address       String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  orders        Order[]
-  isVendor      Boolean   @default(false)
-  restaurant    Restaurant?
+  id          String      @id @default(cuid())
+  email       String      @unique
+  name        String?
+  password    String?
+  phoneNumber String?
+  address     String?
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  isVendor    Boolean     @default(false)
+  orders      Order[]
+  restaurant  Restaurant?
 }
 
 model Restaurant {
-  id             String       @id @default(uuid())
-  name           String       @unique
+  id             String     @id @default(uuid())
+  name           String     @unique
   location       String
   phone          String?
   img            String?
-  openingTime    String
+  vendorId       String     @unique
+  isOnline       Boolean    @default(true)
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+  totalRevenue   Float      @default(0.0)
   closingTime    String
   deliveryCharge Float
+  openingTime    String
   menu           Menu?
-  vendor         User         @relation(fields: [vendorId], references: [id])
-  vendorId       String       @unique
-  isOnline       Boolean      @default(true)
-  createdAt      DateTime     @default(now())
-  updatedAt      DateTime     @updatedAt
-  orders         Order[]
-  totalRevenue   Float        @default(0.0)
   menuItems      MenuItem[]
+  orders         Order[]
+  vendor         User       @relation(fields: [vendorId], references: [id])
 }
 
 model Menu {
-  id           String       @id @default(uuid())
-  restaurant   Restaurant   @relation(fields: [restaurantId], references: [id])
-  restaurantId String       @unique
+  id           String     @id @default(uuid())
+  restaurantId String     @unique
   categories   Category[]
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
 }
 
 model Category {
-  id       String     @id @default(uuid())
-  name     String
-  menu     Menu       @relation(fields: [menuId], references: [id])
-  menuId   String
-  items    MenuItem[]
+  id     String     @id @default(uuid())
+  name   String
+  menuId String
+  menu   Menu       @relation(fields: [menuId], references: [id])
+  items  MenuItem[]
 }
 
 model MenuItem {
-  id             String             @id @default(uuid())
+  id             String          @id @default(uuid())
   name           String
   price          Float
-  category       Category           @relation(fields: [categoryId], references: [id])
   categoryId     String
-  customizations Customization[]    @relation("MenuItemCustomizations")
-  orderItems     OrderItem[]
-  restaurant     Restaurant         @relation(fields: [restaurantId], references: [id])
   restaurantId   String
+  category       Category        @relation(fields: [categoryId], references: [id])
+  restaurant     Restaurant      @relation(fields: [restaurantId], references: [id])
+  orderItems     OrderItem[]
+  customizations Customization[] @relation("MenuItemCustomizations")
 }
 
 model Customization {
-  id          String             @id @default(uuid())
-  name        String
-  price       Float
-  menuItems   MenuItem[]         @relation("MenuItemCustomizations")
-  orderItems  OrderItem[]        @relation("OrderItemCustomizations")
+  id         String      @id @default(uuid())
+  name       String
+  price      Float
+  menuItems  MenuItem[]  @relation("MenuItemCustomizations")
+  orderItems OrderItem[] @relation("OrderItemCustomizations")
 }
 
 model Order {
-  id            String       @id @default(uuid())
-  user          User         @relation(fields: [userId], references: [id])
-  userId        String
-  createdAt     DateTime     @default(now())
-  updatedAt     DateTime     @updatedAt
-  items         OrderItem[]
-  totalAmount   Float
-  status        String
-  restaurant    Restaurant   @relation(fields: [restaurantId], references: [id])
-  restaurantId  String
-  isPickup        Boolean?   @default(false)
-  isPaidOnline    Boolean?   @default(false)
+  id           String      @id @default(uuid())
+  userId       String
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  totalAmount  Float
+  status       String
+  restaurantId String
+  isPaidOnline Boolean?    @default(false)
+  isPickup     Boolean?    @default(false)
+  restaurant   Restaurant  @relation(fields: [restaurantId], references: [id])
+  user         User        @relation(fields: [userId], references: [id])
+  items        OrderItem[]
 }
 
 model OrderItem {
-  id             String             @id @default(uuid())
-  order          Order              @relation(fields: [orderId], references: [id])
+  id             String          @id @default(uuid())
   orderId        String
-  menuItem       MenuItem           @relation(fields: [menuItemId], references: [id])
   menuItemId     String
   quantity       Int
-  customizations Customization[]    @relation("OrderItemCustomizations")
+  menuItem       MenuItem        @relation(fields: [menuItemId], references: [id])
+  order          Order           @relation(fields: [orderId], references: [id])
+  customizations Customization[] @relation("OrderItemCustomizations")
 }
