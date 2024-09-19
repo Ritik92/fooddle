@@ -57,13 +57,13 @@ const Menuitems = (props) => {
   return (
     <div className="flex justify-between items-center p-4 border-b border-gray-200">
       <div className="flex items-start">
-        <Image
+        {/* <Image
           src="/vegicon.png"
           alt="Veg Icon"
           width={16}
           height={16}
           className="mr-2 mt-1"
-        />
+        /> */}
         <div>
           <h3 className="text-lg font-semibold text-gray-800">{name}</h3>
           <p className="text-blue-600 font-medium">₹{price}</p>

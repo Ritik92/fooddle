@@ -11,7 +11,7 @@ const Searchbar=({ searchtext, setsearchtext,text }:any)=>{
                 <input className='holder' type="text" placeholder={text} onChange={(e)=>{setsearchtext(e.target.value)}}/>
             </div>
             
-            <button><Image src="/filter-horizontal.png"/></button>
+            {/* <button><Image src="/filter-horizontal.png"/></button> */}
             <style>
             
             </style> 

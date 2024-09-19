@@ -7,7 +7,7 @@ const { PrismaClient } = require('@prisma/client');
 async function main() {
   // Find the Pizza Nation restaurant
   const pizzaNation = await prisma.restaurant.findUnique({
-    where: { name: 'Pizza Nation' },
+    where: { name: 'The Dessert Club' },
   });
 
   if (!pizzaNation) {
@@ -29,92 +29,77 @@ async function main() {
   // Define categories and their items
   const categories = [
     {
-      name: 'Classic Veg',
+      name: "Bubble Waffle",
       items: [
-        { name: 'Margherita', prices: [99, 219, 349] },
-      ]
+        { name: "Oreo King", price: 200 },
+        { name: "Oreo Queen", price: 120 },
+        { name: "Nutella King", price: 200 },
+        { name: "Nutella Queen", price: 120 },
+        { name: "Brownie King", price: 200 },
+        { name: "Brownie Queen", price: 120 },
+        { name: "Ferrero King", price: 200 },
+        { name: "Ferrero Queen", price: 120 },
+        { name: "Pistachio King", price: 200 },
+        { name: "Pistachio Queen", price: 120 },
+        { name: "Chocolate King", price: 200 },
+        { name: "Chocolate Queen", price: 120 },
+        { name: "Red Velvet King", price: 200 },
+        { name: "Red Velvet Queen", price: 120 },
+        { name: "Blue Berry King", price: 200 },
+        { name: "Blue Berry Queen", price: 120 },
+        { name: "Honey Almond King", price: 200 },
+        { name: "Honey Almond Queen", price: 120 },
+      ],
     },
     {
-      name: 'Classic Non-Veg',
+      name: "Square Waffle",
       items: [
-        { name: 'Chicken Salami', prices: [139, 269, 379] },
-      ]
+        { name: "Kitkat King", price: 200 },
+        { name: "Kitkat Queen", price: 120 },
+        { name: "Nutella King", price: 200 },
+        { name: "Nutella Queen", price: 120 },
+        { name: "Chocolate King", price: 200 },
+        { name: "Chocolate Queen", price: 120 },
+        { name: "Fresh Fruit King", price: 200 },
+        { name: "Fresh Fruit Queen", price: 120 },
+        { name: "Maple Syrup King", price: 200 },
+        { name: "Maple Syrup Queen", price: 120 },
+        { name: "Biscoff King", price: 200 },
+        { name: "Biscoff Queen", price: 120 },
+      ],
     },
     {
-      name: 'Simply Veg',
+      name: "Hot Brownie Sundae",
       items: [
-        { name: 'Spring fling', prices: [139, 269, 399] },
-        { name: "Farmer's Special", prices: [139, 269, 399] },
-        { name: 'Spicy Mexican', prices: [139, 269, 399] },
-        { name: 'Veg. Hawaiian', prices: [139, 269, 399] },
-      ]
+        { name: "Brownie Choco Fudge", price: 120 },
+      ],
     },
     {
-      name: 'Simply Non-Veg',
+      name: "Hot Liquids",
       items: [
-        { name: 'BBQ Chicken', prices: [149, 289, 419] },
-        { name: 'Tandoori Chicken', prices: [149, 289, 419] },
-        { name: 'Spicy Chk.Mexican', prices: [149, 289, 419] },
-        { name: 'Chicken Hawaiian', prices: [149, 289, 419] },
-      ]
+        { name: "Hot Choco Hazelnut", price: 75 },
+        { name: "Hot Choco Nutella", price: 75 },
+      ],
     },
     {
-      name: 'Premium Veg',
+      name: "Dessert Club Special",
       items: [
-        { name: 'Peri Peri Paneer', prices: [159, 309, 429] },
-        { name: 'American Delight', prices: [159, 309, 429] },
-        { name: 'Mexican Delight', prices: [159, 309, 429] },
-        { name: 'Classical Paneer', prices: [159, 309, 429] },
-        { name: 'Health Smart', prices: [159, 309, 429] },
-        { name: "Pizza Nation's Spl", prices: [169, 329, 449] },
-      ]
+        { name: "Dragon Biscuits", price: 25 },
+        { name: "Fruit Punch", price: 150 },
+      ],
     },
     {
-      name: 'Premium Non-Veg',
+      name: "Ice Cream Rolls Sundae",
       items: [
-        { name: 'Peri Peri Chicken', prices: [179, 319, 449] },
-        { name: 'American Delite', prices: [179, 319, 449] },
-        { name: 'Smoked Chicken', prices: [179, 319, 449] },
-        { name: 'Butter Chicken', prices: [179, 319, 449] },
-        { name: 'Chicken Bomber', prices: [179, 319, 449] },
-        { name: "Pizza Nation's Spl", prices: [189, 329, 469] },
-      ]
-    },
-    {
-      name: 'Pasta',
-      items: [
-        { name: 'Veg. White Sauce', price: 79 },
-        { name: 'Veg. Red Sauce', price: 79 },
-        { name: 'Veg. Thai Red Curry', price: 79 },
-        { name: 'Veg. Hong Kong', price: 79 },
-        { name: 'Non-Veg. White Sauce', price: 89 },
-        { name: 'Non-Veg. Red Sauce', price: 89 },
-        { name: 'Non-Veg. Thai Red Curry', price: 89 },
-        { name: 'Non-Veg. Hong Kong', price: 89 },
-      ]
-    },
-    {
-      name: 'Garlic Bread',
-      items: [
-        { name: 'Cheese', price: 99 },
-        { name: 'Black Cheese (Mush.+Olives)', price: 109 },
-        { name: 'Supreme', price: 109 },
-        { name: 'Chicken Tikka Cheese', price: 109 },
-      ]
-    },
-    {
-      name: 'Drinks',
-      items: [
-        { name: 'Hot Coffee', price: 35 },
-        { name: 'Fresh Lime Soda', price: 39 },
-        { name: 'Lemon Ice Tea', price: 49 },
-        { name: 'Peach Ice Tea', price: 49 },
-        { name: 'Cold Coffee', price: 69 },
-        { name: 'Cold Coffee with Ice Cream', price: 79 },
-        { name: 'Soft Drink', price: 0 }, // MRP
-      ]
+        { name: "Special Fresh Fruit", price: 159 },
+        { name: "Kinder Bueno", price: 159 },
+        { name: "Ferrero", price: 159 },
+      ],
     },
   ];
+  
+  
+  
 
  for (const category of categories) {
     const createdCategory = await prisma.category.create({
