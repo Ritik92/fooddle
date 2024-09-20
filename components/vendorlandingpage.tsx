@@ -136,7 +136,7 @@ export default function VendorLandingPage() {
               return (
                 <div key={order.id} className="mb-4 p-2 md:p-6 bg-white">
                   <div className='text-center'>
-                    Order No. 2086
+                    {order.orderId} 
                   </div>
                 <div className='bg-[#004BAD1A] p-4 rounded-[12px]'>
                   <ul>
@@ -197,7 +197,7 @@ export default function VendorLandingPage() {
                   Customer Name
                 </div>
                 <div>
-                  Asmi
+                  {order.user.name}
                 </div>
                 </div>
              
@@ -206,7 +206,7 @@ export default function VendorLandingPage() {
                   Phone No.
                 </div>
                 <div>
-                  P11411414
+                {order.user.phoneNumber}
                 </div>
                 </div>
              
@@ -215,7 +215,7 @@ export default function VendorLandingPage() {
                   Delivery Address
                 </div>
                 <div>
-                  Hostel L
+                {order.user.address} 
                 </div>
                 </div>
                </div>

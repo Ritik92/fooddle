@@ -13,10 +13,9 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: 'Email is required' }, { status: 400 });
     }
 
-    // Find the user by email
     const user = await prisma.user.findUnique({
-      where: { email },
-      select: { isVendor: true }
+      where: { email: email as string },
+      select: { isVendor: true, phoneNumber: true, address: true }
     });
 
     if (!user) {
@@ -24,7 +23,9 @@ export async function GET(req: NextRequest) {
     }
 
     // Return the vendor status
-    return NextResponse.json({ isVendor: user.isVendor }, { status: 200 });
+    return NextResponse.json({isVendor: user.isVendor,
+      phoneNumber: user.phoneNumber,
+      address: user.address }, { status: 200 });
   } catch (error) {
     console.error('Error checking vendor status:', error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });

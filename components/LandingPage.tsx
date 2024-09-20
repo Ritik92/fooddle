@@ -7,13 +7,15 @@ import HomeP from './homePagecomponents/homeP';
 import Loader from './Loader';
 import VendorLandingPage from './vendorlandingpage';
 import axios from 'axios';
+import UserDetailsForm from './userDetailform';
+
 
 const Login = () => {
   const { data: session, status } = useSession();
   const router = useRouter();
   const [isVendor, setIsVendor] = useState(null);
   const [loading, setLoading] = useState(true);
-
+  const [showDetailsForm, setShowDetailsForm] = useState(false);
   useEffect(() => {
     if (status === 'unauthenticated') {
       router.push('/api/auth/signin');
@@ -23,6 +25,9 @@ const Login = () => {
       axios.get(`/api/navigate?email=${email}`)
         .then(response => {
           setIsVendor(response.data.isVendor);
+          if (!response.data.isVendor && (response.data.phoneNumber === null || response.data.address === null)) {
+            setShowDetailsForm(true);
+          }
         })
         .catch(error => {
           console.error('Error checking vendor status:', error);
@@ -39,6 +44,10 @@ const Login = () => {
   let condition=(session.user as any).isVendor
   if (!session) {
     return null; // This will briefly show while redirecting
+  }
+  if (showDetailsForm) {
+   router.push('/filldetails')
+   return ;
   }
   if (condition) {
     return <VendorLandingPage />;

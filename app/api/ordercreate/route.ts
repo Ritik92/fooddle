@@ -58,8 +58,6 @@ export async function POST(request: NextRequest) {
   }
 }
 
-
-
 export async function GET(request: NextRequest) {
   try {
     const userId = request.nextUrl.searchParams.get('userId');
@@ -98,6 +96,13 @@ export async function GET(request: NextRequest) {
           createdAt: 'desc',
         },
         include: {
+          user: {
+            select: {
+              name: true,
+              phoneNumber: true,
+              address: true,
+            },
+          },
           items: {
             include: {
               menuItem: {
@@ -131,6 +136,13 @@ export async function GET(request: NextRequest) {
           createdAt: 'desc',
         },
         include: {
+          user: {
+            select: {
+              name: true,
+              phoneNumber: true,
+              address: true,
+            },
+          },
           items: {
             include: {
               menuItem: {
@@ -157,7 +169,6 @@ export async function GET(request: NextRequest) {
       });
     }
     
-
     return NextResponse.json(orders, { status: 200 });
   } catch (error) {
     console.error('Error fetching orders:', error);
