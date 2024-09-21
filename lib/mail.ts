@@ -14,7 +14,20 @@ export async function sendVerificationEmail(email: string, verificationLink: str
     from: process.env.EMAIL_USER,
     to: email,
     subject: 'Email Verification',
-    text: `Please verify your email by clicking on the following link: ${verificationLink}`,
+    text: `Hi,
+
+Thank you for signing up for Fooddle! We're excited to have you on board.
+
+To complete your registration, please verify your email address by clicking the link below:
+
+${verificationLink}
+
+If you didn't create an account with us, please ignore this email.
+
+Welcome to the Fooddle community!
+
+Best regards,
+The Fooddle Team `,
   });
 
   console.log('Message sent: %s', info.messageId);
